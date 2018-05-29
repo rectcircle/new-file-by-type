@@ -1,0 +1,4 @@
+{{include './PackageName.art'}}{{include './Comments.art'}}
+public enum {{name}} {
+{{indent}}RED, GREEN, BLUE
+}

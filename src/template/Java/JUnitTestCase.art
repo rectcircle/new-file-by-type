@@ -1,0 +1,30 @@
+{{include './PackageName.art'}}import org.junit.*;
+
+{{include './Comments.art'}}
+{{comment}}
+public class {{name}} {
+{{indent}}@BeforeClass
+{{indent}}public static void init() {
+{{indent}}{{indent}}
+{{indent}}}
+
+{{indent}}@Before 
+{{indent}}public void setUp() {
+{{indent}}{{indent}}
+{{indent}}}
+
+{{indent}}@Test
+{{indent}}public void test() {
+{{indent}}{{indent}}
+{{indent}}}
+
+{{indent}}@After
+{{indent}}public void tearDown() {
+{{indent}}{{indent}}
+{{indent}}}
+
+{{indent}}@AfterClass
+{{indent}}public static void destroy() {
+{{indent}}{{indent}}
+{{indent}}}
+}
