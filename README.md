@@ -21,6 +21,18 @@
 * 支持代码缩进方式的配置
 * 支持自通过自定义Snippet方式创建文件
 
+如果当前工作区没有目录打开，则选择目录，向工作区添加目录
+
+![工作区添加目录](images/zh_nodiropen.gif)
+
+创建Java Class文件
+
+![创建Java Class文件](images/zh_java_class.gif)
+
+创建文件并使用Snippet填充内容
+
+![创建Snippet文件](images/zh_snippet.gif)
+
 
 ## 扩展设置
 

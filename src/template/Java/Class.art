@@ -1,4 +1,4 @@
 {{include './PackageName.art'}}{{include './Comments.art'}}
-public interface {{name}} {
+public class {{name}} {
 {{indent}}
 }
