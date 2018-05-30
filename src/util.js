@@ -2,6 +2,7 @@ const vscode = require('vscode')
 const path = require('path')
 const fs = require('fs-extra')
 const template = require('art-template')
+const sprintf = require('sprintf-js').sprintf
 
 /**
  * 根据文件名返回正在编辑文件的后缀
@@ -94,6 +95,7 @@ function loadLanguagePack(name) {
     return require(path.join(__dirname, `./i18n/${locale}/${name}.js`))
 }
 
+
 module.exports = {
     swapWithFirst,
     sourceInfo,
@@ -102,4 +104,6 @@ module.exports = {
     createDir,
     loadLanguagePack,
     loadNewHandler,
+    sprintf,
+    pathResolve:path.resolve
 }

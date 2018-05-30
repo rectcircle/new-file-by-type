@@ -1,0 +1,14 @@
+{{if comments.enable}}/**
+ * 
+ * @file {{fileName}}.cpp{{include './Comments.art'}}
+ */{{/if}}
+
+#include "{{fileName}}.h"
+
+{{fileName}}::{{fileName}}(){
+{{indent}}
+}
+
+{{fileName}}::~{{fileName}}(){
+{{indent}}
+}

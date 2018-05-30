@@ -137,7 +137,7 @@ async function getUserInput(sourceInfo, comments, configuration) {
     )
     if (!subType) return undefined
 
-    const snippet = snippets[projectType].find(s => s.name == subType)
+    const snippet = snippets[projectType] && snippets[projectType].find(s => s.name == subType)
     if (snippet) { //用户选择的是snippets类型
         handler = snippetHandler
     }
@@ -155,6 +155,23 @@ async function getUserInput(sourceInfo, comments, configuration) {
         code: newFileData.code,
         snippet
     }
+}
+
+async function needCreate(targetPath) {
+    const yesOrNo = ['No', 'Yes'];
+
+    //如果文件已存在
+    if (fs.existsSync(targetPath)) {
+        const yn = await vscode.window.showQuickPick(yesOrNo, {
+            ignoreFocusOut: true,
+            placeHolder: util.sprintf(langPack.coverTip, targetPath)
+        })
+
+        if (!yn || yn == yesOrNo[0]) { //退出，或者选择No，不覆盖
+            return false
+        }
+    }
+    return true
 }
 
 async function handle(){
@@ -192,35 +209,43 @@ async function handle(){
         snippet
     } = newFileData
 
-    const yesOrNo = ['No', 'Yes'];
-
-    //如果文件已存在
-    if(fs.existsSync(targetPath)){
-        const yn = await vscode.window.showQuickPick(yesOrNo,{
-            ignoreFocusOut:true,
-            placeHolder: langPack.coverTip
-        })
-
-        if (!yn || yn == yesOrNo[0]) { //退出，或者选择No，不覆盖
-            return 
+    //是否是数组
+    if (targetPath instanceof Array){
+        //创建文件
+        let textDocument;
+        for(let i=0; i<targetPath.length; i++){
+            //判断是否需要创建文件
+            if (!(await needCreate(targetPath[i]))) {
+                continue
+            }
+            util.createFile(targetPath[i], code[i]);
+            textDocument = await vscode.workspace.openTextDocument(targetPath[i])
         }
-    }
+        //打开文件
+        if(textDocument){
+            await vscode.window.showTextDocument(textDocument, vscode.ViewColumn.Active)
+        }
+    } else {
+        //判断是否需要创建文件
+        if(! (await needCreate(targetPath))){
+            return
+        }
+        //创建文件
+        util.createFile(targetPath, code);
+        //打开文件
+        const textDocument = await vscode.workspace.openTextDocument(targetPath)
+        await vscode.window.showTextDocument(textDocument, vscode.ViewColumn.Active)
 
-    //创建文件
-    util.createFile(targetPath, code);
-    //打开文件
-    const textDocument = await vscode.workspace.openTextDocument(targetPath)
-    await vscode.window.showTextDocument(textDocument, vscode.ViewColumn.Active)
-
-    //Snippet需要特殊处理
-    if (snippet) {
-        // 删除原有内容
-        const activeEditor = vscode.window.activeTextEditor;
-        await activeEditor.edit(editBuilder => {
-            editBuilder.delete(new vscode.Range(textDocument.lineAt(0).range.start, textDocument.lineAt(textDocument.lineCount-1).range.end))
-        })
-        // 向编辑器中添加一个Snippet
-        activeEditor.insertSnippet(new vscode.SnippetString(snippet.body.join("\n")))
+        //Snippet需要特殊处理
+        if (snippet) {
+            // 删除原有内容
+            const activeEditor = vscode.window.activeTextEditor;
+            await activeEditor.edit(editBuilder => {
+                editBuilder.delete(new vscode.Range(textDocument.lineAt(0).range.start, textDocument.lineAt(textDocument.lineCount - 1).range.end))
+            })
+            // 向编辑器中添加一个Snippet
+            activeEditor.insertSnippet(new vscode.SnippetString(snippet.body.join("\n")))
+        }
     }
 
 }

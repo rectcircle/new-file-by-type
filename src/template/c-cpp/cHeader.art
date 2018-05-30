@@ -1,0 +1,8 @@
+{{if comments.enable}}/**
+ *
+ * @file {{fileName}}.h{{include './Comments.art'}}
+ */{{/if}}
+#ifndef __{{fileName.toUpperCase()}}_H__
+#define __{{fileName.toUpperCase()}}_H__
+
+#endif

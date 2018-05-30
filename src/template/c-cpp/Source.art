@@ -1,0 +1,6 @@
+{{if comments.enable}}/**
+ * 
+ * @file {{fileName}}.cpp{{include './Comments.art'}}
+ */{{/if}}
+
+
