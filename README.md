@@ -20,6 +20,29 @@ The purpose of this extension is to make vscode create various types of files li
   * <kbd>Ctrl+Alt+N</kbd>
 
 
+## TODO List
+
+- [ ] GO
+- [ ] Python
+- [ ] Scala
+- [ ] Web
+  - [x] HTML5
+  - [x] CSS
+  - [x] JavaScript(JQuery)
+  - [ ] JavaScript(Other Web framework)
+- [x] C/C++ project support
+  - [x] Class (generate .cpp and .h)
+  - [x] Two ordinary files (.c or .cpp and .h)
+- [x] Customized Template via Custom Snippet
+- [x] Java Project File Support
+  - [x] Class
+  - [x] Interface
+  - [x] Enum
+  - [x] Annotation
+  - [x] JUnitTestCase
+  - [x] Package (package-info file)
+
+
 
 ## Features
 
@@ -87,27 +110,6 @@ Use custom snippet to create a file configuration
 ```
 
 
-## TODO List
-
-- [ ] GO
-- [ ] Python
-- [ ] Scala
-- [ ] Web
-  - [x] HTML5
-  - [ ] CSS
-  - [ ] JavaScript
-- [x] C/C++ project support
-  - [x] Class (generate .cpp and .h)
-  - [x] Two ordinary files (.c or .cpp and .h)
-- [x] Customized Template via Custom Snippet
-- [x] Java Project File Support
-  - [x] Class
-  - [x] Interface
-  - [x] Enum
-  - [x] Annotation
-  - [x] JUnitTestCase
-  - [x] Package (package-info file)
-
 ## Release Notes
 
 ### 0.0.1
@@ -118,6 +120,13 @@ Use custom snippet to create a file configuration
 ### 0.0.2
 
 * Basic C/C++ file type support
+
+
+### 0.0.3
+
+* Change C/C++ code style
+* Fix C/C++ Indent Failure
+* Complete the creation of basic CSS and JS files
 
 
 =================================================
@@ -137,6 +146,28 @@ Use custom snippet to create a file configuration
 * 快捷键方式
   * 默认快捷键为 <kbd>Ctrl+Alt+N</kbd>
 
+
+## TODO列表
+
+- [ ] GO
+- [ ] Python
+- [ ] Scala
+- [ ] Web
+  - [x] HTML5
+  - [x] CSS
+  - [x] JavaScript(JQuery)
+  - [ ] JavaScript(其他Web前端框架)
+- [x] C/C++项目支持
+  - [x] Class（生成.cpp和.h）
+  - [x] 普通的两种文件（.c或.cpp和.h）
+- [x] 通过自定义Snippet方式实现自定义模板
+- [x] Java项目文件的支持
+  - [x] Class
+  - [x] Interface
+  - [x] Enum
+  - [x] Annotation
+  - [x] JUnitTestCase
+  - [x] Package（package-info文件）
 
 
 ## 特性
@@ -202,28 +233,6 @@ Use custom snippet to create a file configuration
 ```
 
 
-## TODO列表
-
-- [ ] GO
-- [ ] Python
-- [ ] Scala
-- [ ] Web
-  - [x] HTML5
-  - [ ] CSS
-  - [ ] JavaScript
-- [x] C/C++项目支持
-  - [x] Class（生成.cpp和.h）
-  - [x] 普通的两种文件（.c或.cpp和.h）
-- [x] 通过自定义Snippet方式实现自定义模板
-- [x] Java项目文件的支持
-  - [x] Class
-  - [x] Interface
-  - [x] Enum
-  - [x] Annotation
-  - [x] JUnitTestCase
-  - [x] Package（package-info文件）
-
-
 ## 发行说明
 
 ### 0.0.1
@@ -236,3 +245,8 @@ Use custom snippet to create a file configuration
 
 * 完成基本C/C++文件类型支持
 
+### 0.0.3
+
+* 更改C/C++代码风格
+* 修复C/C++缩进失效问题
+* 完成基本的CSS和JS文件的创建

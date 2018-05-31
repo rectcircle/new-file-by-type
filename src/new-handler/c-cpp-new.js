@@ -51,7 +51,7 @@ async function handle(
     }
 
     let targetPath=[], code=[];
-    const inputs = {fileName};
+    const inputs = {fileName, indent};
     if (C_CPP_TYPES[0] == subType){ //Class
         code.push(renderTemplate(inputs, comments, 'ClassHeader'))
         code.push(renderTemplate(inputs, comments, 'ClassSource'))

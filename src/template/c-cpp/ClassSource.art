@@ -5,10 +5,12 @@
 
 #include "{{fileName}}.h"
 
-{{fileName}}::{{fileName}}(){
+{{fileName}}::{{fileName}}()
+{
 {{indent}}
 }
 
-{{fileName}}::~{{fileName}}(){
+{{fileName}}::~{{fileName}}()
+{
 {{indent}}
 }
