@@ -29,7 +29,7 @@ The purpose of this extension is to make vscode create various types of files li
   - [x] HTML5
   - [x] CSS
   - [x] JavaScript(JQuery)
-  - [ ] JavaScript(Other Web framework)
+  - [ ] JavaScript(Other Web framework:vue and React)
 - [x] C/C++ project support
   - [x] Class (generate .cpp and .h)
   - [x] Two ordinary files (.c or .cpp and .h)
@@ -166,7 +166,7 @@ Use custom snippet to create a file configuration
   - [x] HTML5
   - [x] CSS
   - [x] JavaScript(JQuery)
-  - [ ] JavaScript(其他Web前端框架)
+  - [x] JavaScript(其他Web前端框架：vue、React)
 - [x] C/C++项目支持
   - [x] Class（生成.cpp和.h）
   - [x] 普通的两种文件（.c或.cpp和.h）
