@@ -1,0 +1,6 @@
+{{include './Comments.art'}}
+import Vue from 'vue'
+
+const vm = new Vue({
+{{indent}}
+})

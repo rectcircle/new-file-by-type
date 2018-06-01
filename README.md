@@ -74,6 +74,7 @@ Code annotation configuration
 
 * `new-file-by-type.code-comments.enable` Whether to enable document annotations, enabled by default
 * `new-file-by-type.code-comments.author` Specifies the name of the author in the code comment of the newly created file. The default value is null, which means the user is logged in using the current operating system.
+* `new-file-by-type.code-comments.description` The default description for adding code comments is:`Copyright (c) $year $author`
 * `new-file-by-type.code-comments.date-farmat` The format of the creation time in the configuration file comment. The default is `YYYY-MM-DD`, see http://momentjs.com/docs/#/displaying/
 * `new-file-by-type.code-comments.version` creates the file's version number information (the value of @version), defaults to `0.0.1`
 * `new-file-by-type.code-comments.items` specifies that the code comments for each item default to `["author", "date", "version"]`
@@ -127,6 +128,15 @@ Use custom snippet to create a file configuration
 * Change C/C++ code style
 * Fix C/C++ Indent Failure
 * Complete the creation of basic CSS and JS files
+
+
+### 0.0.4
+
+* Fix missing C/C++ English prompts
+* Improve the creation of Web type files
+* The default description for adding code comments is:`Copyright (c) $year $author`
+
+
 
 
 =================================================
@@ -197,6 +207,7 @@ Use custom snippet to create a file configuration
 
 * `new-file-by-type.code-comments.enable` 是否启用生成文档注释功能，默认启用
 * `new-file-by-type.code-comments.author` 指定新建文件的代码注释中的作者名，默认为null，代表使用当前操作系统登录用户名
+* `new-file-by-type.code-comments.description` 添加代码注释的描述信息默认为：`Copyright (c) $year $author`
 * `new-file-by-type.code-comments.date-farmat` 配置文件注释中的创建时间的格式化形式，默认为 `YYYY-MM-DD`，更多参见 http://momentjs.cn/docs/#/displaying/
 * `new-file-by-type.code-comments.version` 创建文件的版本号信息（@version的值），默认为 `0.0.1`
 * `new-file-by-type.code-comments.items` 指定代码注释各个项目默认为`["author", "date", "version"]`
@@ -250,3 +261,12 @@ Use custom snippet to create a file configuration
 * 更改C/C++代码风格
 * 修复C/C++缩进失效问题
 * 完成基本的CSS和JS文件的创建
+
+
+### 0.0.4
+
+* 修复C/C++英文提示缺失问题
+* 完善Web类型文件的创建
+* 添加代码注释的描述信息默认为：`Copyright (c) $year $author`
+
+

@@ -19,6 +19,14 @@ function select(items, prompt) {
     })
 }
 
+function selectMany(items, prompt) {
+    return vscode.window.showQuickPick(items, {
+        ignoreFocusOut: true,
+        placeHolder: prompt,
+        canPickMany:true
+    })
+}
+
 function inputSrc(defaultSrc) {
     return vscode.window.showInputBox({
         value: defaultSrc,
@@ -37,5 +45,6 @@ function inputSrc(defaultSrc) {
 module.exports = {
     input,
     inputSrc,
-    select
+    select,
+    selectMany
 }

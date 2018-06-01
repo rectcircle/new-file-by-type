@@ -70,6 +70,15 @@ async function openProjectDir() {
     return
 }
 
+function getIndent(indents, needKey) {
+    for (let key in indents) {
+        if (key.toUpperCase() == needKey.toUpperCase() && typeof (indents[key]) == "number") {
+            return indents[key]
+        }
+    }
+    return -1
+}
+
 async function getUserInput(sourceInfo, comments, configuration) {
     const {
         sourceDirPath, //当前打开的文件所在目录的路径
@@ -111,18 +120,13 @@ async function getUserInput(sourceInfo, comments, configuration) {
 
     //缩进类型处理
     const {defaultIndent, indents} = configuration;
-    let insertSpace = defaultIndent;
-    for (let key in indents) {
-        if (key.toUpperCase() == projectType.toUpperCase() && typeof (indents[key]) == "number") {
-            insertSpace = indents[key]
-        }
-    }
-    let indent;
-    if(insertSpace <= 0){
-        indent = '\t'
-    } else {
-        indent = Array(insertSpace).fill(' ').join('')
-    }
+    let insertSpace = defaultIndent; //默认空格数目
+    let indent; //缩进字符串
+    
+    let tmpIndent = getIndent(indents, projectType) 
+    if (tmpIndent != -1) insertSpace = tmpIndent
+
+    
     
     //input:用户选择用户子类型
     const subTypes = [...handler.subTypes];
@@ -130,12 +134,24 @@ async function getUserInput(sourceInfo, comments, configuration) {
         subTypes.push(...snippets[projectType].map(v=>v.name))
     }
     const subType = await vscode.window.showQuickPick(
-        subTypes, {
+        subTypes.sort(), {
             ignoreFocusOut:true,
             placeHolder: sprintf(langPack.inputSubtype, projectType)
         }
     )
     if (!subType) return undefined
+
+
+    //第二次处理缩进类型
+    tmpIndent = getIndent(indents, subType)
+    if (tmpIndent != -1) insertSpace = tmpIndent
+    
+    //最终生成字符串
+    if (insertSpace <= 0) {
+        indent = '\t'
+    } else {
+        indent = Array(insertSpace).fill(' ').join('')
+    }
 
     const snippet = snippets[projectType] && snippets[projectType].find(s => s.name == subType)
     if (snippet) { //用户选择的是snippets类型
@@ -187,10 +203,15 @@ async function handle(){
         dateFarmat: commentsConfig.get("date-farmat"),
         version: commentsConfig.get("version"),
         items: commentsConfig.get("items"),
+        description: commentsConfig.get("description")
     }
     if (comments.author==null){
         comments.author = os.userInfo().username
     }
+    if (comments.description == null) {
+        comments.description = util.sprintf("Copyright (c) %d %s", new Date().getFullYear(), comments.author)
+    }
+
     comments.date = moment().format(comments.dateFarmat)
 
     //如果用户的工作空间没有打开任何项目目录

@@ -2,7 +2,7 @@
     "name": "new-file-by-type",
     "displayName": "new file by type",
     "description": "create file by project type and generate template code (根据文件或项目类型创建文件，并自动生成模板代码)",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "Rectcircle",
     "author": {
         "name": "Rectcirle",
@@ -57,6 +57,12 @@
                     "scope": "window",
                     "description": "code-comments @author value, os login username as default （指定新建文件的代码注释中的作者名，null代表使用当前操作系统登录用户名）"
                 },
+                "new-file-by-type.code-comments.description": {
+                    "default": null,
+                    "type": "string",
+                    "scope": "window",
+                    "description": "The fixed description information in the code comment of the specified new file defaults to Copyright (c) `year` `author` （指定新建文件的代码注释中的固定描述信息默认为：Copyright (c) `year` `author`）"
+                },
                 "new-file-by-type.code-comments.date-farmat": {
                     "default": "YYYY-MM-DD",
                     "type": "string",
@@ -93,7 +99,8 @@
                 },
                 "new-file-by-type.template.indents": {
                     "default": {
-                        "Java": 0
+                        "Java": 0,
+                        "JS" : 2
                     },
                     "type": "object",
                     "scope": "window",

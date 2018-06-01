@@ -15,14 +15,20 @@ module.exports = [{
     },
     {
         "category": "Web",
-        "name": "JS",
-        "defaultFilename": "main",
-        "defaultSrc": "js",
-        "suffix": "js",
+        "name": "VUE COMPONENT",
+        "defaultFilename": "component",
+        "defaultSrc": "src/components",
+        "suffix": "vue",
         "body": [
-            "$(function() {",
-            "  $0",
-            "})"
+            "<template>",
+            "$0",
+            "</template>",
+            "",
+            "<script>",
+            "</script>",
+            "",
+            "<style>",
+            "</style>",
         ]
     },
     {
