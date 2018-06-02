@@ -38,5 +38,22 @@ module.exports = [{
         "defaultSrc": "css",
         "suffix": "css",
         "body": ["$0"]
+    },
+    {
+        "category": "Web",
+        "name": "Sass",
+        "defaultFilename": "style",
+        "defaultSrc": "sass",
+        "suffix": "sass",
+        "body": ["$0"]
+    },
+    {
+        "category": "Web",
+        "name": "Less",
+        "defaultFilename": "style",
+        "defaultSrc": "less",
+        "suffix": "less",
+        "body": ["$0"]
     }
+
 ]

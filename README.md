@@ -25,11 +25,20 @@ The purpose of this extension is to make vscode create various types of files li
 - [ ] GO
 - [ ] Python
 - [ ] Scala
-- [ ] Web
-  - [x] HTML5
-  - [x] CSS
-  - [x] JavaScript(JQuery)
-  - [ ] JavaScript(Other Web framework:vue and React)
+- [ ] TypeScript
+- [x] JavaScript
+  - [x] None
+  - [x] JQuery
+  - [x] Node-Module
+  - [x] ES6-Module
+  - [x] React
+  - [x] Vue
+- [x] Web
+  - [x] HTML
+  - [x] HTML5 (from Snippet)
+  - [x] CSS (from Snippet)
+  - [x] Less (from Snippet)
+  - [x] Sass (from Snippet)
 - [x] C/C++ project support
   - [x] Class (generate .cpp and .h)
   - [x] Two ordinary files (.c or .cpp and .h)
@@ -137,6 +146,12 @@ Use custom snippet to create a file configuration
 * The default description for adding code comments is:`Copyright (c) $year $author`
 
 
+### 0.0.5
+
+* Remove TS (TypeScript) and JS from the Web
+* Add Item Category JavaScript
+* All templates implemented via Snippet, add instructions
+
 
 
 =================================================
@@ -162,11 +177,20 @@ Use custom snippet to create a file configuration
 - [ ] GO
 - [ ] Python
 - [ ] Scala
-- [ ] Web
-  - [x] HTML5
-  - [x] CSS
-  - [x] JavaScript(JQuery)
-  - [x] JavaScript(其他Web前端框架：vue、React)
+- [ ] TypeScript
+- [x] JavaScript
+  - [x] None
+  - [x] JQuery
+  - [x] Node-Module
+  - [x] ES6-Module
+  - [x] React
+  - [x] Vue
+- [x] Web
+  - [x] HTML
+  - [x] HTML5 (from Snippet)
+  - [x] CSS (from Snippet)
+  - [x] Less (from Snippet)
+  - [x] Sass (from Snippet)
 - [x] C/C++项目支持
   - [x] Class（生成.cpp和.h）
   - [x] 普通的两种文件（.c或.cpp和.h）
@@ -269,4 +293,11 @@ Use custom snippet to create a file configuration
 * 完善Web类型文件的创建
 * 添加代码注释的描述信息默认为：`Copyright (c) $year $author`
 
+
+### 0.0.5
+
+* 在Web中添加Sass和Less
+* 从Web中删除TS（TypeScript）和JS
+* 添加项目分类JavaScript
+* 所有通过Snippet方式实现的模板，添加说明
 

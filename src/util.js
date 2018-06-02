@@ -95,6 +95,29 @@ function loadLanguagePack(name) {
     return require(path.join(__dirname, `./i18n/${locale}/${name}.js`))
 }
 
+function traverseDir(p, cb, relativeDir = "") {
+    if(!fs.existsSync(p)) return []
+
+    let pa = fs.readdirSync(p);
+    let items = []
+    for (let ele of pa) {
+        let subPath = path.resolve(p, ele)
+        let subRelativeDir
+        if (relativeDir == "") {
+            subRelativeDir = ele
+        } else {
+            subRelativeDir = `${relativeDir}/${ele}`
+        }
+        if (fs.statSync(subPath).isFile()) {
+            if (cb(subRelativeDir)) {
+                items.push(subRelativeDir)
+            }
+        } else {
+            items.push(...traverseDir(subPath, cb, subRelativeDir));
+        }
+    }
+    return items
+}
 
 module.exports = {
     swapWithFirst,
@@ -105,5 +128,6 @@ module.exports = {
     loadLanguagePack,
     loadNewHandler,
     sprintf,
-    pathResolve:path.resolve
+    pathResolve:path.resolve,
+    traverseDir
 }

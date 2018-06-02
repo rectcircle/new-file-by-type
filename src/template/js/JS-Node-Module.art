@@ -1,0 +1,5 @@
+{{include './Comments.art'}}
+{{each importInfos}}
+var {{$value[0]}} = require('{{$value[1]}}'){{/each}}
+
+module.exports = {}

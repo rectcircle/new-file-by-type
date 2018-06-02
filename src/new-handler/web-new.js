@@ -10,7 +10,7 @@ const path = require('path')
 
 const langPack = util.loadLanguagePack('web')
 
-const WEB_TYPES = ["HTML", "JS", "TS"]
+const WEB_TYPES = ["HTML"]
 
 //渲染模板
 function renderTemplate(inputs, comments, tempName) {
@@ -20,34 +20,12 @@ function renderTemplate(inputs, comments, tempName) {
     }, inputs))
 }
 
-function traverseDir(p, cb, relativeDir = "") {
-    let pa = fs.readdirSync(p);
-    let items = []
-    for(let ele of pa){
-        let subPath = path.resolve(p, ele)
-        let subRelativeDir
-        if(relativeDir==""){
-            subRelativeDir = ele
-        } else {
-            subRelativeDir = `${relativeDir}/${ele}`
-        }
-        if (fs.statSync(subPath).isFile()) {
-            if (cb(subRelativeDir)) {
-                items.push(subRelativeDir)
-            }
-        } else {
-            items.push(...traverseDir(subPath, cb, subRelativeDir));
-        }
-    }
-    return items
-}
-
 
 //选择需要引入的内容
 function getExtResList(projectDir, srcPath) {
     let p = path.resolve(projectDir, srcPath)
     let reg = new RegExp(/\.(js|css)$/i)
-    return traverseDir(p, subPath => {
+    return util.traverseDir(p, subPath => {
         return reg.test(subPath)
     })
 }
@@ -93,25 +71,26 @@ async function handle({ //工作空间
         }, comments, 'html')
         let targetPath = util.pathResolve(projectDir, srcPath, `${fileName}.html`)
         return {targetPath, code}
-    } else if (WEB_TYPES[1] == subType) { //JS
-        //选择代码js框架
-        const JS_FRAMEWORK = ['None', 'JQuery', 'React']
-        let jsType = await select(JS_FRAMEWORK, langPack.inputJSType)
-        if (!jsType) return undefined
+    } 
+    // else if (WEB_TYPES[1] == subType) { //JS
+    //     //选择代码js框架
+    //     const JS_FRAMEWORK = ['None', 'JQuery', 'React']
+    //     let jsType = await select(JS_FRAMEWORK, langPack.inputJSType)
+    //     if (!jsType) return undefined
 
-        //输入源文件路径
-        const srcPath = await inputSrc("js")
-        if (srcPath == undefined) return undefined
+    //     //输入源文件路径
+    //     const srcPath = await inputSrc("js")
+    //     if (srcPath == undefined) return undefined
 
-        //输入文件名
-        let fileName = await input('main', langPack.inputName)
-        if (!fileName) return undefined
+    //     //输入文件名
+    //     let fileName = await input('main', langPack.inputName)
+    //     if (!fileName) return undefined
 
-        //渲染
-        let code = renderTemplate({indent}, comments, `JS-${jsType}`)
-        let targetPath = util.pathResolve(projectDir, srcPath, `${fileName}.js`)
-        return {targetPath, code}
-    }
+    //     //渲染
+    //     let code = renderTemplate({indent}, comments, `JS-${jsType}`)
+    //     let targetPath = util.pathResolve(projectDir, srcPath, `${fileName}.js`)
+    //     return {targetPath, code}
+    // }
 }
 
 module.exports = {

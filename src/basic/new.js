@@ -16,6 +16,10 @@ const configuration = {
 }
 configuration.snippets.push(...snippetTemplate)
 
+for (let i = 0; i < configuration.snippets.length; i++){
+    configuration.snippets[i].name += ' (from Snippet)'
+}
+
 
 //TODO:添加JS,HTML,CSS;C/C++;GO;Python;Shell;Go;Scala;XML;JSON;
 //TODO:C, C++, Java, JavaScript, PHP, Python, Perl, Perl 6, Ruby, Go, Lua, Groovy, PowerShell, BAT / CMD, BASH / SH, F# Script, F#(.NET Core), C# Script, C#(.NET Core), VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script, R, AppleScript, Elixir, Visual Basic.NET, Clojure, Haxe, Objective - C, Rust, Racket, AutoHotkey, AutoIt, Kotlin, Dart, Free Pascal, Haskell, Nim, D
@@ -134,7 +138,7 @@ async function getUserInput(sourceInfo, comments, configuration) {
         subTypes.push(...snippets[projectType].map(v=>v.name))
     }
     const subType = await vscode.window.showQuickPick(
-        subTypes.sort(), {
+        subTypes, {
             ignoreFocusOut:true,
             placeHolder: sprintf(langPack.inputSubtype, projectType)
         }
