@@ -1,7 +1,8 @@
 {{include './Comments.art'}}
-
-import React from 'react';
-import ReactDOM from 'react-dom';
+import Vue from "vue";
 {{each importInfos}}
 import * as {{$value[0]}} from '{{$value[1]}}';{{/each}}
 
+let v = new Vue({
+
+});

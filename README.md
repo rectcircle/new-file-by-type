@@ -25,7 +25,13 @@ The purpose of this extension is to make vscode create various types of files li
 - [ ] GO
 - [ ] Python
 - [ ] Scala
-- [ ] TypeScript
+- [x] Ordinary file
+- [x] TypeScript
+  - [x] None
+  - [x] Module
+  - [x] React
+  - [x] Angular
+  - [x] Vue
 - [x] JavaScript
   - [x] None
   - [x] JQuery
@@ -152,7 +158,10 @@ Use custom snippet to create a file configuration
 * Add Item Category JavaScript
 * All templates implemented via Snippet, add instructions
 
+### 0.0.6
 
+* Add ordinary file creation, support selection of common suffixes and custom suffixes
+* Add a TypeScript type file to create
 
 =================================================
 
@@ -177,7 +186,13 @@ Use custom snippet to create a file configuration
 - [ ] GO
 - [ ] Python
 - [ ] Scala
-- [ ] TypeScript
+- [x] 普通文件
+- [x] TypeScript
+  - [x] None
+  - [x] Module
+  - [x] React
+  - [x] Angular
+  - [x] Vue
 - [x] JavaScript
   - [x] None
   - [x] JQuery
@@ -300,4 +315,15 @@ Use custom snippet to create a file configuration
 * 从Web中删除TS（TypeScript）和JS
 * 添加项目分类JavaScript
 * 所有通过Snippet方式实现的模板，添加说明
+
+
+### 0.0.6
+
+* 添加普通文件的创建，支持选择常见后缀和自定义后缀
+* 添加TypeScript类型文件创建
+
+
+
+
+
 
