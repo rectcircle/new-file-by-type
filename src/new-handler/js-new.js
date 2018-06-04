@@ -113,6 +113,7 @@ async function handle({ //工作空间
 
 module.exports = {
     key: "JavaScript",
+    suffix: ['js'],
     subTypes: JS_TYPES,
     handle: handle
 }

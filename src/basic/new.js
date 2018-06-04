@@ -21,8 +21,8 @@ for (let i = 0; i < configuration.snippets.length; i++){
 }
 
 
-//TODO:添加JS,HTML,CSS;C/C++;GO;Python;Shell;Go;Scala;XML;JSON;
-//TODO:C, C++, Java, JavaScript, PHP, Python, Perl, Perl 6, Ruby, Go, Lua, Groovy, PowerShell, BAT / CMD, BASH / SH, F# Script, F#(.NET Core), C# Script, C#(.NET Core), VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script, R, AppleScript, Elixir, Visual Basic.NET, Clojure, Haxe, Objective - C, Rust, Racket, AutoHotkey, AutoIt, Kotlin, Dart, Free Pascal, Haskell, Nim, D
+//TODO:添加GO;Python;Shell;Go;Scala;XML;JSON;
+//TODO:PHP, Python, Perl, Perl 6, Ruby, Go, Lua, Groovy, PowerShell, BAT / CMD, BASH / SH, F# Script, F#(.NET Core), C# Script, C#(.NET Core), VBScript, TypeScript, CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script, R, AppleScript, Elixir, Visual Basic.NET, Clojure, Haxe, Objective - C, Rust, Racket, AutoHotkey, AutoIt, Kotlin, Dart, Free Pascal, Haskell, Nim, D
 
 //自动扫描目录，并载入相关模块
 const handlers = util.loadNewHandler()
@@ -110,7 +110,26 @@ async function getUserInput(sourceInfo, comments, configuration) {
 
     //将匹配的类型放在首位
     if (sourceFileSuffix) {
-        util.swapWithFirst(handleKeys, v => sourceFileSuffix.toUpperCase() == v.toUpperCase())
+        util.insertToFirst(handleKeys, v => {
+            if(sourceFileSuffix.toUpperCase() == v.toUpperCase()){
+                return true;
+            }
+            if(handlers[v]){
+                for (let s of handlers[v].suffix){
+                    if (sourceFileSuffix.toUpperCase() == s.toUpperCase()){
+                        return true;
+                    }
+                }
+            } else if (snippets[v]){
+                for (let s of snippets[v]) {
+                    if (sourceFileSuffix.toUpperCase() == s.suffix.toUpperCase()) {
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
+        })
     }
 
     //input:获取用户选择的项目类型

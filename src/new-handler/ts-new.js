@@ -114,6 +114,7 @@ async function handle({ //工作空间
 
 module.exports = {
     key: "TypeScript",
+    suffix: ['ts', 'tsx'],
     subTypes: TS_TYPES,
     handle: handle
 }

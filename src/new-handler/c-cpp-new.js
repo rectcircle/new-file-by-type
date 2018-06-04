@@ -75,6 +75,7 @@ async function handle(
 
 module.exports = {
     key: "C/C++",
+    suffix: ['c','cpp','h'],
     subTypes: C_CPP_TYPES,
     handle: handle
 }

@@ -72,29 +72,11 @@ async function handle({ //工作空间
         let targetPath = util.pathResolve(projectDir, srcPath, `${fileName}.html`)
         return {targetPath, code}
     } 
-    // else if (WEB_TYPES[1] == subType) { //JS
-    //     //选择代码js框架
-    //     const JS_FRAMEWORK = ['None', 'JQuery', 'React']
-    //     let jsType = await select(JS_FRAMEWORK, langPack.inputJSType)
-    //     if (!jsType) return undefined
-
-    //     //输入源文件路径
-    //     const srcPath = await inputSrc("js")
-    //     if (srcPath == undefined) return undefined
-
-    //     //输入文件名
-    //     let fileName = await input('main', langPack.inputName)
-    //     if (!fileName) return undefined
-
-    //     //渲染
-    //     let code = renderTemplate({indent}, comments, `JS-${jsType}`)
-    //     let targetPath = util.pathResolve(projectDir, srcPath, `${fileName}.js`)
-    //     return {targetPath, code}
-    // }
 }
 
 module.exports = {
     key: "Web",
+    suffix: ['css', 'html'],
     subTypes: WEB_TYPES,
     handle: handle
 }

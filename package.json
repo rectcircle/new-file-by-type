@@ -2,7 +2,7 @@
     "name": "new-file-by-type",
     "displayName": "new file by type",
     "description": "create file by project type and generate template code (根据文件或项目类型创建文件，并自动生成模板代码)",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "publisher": "Rectcircle",
     "author": {
         "name": "Rectcirle",

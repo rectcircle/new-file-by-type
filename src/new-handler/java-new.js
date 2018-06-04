@@ -149,6 +149,7 @@ const JAVA_TYPES = ["Class", "Interface", "Enum", "Annotation", "JUnitTestCase",
 
 module.exports ={
     key:"Java",
+    suffix: ['java'],
     subTypes:JAVA_TYPES,
     handle:handle
 }

@@ -48,6 +48,19 @@ function swapWithFirst(arr, cb) {
     }
 }
 
+function insertToFirst(arr, cb) {
+    for (let i = 0; i < arr.length; i++) {
+        if (cb(arr[i])) {
+            let tmp = arr[i];
+            for(let j=i-1; j>=0; j--){
+                arr[j+1] = arr[j];
+            }
+            arr[0] = tmp;
+        }
+    }
+}
+
+
 function render(templateName, inputs) {
     var view = require(`./template/${templateName}.art`);
     let code = view(inputs)
@@ -121,6 +134,7 @@ function traverseDir(p, cb, relativeDir = "") {
 
 module.exports = {
     swapWithFirst,
+    insertToFirst,
     sourceInfo,
     render,
     createFile,

@@ -163,6 +163,11 @@ Use custom snippet to create a file configuration
 * Add ordinary file creation, support selection of common suffixes and custom suffixes
 * Add a TypeScript type file to create
 
+### 0.0.7
+
+* `A File`, add the default file name based on the suffix
+* Optimize project selection sorting mechanism
+
 =================================================
 
 
@@ -321,6 +326,16 @@ Use custom snippet to create a file configuration
 
 * 添加普通文件的创建，支持选择常见后缀和自定义后缀
 * 添加TypeScript类型文件创建
+
+### 0.0.6
+
+* 添加普通文件的创建，支持选择常见后缀和自定义后缀
+* 添加TypeScript类型文件创建### 0.0.6
+
+### 0.0.7
+
+* 根据普通文件，根据后缀添加默认文件名
+* 优化项目选择排序机制
 
 
 
