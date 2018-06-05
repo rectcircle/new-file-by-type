@@ -25,6 +25,20 @@ The purpose of this extension is to make vscode create various types of files li
 - [ ] GO
 - [ ] Python
 - [ ] Scala
+- [x] License
+  - [x] Apache-2.0
+  - [x] BSD-3-Clause
+  - [x] BSD-2-Clause
+  - [x] GPL-2.0
+  - [x] GPL-3.0
+  - [x] LGPL-2.0
+  - [x] LGPL-2.1
+  - [x] LGPL-3.0
+  - [x] MIT
+  - [x] MPL-2.0
+  - [x] CDDL-1.0
+  - [x] EPL-1.0
+  - [x] The Unlicense
 - [x] Ordinary file
 - [x] TypeScript
   - [x] None
@@ -89,7 +103,7 @@ Code annotation configuration
 
 * `new-file-by-type.code-comments.enable` Whether to enable document annotations, enabled by default
 * `new-file-by-type.code-comments.author` Specifies the name of the author in the code comment of the newly created file. The default value is null, which means the user is logged in using the current operating system.
-* `new-file-by-type.code-comments.description` The default description for adding code comments is:`Copyright (c) $year $author`
+* `new-file-by-type.code-comments.description` The default description for adding code comments is:`Copyright (c) $year, $author. All rights reserved.`
 * `new-file-by-type.code-comments.date-farmat` The format of the creation time in the configuration file comment. The default is `YYYY-MM-DD`, see http://momentjs.com/docs/#/displaying/
 * `new-file-by-type.code-comments.version` creates the file's version number information (the value of @version), defaults to `0.0.1`
 * `new-file-by-type.code-comments.items` specifies that the code comments for each item default to `["author", "date", "version"]`
@@ -168,6 +182,11 @@ Use custom snippet to create a file configuration
 * `A File`, add the default file name based on the suffix
 * Optimize project selection sorting mechanism
 
+
+### 0.0.8
+
+* Add license template file creation
+
 =================================================
 
 
@@ -191,6 +210,20 @@ Use custom snippet to create a file configuration
 - [ ] GO
 - [ ] Python
 - [ ] Scala
+- [x] License
+  - [x] Apache-2.0
+  - [x] BSD-3-Clause
+  - [x] BSD-2-Clause
+  - [x] GPL-2.0
+  - [x] GPL-3.0
+  - [x] LGPL-2.0
+  - [x] LGPL-2.1
+  - [x] LGPL-3.0
+  - [x] MIT
+  - [x] MPL-2.0
+  - [x] CDDL-1.0
+  - [x] EPL-1.0
+  - [x] The Unlicense
 - [x] 普通文件
 - [x] TypeScript
   - [x] None
@@ -251,7 +284,7 @@ Use custom snippet to create a file configuration
 
 * `new-file-by-type.code-comments.enable` 是否启用生成文档注释功能，默认启用
 * `new-file-by-type.code-comments.author` 指定新建文件的代码注释中的作者名，默认为null，代表使用当前操作系统登录用户名
-* `new-file-by-type.code-comments.description` 添加代码注释的描述信息默认为：`Copyright (c) $year $author`
+* `new-file-by-type.code-comments.description` 添加代码注释的描述信息默认为：`Copyright (c) $year, $author. All rights reserved.`
 * `new-file-by-type.code-comments.date-farmat` 配置文件注释中的创建时间的格式化形式，默认为 `YYYY-MM-DD`，更多参见 http://momentjs.cn/docs/#/displaying/
 * `new-file-by-type.code-comments.version` 创建文件的版本号信息（@version的值），默认为 `0.0.1`
 * `new-file-by-type.code-comments.items` 指定代码注释各个项目默认为`["author", "date", "version"]`
@@ -338,7 +371,6 @@ Use custom snippet to create a file configuration
 * 优化项目选择排序机制
 
 
+### 0.0.8
 
-
-
-
+* 添加许可证模板文件创建

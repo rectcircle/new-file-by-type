@@ -232,7 +232,7 @@ async function handle(){
         comments.author = os.userInfo().username
     }
     if (comments.description == null) {
-        comments.description = util.sprintf("Copyright (c) %d %s", new Date().getFullYear(), comments.author)
+        comments.description = util.sprintf("Copyright (c) %d, %s. All rights reserved.", new Date().getFullYear(), comments.author)
     }
 
     comments.date = moment().format(comments.dateFarmat)
