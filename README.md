@@ -24,7 +24,16 @@ The purpose of this extension is to make vscode create various types of files li
 
 - [ ] GO
 - [ ] Python
-- [ ] Scala
+- [x] Scala
+  - [x] App
+  - [x] Class
+  - [x] Object
+  - [x] Trait
+  - [x] Class&Object
+  - [x] Trait&Object
+  - [x] Package Object
+  - [x] Scala Worksheet
+  - [x] Scala Script
 - [x] License
   - [x] Apache-2.0
   - [x] BSD-3-Clause
@@ -187,6 +196,12 @@ Use custom snippet to create a file configuration
 
 * Add license template file creation
 
+### 0.0.9
+
+* `BSD-2-Clause` Add License Title: `BSD 2-Clause License`
+* Add Scala project file creation
+
+
 =================================================
 
 
@@ -209,7 +224,16 @@ Use custom snippet to create a file configuration
 
 - [ ] GO
 - [ ] Python
-- [ ] Scala
+- [x] Scala
+  - [x] App
+  - [x] Class
+  - [x] Object
+  - [x] Trait
+  - [x] Class&Object
+  - [x] Trait&Object
+  - [x] Package Object
+  - [x] Scala Worksheet
+  - [x] Scala Script
 - [x] License
   - [x] Apache-2.0
   - [x] BSD-3-Clause
@@ -374,3 +398,9 @@ Use custom snippet to create a file configuration
 ### 0.0.8
 
 * 添加许可证模板文件创建
+
+### 0.0.9
+
+* `BSD-2-Clause`添加许可证标题：`BSD 2-Clause License`
+* 添加Scala项目文件的创建
+

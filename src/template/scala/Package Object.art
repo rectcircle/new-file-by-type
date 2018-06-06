@@ -1,0 +1,4 @@
+{{include './PackageName.art'}}{{include './Comments.art'}}
+package object {{name}} {
+{{indent}}
+}
