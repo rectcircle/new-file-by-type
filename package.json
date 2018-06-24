@@ -2,7 +2,7 @@
     "name": "new-file-by-type",
     "displayName": "new file by type",
     "description": "create file by project type and generate template code (根据文件或项目类型创建文件，并自动生成模板代码)",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "publisher": "Rectcircle",
     "author": {
         "name": "Rectcirle",
@@ -18,7 +18,7 @@
     "keywords":[
         "new","file","create", "new java file"
     ],
-    "preview":true,
+    "preview":false,
     "license": "SEE LICENSE IN LICENSE",
     "icon": "images/new-file-by-type.png",
     "homepage": "https://github.com/rectcircle/new-file-by-type/blob/master/README.md",
@@ -31,14 +31,26 @@
         "theme": "dark"
     },
     "activationEvents": [
-        "onCommand:new-file-by-type.new"
+        "onCommand:new-file-by-type.new",
+        "onCommand:new-file-by-type.smart-new-file",
+        "onCommand:new-file-by-type.copy-new-file"
     ],
     "main": "./src/extension",
     "contributes": {
         "commands": [
             {
                 "command": "new-file-by-type.new",
-                "title": "New File By Project Type（根据文件或项目类型创建文件）",
+                "title": "%new-file-by-title.new.title%",
+                "category": "New"
+            },
+            {
+                "command": "new-file-by-type.smart-new-file",
+                "title": "%new-file-by-title.smart-new-file.title%",
+                "category": "New"
+            },
+            {
+                "command": "new-file-by-type.copy-new-file",
+                "title": "%new-file-by-title.copy-new-file.title%",
                 "category": "New"
             }
         ],
@@ -48,38 +60,54 @@
                 "key": "Ctrl+Alt+N"
             }
         ],
+        "menus": {
+            "editor/context": [{
+                "command": "new-file-by-type.smart-new-file",
+                "group": "New"
+            },{
+                "command": "new-file-by-type.copy-new-file",
+                "group": "New"
+            }],
+            "explorer/context": [{
+                "command": "new-file-by-type.smart-new-file",
+                "group": "New"
+            },{
+                "command": "new-file-by-type.copy-new-file",
+                "group": "New"
+            }]
+        },
         "configuration": {
-            "title": "New File By Project Type（根据文件或项目类型创建文件）",
+            "title": "%new-file-by-type.configuration.title%",
             "properties": {
                 "new-file-by-type.code-comments.author": {
                     "default": null,
                     "type": "string",
                     "scope": "window",
-                    "description": "code-comments @author value, os login username as default （指定新建文件的代码注释中的作者名，null代表使用当前操作系统登录用户名）"
+                    "description": "%new-file-by-type.code-comments.author.description%"
                 },
                 "new-file-by-type.code-comments.description": {
                     "default": null,
                     "type": "string",
                     "scope": "window",
-                    "description": "The fixed description information in the code comment of the specified new file defaults to Copyright (c) `year` `author` （指定新建文件的代码注释中的固定描述信息默认为：Copyright (c) `year` `author`）"
+                    "description": "%new-file-by-type.code-comments.description.description%"
                 },
                 "new-file-by-type.code-comments.date-farmat": {
                     "default": "YYYY-MM-DD",
                     "type": "string",
                     "scope": "window",
-                    "description": "code-comments @date format, see http://momentjs.cn/docs/#/displaying/ （配置文件注释中的创建时间的格式化形式，更多参见 http://momentjs.cn/docs/#/displaying/）"
+                    "description": "%new-file-by-type.code-comments.date-farmat.description%"
                 },
                 "new-file-by-type.code-comments.version": {
                     "default": "0.0.1",
                     "type": "string",
                     "scope": "window",
-                    "description": "code-comments @version （默认创建文件的版本信息）"
+                    "description": "%new-file-by-type.code-comments.version.description%"
                 },
                 "new-file-by-type.code-comments.enable": {
                     "default": true,
                     "type": "boolean",
                     "scope": "window",
-                    "description": "code-comments enable （是否启用生成文档注释功能）"
+                    "description": "%new-file-by-type.code-comments.enable.description%"
                 },
                 "new-file-by-type.code-comments.items": {
                     "default": [
@@ -89,13 +117,13 @@
                     ],
                     "type": "array",
                     "scope": "window",
-                    "description": "code-comments need display items: build-in support [author, date, version], user can customize e.g. [link, since ...]（指定代码注释各个项目）"
+                    "description": "%new-file-by-type.code-comments.items.description%"
                 },
                 "new-file-by-type.template.defaultIndent": {
                     "default": 0,
                     "type": "number",
                     "scope": "window",
-                    "description": "default Indent type, 0 is [tab], otherwise is [space]（指定生成代码的缩进方式，0代表使用[tab]字符，大于零表示使用该数目的空格字符）"
+                    "description": "%new-file-by-type.template.defaultIndent.description%"
                 },
                 "new-file-by-type.template.indents": {
                     "default": {
@@ -104,7 +132,7 @@
                     },
                     "type": "object",
                     "scope": "window",
-                    "description": "the configuration will override defaultIndent, equal 0 use [tab], otherwise use [space]（根据文件类型，指定代码缩进方式，覆盖defaultIndent选项）"
+                    "description": "%new-file-by-type.template.indents.description%"
                 },
                 "new-file-by-type.snippets":{
                     "default": [{
@@ -117,7 +145,7 @@
                     }],
                     "type": "array",
                     "scope": "window",
-                    "description": "A user-defined code snippet for creating a file. The syntax is: https://code.visualstudio.com/docs/editor/userdefinedsnippets（用户自定义的用于创建文件的代码片段，语法参见：https://code.visualstudio.com/docs/editor/userdefinedsnippets）"
+                    "description": "%new-file-by-type.snippets.description%"
                 }
             }
         }

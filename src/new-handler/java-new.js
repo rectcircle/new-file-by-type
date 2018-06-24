@@ -1,9 +1,11 @@
-const vscode = require('vscode');
+// const vscode = require('vscode');
+const {
+    input
+} = require('../input')
 const util = require('../util')
 const os = require('os')
 const path = require('path')
 const fs = require('fs-extra');
-const sprintf = require('sprintf-js').sprintf;
 
 const langPack = util.loadLanguagePack('Java')
 
@@ -12,8 +14,9 @@ function getRelativeSrcPath(projectDir, sourceDirPath){
     //用户选择的项目目录为：正在编辑的文件所在目录
     if (sourceDirPath && sourceDirPath.startsWith(projectDir)) { 
         for (let i = 0; i < srcPaths.length; i++) {
-            if (sourceDirPath.match(srcPaths[i]) != null) {
-                return srcPaths[i];
+            if (sourceDirPath.includes(srcPaths[i])) {
+                let relativeSourceDirPath = path.relative(projectDir, sourceDirPath)
+                return relativeSourceDirPath.substr(0, relativeSourceDirPath.indexOf(srcPaths[i]))+ srcPaths[i];
             }
         }
     } else { //else 探测文件系统
@@ -77,6 +80,74 @@ function renderTemplate(inputs, comments) {
 const JAVA_TYPES = ["Class", "Interface", "Enum", "Annotation", "JUnitTestCase", "Package"];
 
 
+function createTargetPathBySrcPath({
+    srcPath,
+    name,
+    javaType
+}) {
+    if (javaType == "Package") {
+        name = "package-info"
+    }
+    let targetPath = path.resolve(srcPath, name + ".java");
+    return targetPath;
+}
+
+function getPackageNameBySrcPath(srcPath) {
+    const srcPaths = ["src/main/java", "src/test/java", "src"]
+    let packageName;
+    for(let s of srcPaths){
+        if(srcPath.includes(s)){
+            packageName = srcPath.substr(srcPath.indexOf(s)+s.length+1)
+            break
+        }
+    }
+    if (packageName == undefined) return undefined
+    return packageName.replace(/\\/g,'.').replace(/\//g, '.')
+}
+
+/**
+ * 实现给出源代码文件所在目录
+ * @param {*} param0 
+ * @param {*} comments 
+ * @param {*} param2 
+ */
+async function inputFileInfo({ //工作空间
+        srcDirPath, //用户选择的绝对路径
+        subType, //用户输入的子类型
+    }, comments, //注释相关的信息
+    { //配置
+        indent //缩进字符串
+    }) {
+    const inputs = {
+        javaType: subType, //"Class",
+        name: "ClassName", //类型为Package-Info则不存在
+        srcPath: srcDirPath,
+        packageName: getPackageNameBySrcPath(srcDirPath), //包名
+        indent: indent
+    };
+
+
+    //如果是Package类型，直接生成代码
+    if (inputs.javaType == "Package") {
+        return {
+            targetPath: createTargetPathBySrcPath(inputs),
+            code: renderTemplate(inputs, comments)
+        }
+    }
+
+    //输入类型名（"Class", "Interface", "Enum", "Annotation", "JUnitTestCase"）
+    inputs.name = await input(
+        `${inputs.javaType}Name`,
+        util.sprintf(langPack.inputTpyeName, inputs.javaType),
+    )
+    if (!inputs.name) return undefined
+
+    return {
+        targetPath: createTargetPathBySrcPath(inputs),
+        code: renderTemplate(inputs, comments)
+    }
+}
+
 /**
  * 需要返回创建文件的相对与项目目录的路径和处理好的模板代码
  * 返回对象为：{targetPath, code}
@@ -99,29 +170,18 @@ const JAVA_TYPES = ["Class", "Interface", "Enum", "Annotation", "JUnitTestCase",
     };
 
     // 输入源代码路径（相对于项目目录）
-    inputs.relativeSrcPath = await vscode.window.showInputBox({
-        value: inputs.relativeSrcPath ? inputs.relativeSrcPath:"src/main/java",
-        ignoreFocusOut:true,
-        placeHolder: langPack.inputSrcDir,
-        prompt: langPack.inputSrcDirPrompt,
-        validateInput:v => {
-            if(v.startsWith('/')){
-                return langPack.needRelativePath;
-            }
-            return undefined
-        }
-    })
+    inputs.relativeSrcPath = await input(
+        inputs.relativeSrcPath ? inputs.relativeSrcPath : "src/main/java",
+        langPack.inputSrcDir
+    )
     if (inputs.relativeSrcPath==undefined) return undefined
 
     //输入包名
-    inputs.packageName = await vscode.window.showInputBox({
-        placeHolder: langPack.inputPackageName,
-        prompt: langPack.inputPackageName,
-        validateInput: validatePackage,
-        ignoreFocusOut:true, //失去焦点不关闭
-        value: inputs.packageName ? inputs.packageName : "com." + os.userInfo().username
-
-    })
+    inputs.packageName = await input(
+        inputs.packageName ? inputs.packageName : "com." + os.userInfo().username,
+        langPack.inputPackageName,
+        validatePackage
+    )
     if(inputs.packageName==undefined) return undefined
 
     //如果是Package类型，直接生成代码
@@ -133,12 +193,10 @@ const JAVA_TYPES = ["Class", "Interface", "Enum", "Annotation", "JUnitTestCase",
     }
 
     //输入类型名（"Class", "Interface", "Enum", "Annotation", "JUnitTestCase"）
-    inputs.name = await vscode.window.showInputBox({
-        placeHolder: sprintf(langPack.inputTpyeName, inputs.javaType),
-        prompt: sprintf(langPack.inputTpyeName, inputs.javaType),
-        value: `${inputs.javaType}Name`,
-        ignoreFocusOut: true, //失去焦点不关闭
-    })
+    inputs.name = await input(
+        `${inputs.javaType}Name`, 
+        util.sprintf(langPack.inputTpyeName, inputs.javaType),
+    )
     if (!inputs.name) return undefined
 
     return {
@@ -150,6 +208,7 @@ const JAVA_TYPES = ["Class", "Interface", "Enum", "Annotation", "JUnitTestCase",
 module.exports ={
     key:"Java",
     suffix: ['java'],
+    inputFileInfo,
     subTypes:JAVA_TYPES,
     handle:handle
 }

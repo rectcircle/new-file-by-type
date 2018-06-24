@@ -1,12 +1,8 @@
 const {
     input,
-    select,
-    inputSrc,
-    selectMany
+    inputSmartSrc,
 } = require('../input')
 const util = require('../util')
-const fs = require('fs-extra')
-const path = require('path')
 
 const langPack = util.loadLanguagePack('file')
 
@@ -65,22 +61,13 @@ const FILE_TYPES = [
     '.yml',
 ]
 
-
-async function handle({ //工作空间
-        sourceDirPath, //当前打开的文件所在目录的路径
-        projectDir, //项目目录
+async function inputFileInfo({ //工作空间
+        srcDirPath, //用户选择的绝对路径
         subType, //用户输入的子类型
-    },
-    comments, //注释相关的信息
+    }, comments, //注释相关的信息
     { //配置
         indent //缩进字符串
-    }
-) {
-
-    //输入源文件路径
-    const srcPath = await inputSrc("")
-    if (srcPath == undefined) return undefined
-
+    }) {
     //输入文件名
     let fileName = 'main';
     switch (subType) {
@@ -133,23 +120,50 @@ async function handle({ //工作空间
         fileName = await input(fileName, langPack.inputName)
         if (!fileName) return undefined
     }
-    
+
 
     let targetPath;
-    if (subType == 'None'){
-        targetPath = util.pathResolve(projectDir, srcPath, fileName)
+    if (subType == 'None') {
+        targetPath = util.pathResolve(srcDirPath, fileName)
     } else {
-        targetPath = util.pathResolve(projectDir, srcPath, fileName+subType)
+        targetPath = util.pathResolve(srcDirPath, fileName + subType)
     }
     return {
         targetPath: targetPath,
-        code:""
+        code: ""
     }
+
+}
+
+async function handle({ //工作空间
+        sourceDirPath, //当前打开的文件所在目录的路径
+        projectDir, //项目目录
+        subType, //用户输入的子类型
+    },
+    comments, //注释相关的信息
+    { //配置
+        indent //缩进字符串
+    }
+) {
+
+    //输入源文件路径
+    const srcPath = await inputSmartSrc(projectDir, sourceDirPath)
+    if (srcPath == undefined) return undefined
+
+    return await inputFileInfo({
+            srcDirPath: util.pathResolve(projectDir, srcPath),
+            subType
+        },
+        comments, {
+            indent
+        }
+    )
 }
 
 module.exports = {
     key: "A File",
     suffix: [],
     subTypes: FILE_TYPES,
-    handle: handle
+    handle: handle,
+    inputFileInfo
 }

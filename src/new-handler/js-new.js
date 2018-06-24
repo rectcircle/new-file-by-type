@@ -1,12 +1,9 @@
 const {
     input,
-    select,
-    inputSrc,
+    inputSmartSrc,
     selectMany
 } = require('../input')
 const util = require('../util')
-const fs = require('fs-extra')
-const path = require('path')
 
 const langPack = util.loadLanguagePack('js')
 
@@ -24,18 +21,18 @@ function renderTemplate(inputs, comments, tempName) {
 function getImportList(projectDir, srcPath) {
     let p
     if(srcPath.indexOf('/')==-1){
-        p = path.resolve(projectDir, srcPath)
+        p = util.pathResolve(projectDir, srcPath)
     } else {
-        p = path.resolve(projectDir, srcPath.substr(0, srcPath.indexOf('/')))
+        p = util.pathResolve(projectDir, srcPath.substr(0, srcPath.indexOf('/')))
     }
     let reg = new RegExp(/\.js$/i)
 
-    let items = util.traverseDir(p, subPath => {
-        return reg.test(subPath)
+    let items = util.traverseDir(p, (subPath, isFile) => {
+        return isFile && reg.test(subPath)
     }, p)
 
     return items.map(v=>{
-        let rp = path.relative(path.resolve(projectDir, srcPath), v)
+        let rp = util.pathRelative(util.pathResolve(projectDir, srcPath), v)
         if(!rp.startsWith('.')){
             rp = './'+rp
         }
@@ -43,6 +40,54 @@ function getImportList(projectDir, srcPath) {
     })
 }
 
+async function inputFileInfo({ //工作空间
+        srcDirPath, //用户选择的绝对路径
+        subType, //用户输入的子类型
+    }, comments, //注释相关的信息
+    { //配置
+        indent //缩进字符串
+    }) {
+    if (JS_TYPES[0] == subType || JS_TYPES[1] == subType) { //None || JQuery
+
+        //输入文件名
+        let fileName = await input('main', langPack.inputName)
+        if (!fileName) return undefined
+
+        //渲染
+        let code = renderTemplate({
+            indent,
+            fileName,
+        }, comments, `JS-${subType}`)
+        let targetPath = util.pathResolve(srcDirPath, `${fileName}.js`)
+        return {
+            targetPath,
+            code
+        }
+        //Node-Module || ES6-Module
+        //React || Vue
+    } else if (JS_TYPES[2] == subType ||
+        JS_TYPES[3] == subType ||
+        JS_TYPES[4] == subType ||
+        JS_TYPES[5] == subType) {
+
+        //输入文件名
+        let fileName = await input('main', langPack.inputName)
+        if (!fileName) return undefined
+
+        //渲染
+        let code = renderTemplate({
+            indent,
+            fileName,
+            importInfos:[]
+        }, comments, `JS-${subType}`)
+        let targetPath = util.pathResolve(srcDirPath, `${fileName}.js`)
+        return {
+            targetPath,
+            code
+        }
+
+    }
+}
 
 async function handle({ //工作空间
         sourceDirPath, //当前打开的文件所在目录的路径
@@ -57,7 +102,7 @@ async function handle({ //工作空间
 
     if (JS_TYPES[0] == subType || JS_TYPES[1] == subType) { //None || JQuery
         //输入源文件路径
-        const srcPath = await inputSrc("js")
+        const srcPath = await inputSmartSrc(projectDir, sourceDirPath ,"js")
         if (srcPath == undefined) return undefined
 
         //输入文件名
@@ -81,7 +126,7 @@ async function handle({ //工作空间
         JS_TYPES[4] == subType ||
         JS_TYPES[5] == subType) { 
         //输入源文件路径
-        const srcPath = await inputSrc("src")
+        const srcPath = await inputSmartSrc(projectDir, sourceDirPath, "src")
         if (srcPath == undefined) return undefined
 
         //输入文件名
@@ -93,7 +138,7 @@ async function handle({ //工作空间
             getImportList(projectDir, srcPath),
             langPack.inputImportList)
         let importInfos = importList.map(v=>{
-            return [path.basename(v), v]
+            return [util.pathBasename(v), v]
         })
 
         //渲染
@@ -115,7 +160,8 @@ module.exports = {
     key: "JavaScript",
     suffix: ['js'],
     subTypes: JS_TYPES,
-    handle: handle
+    handle: handle,
+    inputFileInfo
 }
 
 

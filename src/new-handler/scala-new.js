@@ -1,15 +1,10 @@
 const {
-    input,
-    select,
-    inputSrc,
-    selectMany
+    input
 } = require('../input')
-const vscode = require('vscode');
 const util = require('../util')
 const os = require('os')
 const path = require('path')
 const fs = require('fs-extra');
-const sprintf = require('sprintf-js').sprintf;
 
 const langPack = util.loadLanguagePack('Scala')
 
@@ -18,8 +13,9 @@ function getRelativeSrcPath(projectDir, sourceDirPath){
     //用户选择的项目目录为：正在编辑的文件所在目录
     if (sourceDirPath && sourceDirPath.startsWith(projectDir)) { 
         for (let i = 0; i < srcPaths.length; i++) {
-            if (sourceDirPath.match(srcPaths[i]) != null) {
-                return srcPaths[i];
+            if (sourceDirPath.includes(srcPaths[i])) {
+                let relativeSourceDirPath = path.relative(projectDir, sourceDirPath)
+                return relativeSourceDirPath.substr(0, relativeSourceDirPath.indexOf(srcPaths[i])) + srcPaths[i];
             }
         }
     } else { //else 探测文件系统
@@ -95,11 +91,121 @@ function renderTemplate(inputs, comments) {
     return util.render(templateName, Object.assign({comments}, inputs))
 }
 
-const SCALA_TYPES = ["App", "Class", "Object",
-    "Trait", "Class&Object", "Trait&Object", 
-    "Package Object", "Scala Worksheet", "Scala Script"];
+function createTargetPathBySrcPath(inputs) {
 
-// console.log(SCALA_TYPES.map(v=>'  - [x] '+v).join('\n'))
+    let {
+        srcPath,
+        name,
+        packageName,
+        subType
+    } = inputs
+
+    let targetPath = srcPath
+    if (subType == "Scala Worksheet" || subType == "Scala Script") {
+        packageName = ""
+    }
+
+    // if (packageName) {
+        // targetPath = path.resolve(targetPath, packageName.replace(/\./g, "/"));
+    // }
+
+    if (subType == "Package Object") {
+        inputs.name = name = packageName.substring(
+            packageName.lastIndexOf('.') + 1,
+            packageName.length)
+        inputs.packageName = packageName = packageName.substring(0,
+            packageName.lastIndexOf('.'))
+        targetPath = path.resolve(targetPath, '../')
+    }
+    if (subType == "Scala Worksheet") {
+        targetPath = path.resolve(targetPath, name + ".sc");
+    } else {
+        targetPath = path.resolve(targetPath, name + ".scala");
+    }
+    return targetPath;
+}
+
+function getPackageNameBySrcPath(srcPath) {
+    const srcPaths = ["src/main/scala", "src/test/scala", "src"]
+    let packageName;
+    for (let s of srcPaths) {
+        if (srcPath.includes(s)) {
+            packageName = srcPath.substr(srcPath.indexOf(s) + s.length + 1)
+            break
+        }
+    }
+    if (packageName == undefined) return undefined
+    return packageName.replace(/\\/g, '.').replace(/\//g, '.')
+}
+
+/**
+ * 实现给出源代码文件所在目录
+ * @param {*} param0 
+ * @param {*} comments 
+ * @param {*} param2 
+ */
+async function inputFileInfo({ //工作空间
+        srcDirPath, //用户选择的绝对路径
+        subType, //用户输入的子类型
+    }, comments, //注释相关的信息
+    { //配置
+        indent //缩进字符串
+    }) {
+
+    const inputs = {
+        subType: subType, //"Class",
+        name: "ClassName", //类型为Package-Info则不存在
+        srcPath: srcDirPath,
+        packageName: getPackageNameBySrcPath(srcDirPath), //包名
+        indent: indent
+    };
+
+
+    if (inputs.subType == "Scala Worksheet" || inputs.subType == "Scala Script") {
+        //输入类型名
+        inputs.name = await input(
+            `${inputs.subType.replace(/[\s\&]+/g,'')}Name`,
+            util.sprintf(langPack.inputTpyeName, inputs.subType))
+        if (!inputs.name) return undefined
+        return {
+            targetPath: createTargetPathBySrcPath(inputs),
+            code: renderTemplate(inputs, comments)
+        }
+    }
+
+    //输入包名
+    inputs.packageName = await input(
+        inputs.packageName ? inputs.packageName : "com." + os.userInfo().username,
+        langPack.inputPackageName,
+        validatePackage)
+    if (inputs.packageName == undefined) return undefined
+
+    //如果是Package类型，直接生成代码
+    if (inputs.subType == "Package Object") {
+        return {
+            targetPath: createTargetPathBySrcPath(inputs),
+            code: renderTemplate(inputs, comments)
+        }
+    }
+
+    //输入类型名
+    inputs.name = await input(
+        `${inputs.subType.replace(/[\s\&]+/g,'')}Name`,
+        util.sprintf(langPack.inputTpyeName, inputs.subType))
+    if (!inputs.name) return undefined
+
+    return {
+        targetPath: createTargetPathBySrcPath(inputs),
+        code: renderTemplate(inputs, comments)
+    }
+}
+
+const SCALA_TYPES = ["App", "Class", "Object",
+    "Trait", "Class&Object", "Trait&Object",
+    "Package Object", "Scala Worksheet", "Scala Script"
+];
+
+
 
 /**
  * 需要返回创建文件的相对与项目目录的路径和处理好的模板代码
@@ -139,7 +245,7 @@ const SCALA_TYPES = ["App", "Class", "Object",
         //输入类型名
         inputs.name = await input(
             `${inputs.subType.replace(/[\s\&]+/g,'')}Name`,
-            sprintf(langPack.inputTpyeName, inputs.subType))
+            util.sprintf(langPack.inputTpyeName, inputs.subType))
         if (!inputs.name) return undefined
         return {
             targetPath: createTargetPath(projectDir, inputs),
@@ -168,7 +274,7 @@ const SCALA_TYPES = ["App", "Class", "Object",
     //输入类型名
     inputs.name = await input(
         `${inputs.subType.replace(/[\s\&]+/g,'')}Name`,
-        sprintf(langPack.inputTpyeName, inputs.subType))
+        util.sprintf(langPack.inputTpyeName, inputs.subType))
     if (!inputs.name) return undefined
 
     return {
@@ -181,5 +287,6 @@ module.exports ={
     key:"Scala",
     suffix: ['scala', 'sc'],
     subTypes:SCALA_TYPES,
-    handle:handle
+    handle:handle,
+    inputFileInfo,
 }

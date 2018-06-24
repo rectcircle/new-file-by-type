@@ -1,0 +1,15 @@
+{
+	"new-file-by-title.new.title": "根据文件或项目类型创建文件", 
+	"new-file-by-title.smart-new-file.title": "在当前目录创建文件",
+	"new-file-by-title.copy-new-file.title": "创建该文件副本",
+	"new-file-by-type.configuration.title": "根据文件或项目类型创建文件插件配置",
+	"new-file-by-type.code-comments.author.description": "指定新建文件的代码注释中的作者名，null代表使用当前操作系统登录用户名",
+	"new-file-by-type.code-comments.description.description": "指定新建文件的代码注释中的固定描述信息默认为：Copyright (c) `year` `author`",
+	"new-file-by-type.code-comments.date-farmat.description": "指定文件注释中的创建时间的格式化形式，更多参见 http://momentjs.cn/docs/#/displaying/",
+	"new-file-by-type.code-comments.version.description": "指定文件注释中的版本信息的值",
+	"new-file-by-type.code-comments.enable.description": "是否启用生成文档注释功能",
+	"new-file-by-type.code-comments.items.description": "指定代码注释各个项目",
+	"new-file-by-type.template.defaultIndent.description": "指定生成代码的缩进方式，0代表使用[tab]字符，大于零表示使用该数目的空格字符",
+	"new-file-by-type.template.indents.description": "根据文件类型，指定代码缩进方式，覆盖defaultIndent选项",
+	"new-file-by-type.snippets.description": "用户自定义的用于创建文件的代码片段，语法参见：https://code.visualstudio.com/docs/editor/userdefinedsnippets"
+}

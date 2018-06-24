@@ -1,0 +1,15 @@
+{
+	"new-file-by-title.new.title": "New File By File or Project Type",
+	"new-file-by-title.smart-new-file.title": "Create a file in the current directory",
+	"new-file-by-title.copy-new-file.title": "Create a copy of this file",
+	"new-file-by-type.configuration.title": "New File By File or Project Type Extension",
+	"new-file-by-type.code-comments.author.description": "code-comments @author value, os login username as default",
+	"new-file-by-type.code-comments.description.description": "The fixed description information in the code comment of the specified new file defaults to Copyright (c) `year` `author`",
+	"new-file-by-type.code-comments.date-farmat.description": "code-comments @date format, see http://momentjs.cn/docs/#/displaying/",
+	"new-file-by-type.code-comments.version.description": "code-comments @version value",
+	"new-file-by-type.code-comments.enable.description": "code-comments enable",
+	"new-file-by-type.code-comments.items.description": "code-comments need display items: build-in support [author, date, version], user can customize e.g. [link, since ...]",
+	"new-file-by-type.template.defaultIndent.description": "default Indent type, 0 is [tab], otherwise is [space]",
+	"new-file-by-type.template.indents.description": "the configuration will override defaultIndent, equal 0 use [tab], otherwise use [space]",
+	"new-file-by-type.snippets.description": "A user-defined code snippet for creating a file. The syntax is: https://code.visualstudio.com/docs/editor/userdefinedsnippets"
+}
