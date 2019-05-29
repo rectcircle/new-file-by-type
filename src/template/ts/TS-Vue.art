@@ -1,8 +1,0 @@
-{{include './Comments.art'}}
-import Vue from "vue";
-{{each importInfos}}
-import * as {{$value[0]}} from '{{$value[1]}}';{{/each}}
-
-let v = new Vue({
-
-});
