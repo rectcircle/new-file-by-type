@@ -1,0 +1,294 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Template Config",
+	"description": "vscode extension new-file-by-type config schema",
+	"type": "object",
+	"definitions": {
+		"StringOrStringArray": {
+			"anyOf": [{
+					"type": "string"
+				},
+				{
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			]
+		},
+		"Input": {
+			"type": "object",
+			"properties": {
+				"type": {
+					"enum": ["path", "text"],
+					"description": "input type",
+					"default": "text"
+				},
+				"name": {
+					"type": "string",
+					"description": "input name"
+				},
+				"value": {
+					"type": "string",
+					"description": "if set value, will not show the input windows"
+				},
+				"prompt": {
+					"type": "string",
+					"default": "{{i18n('inputs.name.prompt')}}"
+				},
+				"placeHolder": {
+					"type": "string",
+					"default": "{{i18n('inputs.name.placeHolder')}}"
+				},
+				"suggest": {
+					"type": "object",
+					"properties": {
+						"selected":{
+							"type": "boolean",
+							"default": true
+						},
+						"value": {
+							"$ref": "#/definitions/StringOrStringArray"
+						}
+					}
+				},
+				"checkRules": {
+					"$ref": "#/definitions/StringOrStringArray"
+				},
+				"option": {
+					"type": "object",
+					"properties": {
+						"parentDirectoryText":{
+							"type":"string",
+							"default": "{{i18n('inputs.name.parentDirectoryText')}}"
+						},
+						"pathSeparator": {
+							"type": "string",
+							"default": "/"
+						},
+						"confirmText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.confirmText')}"
+						},
+						"suggestText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.suggestText')}}"
+						},
+						"directoryText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name..directoryText')}}"
+						},
+						"fileText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.fileText')}}"
+						},
+						"confirmDetailText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.confirmDetailText')}}"
+						},
+						"currentDirectoryText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.currentDirectoryText')}}"
+						},
+						"allowNoExist": {
+							"type": "boolean",
+							"default": "true"
+						},
+						"resultExistAndTypeErrorText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.resultExistAndTypeErrorText')}}"
+						},
+						"returnType": {
+							"enum": ["file" , "directory" , "all"],
+							"default": "directory"
+						},
+						"basePath": {
+							"type": "string",
+							"default": "{{projectFolder}}"
+						}
+					}
+				}
+			},
+			"required": ["type", "name"]
+		},
+		"Target": {
+			"type": "object",
+			"properties": {
+				"filepath": {
+					"description": "target file path to generate",
+					"type": "string",
+					"default": "{{ inputs.path.resolve(projectFolder, inputs.filename + ( suffix ?  '.' + suffix : '') )}}"
+				},
+				"tplpath": {
+					"description": "template file path",
+					"type": "string",
+					"default": "tpl"
+				}
+			}
+		},
+		"Comment": {
+			"type": "object",
+			"description": "comment config",
+			"properties": {
+				"dateFormat": {
+					"description": "code comment date format",
+					"type": "string",
+					"default": "YYYY-MM-DD"
+				},
+				"copyright": {
+					"description": "copyright string",
+					"default": "Copyright (c) {{year}}, {{user}}. All rights reserved."
+				},
+				"startLine": {
+					"description": "comment first line string",
+					"type": "string",
+					"default": "/**"
+				},
+				"lineHeader": {
+					"description": "expect first and last line, comment every line header string",
+					"type": "string",
+					"default": "* "
+				},
+				"endLine": {
+					"description": "comment last line string",
+					"type": "string",
+					"default": " */"
+				},
+				"items": {
+					"type": "array",
+					"default": [
+						"{{comment.copyright}}",
+						"\n",
+						"@author {{user}}",
+						"@date {{date}}",
+						"@version {{version}}"
+					],
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"Match": {
+			"description": "show when this condition is matched",
+			"type": "object",
+			"properties": {
+				"workspaceFolderGlobs": {
+					"type": "array",
+					"description": "workspace folder glob match",
+					"items": {
+						"type": "string"
+					}
+				},
+				"always": {
+					"type": "boolean",
+					"description": "Whether it always matches",
+					"default": true
+				}
+			}
+		}
+	},
+	"properties": {
+		"name": {
+			"description": "template or type name",
+			"type": "string",
+			"default": "{{ i18n('name') }}"
+		},
+		"description": {
+			"description": "template or type name",
+			"type": "string",
+			"default": "{{ i18n('description') }}"
+		},
+		"version": {
+			"description": "default version will use in comment",
+			"type": "string",
+			"default": "0.0.1"
+		},
+		"flat": {
+			"description": "subtype flat display",
+			"type": "boolean",
+			"default": false
+		},
+		"snippet": {
+			"description": "is snippet",
+			"type": "boolean",
+			"default": false
+		},
+		"indent": {
+			"description": "file indent type: 0 - use [Tab], non-zero - use `indent` number space",
+			"default": "{{defaultConf.indent}}",
+			"oneOf": [
+				{
+					"type": "number"
+				},
+				{
+					"type": "string"
+				}
+			]
+		},
+		"encoding": {
+			"type": "string",
+			"description": "file encoding",
+			"default": "{{defaultConf.encoding}}"
+		},
+		"user": {
+			"type": "string",
+			"description": "coder name can use in tpl",
+			"default": "{{defaultConf.user}}"
+		},
+		"suffix": {
+			"description": "file suffix",
+			"type": "string",
+			"default": ""
+		},
+		"showHidden": {
+			"description": "show hidden directory",
+		},
+		"targets": {
+			"description": "template file path and output path config",
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Target"
+			}
+		},
+		"placeHolder": {
+			"description": "template select view placeHolder text",
+			"type": "string",
+			"default": "{{i18n('templateSelectPlaceHolder')}}"
+		},
+		"inputs": {
+			"type": "array",
+			"default": [
+				{
+					"type": "path",
+					"name": "srcPath",
+					"prompt": "i18n('inputs.srcPath.prompt')",
+					"placeHolder": "i18n('inputs.srcPath.placeHolder')",
+					"suggest": {
+						"selected": true,
+						"value": "src/"
+					}
+				}, 
+				{
+					"type": "text",
+					"name": "filename",
+					"prompt": "i18n('inputs.filename.prompt')",
+					"placeHolder": "i18n('inputs.filename.placeHolder')",
+					"suggest": {
+						"selected": true,
+						"value": "main"
+					}
+				}
+			],
+			"items": {
+				"$ref": "#/definitions/Input"
+			}
+		},
+		"comment": {
+			"$ref": "#/definitions/Comment"
+		},
+		"match": {
+			"$ref": "#/definitions/Match"
+		}
+	}
+}

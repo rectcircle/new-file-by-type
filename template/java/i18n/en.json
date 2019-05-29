@@ -1,0 +1,19 @@
+{
+	"class": "Class",
+	"classDescription": "Create a Java Class",
+	"templateSelectPlaceHolder": "Please select a file type",
+	"projectSelectPlaceHolder": "Please select a project directory",
+	"inputs.srcPath.placeHolder": "Please Select Java Source Root Directory (input or select a directory)",
+	"inputs.packageName.prompt": "Current selection: ",
+	"inputs.packageName.placeHolder": "Please select or input package name",
+	"inputs.packageName.parentDirectoryText": "..(return to the upper level)",
+	"inputs.packageName.confirmText": "Confirm use: ",
+	"inputs.packageName.suggestText": "Suggest",
+	"inputs.packageName.directoryText": "Package",
+	"inputs.packageName.fileText": "File",
+	"inputs.packageName.resultExistAndTypeErrorText": "\"{resultPath}\" already exists, type is {nowTypeText}, expect type is {expectTypeText}",
+	"inputs.packageName.confirmDetailText": "(Press ↵ finish selection)",
+	"inputs.packageName.currentDirectoryText": "Default package",
+	"inputs.className.prompt": "Please input class name",
+	"inputs.className.placeHolder": "Please input class name"
+}

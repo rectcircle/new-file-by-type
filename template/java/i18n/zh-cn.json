@@ -1,0 +1,18 @@
+{
+	"class": "Class",
+	"classDescription": "创建一个 Java 类",
+	"templateSelectPlaceHolder": "请选择文件类型",
+	"inputs.srcPath.placeHolder": "请选择Java源代码根目录（输入或选择一个目录）",
+	"inputs.packageName.prompt": "当前选择：",
+	"inputs.packageName.placeHolder": "请选择或输入包名（输入或选择一个包）",
+	"inputs.packageName.parentDirectoryText": "..（返回）",
+	"inputs.packageName.confirmText": "确定使用：",
+	"inputs.packageName.suggestText": "建议",
+	"inputs.packageName.directoryText": "子包",
+	"inputs.packageName.fileText": "文件",
+	"inputs.packageName.resultExistAndTypeErrorText": "{resultPath} 已经存在, 类型为 {nowTypeText}, 期望类型为 {expectTypeText}",
+	"inputs.packageName.confirmDetailText": "(按 ↵ 键完成选择)",
+	"inputs.packageName.currentDirectoryText": "缺省包",
+	"inputs.className.prompt": "请输入类名",
+	"inputs.className.placeHolder": "请输入类名"
+}

@@ -1,0 +1,4 @@
+{{inputs.packageName ? 'package '+inputs.packageName + ';\n\n' : ''}}{{commentOutput}}
+public class {{inputs.className}} {
+	{{focus('// TODO: happy codding! (created by vscode extension new-file-by-type)')}}
+}
