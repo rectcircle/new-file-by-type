@@ -116,7 +116,7 @@
 					"description": "%new-file-by-type.configuration.global.recentUseDataFrom%"
 				},
 				"new-file-by-type.global.recentUseSortBy": {
-					"default": "frequency",
+					"default": "time",
 					"enum": [
 						"time",
 						"frequency"
@@ -161,11 +161,6 @@
 										"type": "string"
 									}
 								]
-							},
-							"encoding": {
-								"type": "string",
-								"description": "%new-file-by-type.template.encoding%",
-								"default": "{{defaultConf.encoding}}"
 							},
 							"user": {
 								"type": "string",

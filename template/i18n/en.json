@@ -34,6 +34,8 @@
 	"inputs.srcPath.confirmDetailText": "(Press ↵ to complete the selection)",
 	"inputs.srcPath.currentDirectoryText": "Project root directory",
 	"inputs.srcPath.resultExistAndTypeErrorText": "\"{resultPath}\" already exists, type is {nowTypeText}, expect type is {expectTypeText}",
+	"inputs.filename.prompt": "Please input file name",
+	"inputs.filename.placeHolder": "Please input file name",
 	
 	"common.prompt": "Current selection: ",
 	"common.placeHolder": "Please select target directory or input target file",

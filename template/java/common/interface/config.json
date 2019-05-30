@@ -1,8 +1,6 @@
 {
-	"name": "{{ i18n('class') }}",
-	"description": "{{ i18n('class.description') }}",
+	"weight": 200,
 	"suffix": "java",
-	"weight": 100,
 	"targets": [
 		{
 			"filepath": "{{ customize['fullTargetPath'] }}",
@@ -36,26 +34,13 @@
 		},
 		{
 			"type": "text",
-			"name": "className",
-			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.className + '.' + suffix)}}",
+			"name": "interfaceName",
+			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.interfaceName + '.' + suffix)}}",
 			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
 			"suggest": {
 				"selected": true,
 				"value": "Main"
 			}
 		}
-	],
-	"comment": {
-		"dateFormat": "YYYY-MM-DD",
-		"startLine": "/**",
-		"lineHeader": " * ",
-		"endLine": " */",
-		"items": [
-			"{{comment.copyright}}",
-			"",
-			"@author {{user}}",
-			"@date {{date}}",
-			"@version {{version}}"
-		]
-	}
+	]
 }

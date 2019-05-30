@@ -2,7 +2,6 @@ import ViewBase from "../ViewBase";
 import * as vscode from 'vscode';
 import TemplateTree, { Node } from "../../template/TemplateTree";
 import { Constant } from "../../UserConfiguration";
-import { objectToArray } from "../../util/common";
 import { QuickPickItem } from "vscode";
 import ViewTimeline from "./ViewTimeline";
 import { listWorkspaceFolderPath } from "../../util/vscode";
@@ -18,7 +17,7 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 	}
 
 	private getRecentNodeList(recentUseMaxNumber ?: number): Node[] {
-		const result: Node[] = [];
+		let result: Node[] = [];
 		recentUseMaxNumber = recentUseMaxNumber || this.config.recentUseMaxNumber;
 		if (!this.config.showRecentUsed) {
 			return result;
@@ -35,14 +34,15 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 		}
 		let paths:string[];
 		if (this.config.recentUseSortBy === "frequency") {
-			paths = objectToArray(recentUsages.frequency)
-				.sort((a, b) => a[1] - b[1])
+			paths = Object.entries<number>(recentUsages.frequency)
+				.sort((a, b) => b[1] - a[1])
 				.slice(0, recentUseMaxNumber)
 				.map(v => v[0]);
 		} else {
-			paths = (recentUsages.time as Array<string>).slice(0, this.config.recentUseMaxNumber);
+			paths = (recentUsages.time as Array<string>).slice(0, recentUseMaxNumber);
 		}
-		return this.tree.findLeafNodeByPath(paths);
+		result = this.tree.findLeafNodeByPath(paths);
+		return paths.map(p => result.find(n => n.path === p )) as Node[];
 	}
 
 	private async matchNodeChildren(node?: Node) {
@@ -55,7 +55,7 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 			return {
 				label: (node.children.length === 0 ? '$(file-code) ' : '$(file-directory) ') + node.name,
 				description: tag || node.namespace,
-				detail: Constant.ALIGN_STRING + node.description,
+				detail: node.description ? Constant.ALIGN_STRING + node.description : undefined,
 				node: node
 			};
 		});
@@ -70,6 +70,9 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 		if (allRecentNodeParentNode.children.length <= nodes.length) {
 			return null;
 		}
+		allRecentNodeParentNode.configuration = this.tree.root.configuration;
+		allRecentNodeParentNode.langPack = this.tree.root.langPack;
+		allRecentNodeParentNode.engine = this.tree.root.engine;
 		return allRecentNodeParentNode;
 	}
 

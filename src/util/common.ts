@@ -99,14 +99,6 @@ export function mergeArray<T>(target: T[], source: T[], eq: (a: T, b: T)=> boole
 	return result;
 }
 
-export function objectToArray(obj: {[key:string]: any}): Array<[string, any]> {
-	let result: Array<[string, any]> = [];
-	for (let key in obj) {
-		result.push([key, obj[key]]);
-	}
-	return result;
-}
-
 function doExpandAndToSource(context: any, filter: Function | undefined, requires:string[], startingIndent: number) {
 	const result: string[] = [];
 	const startingIndentString = new Array(startingIndent).fill(' ').join('');

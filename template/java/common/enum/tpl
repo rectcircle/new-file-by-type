@@ -1,0 +1,4 @@
+{{inputs.packageName ? 'package '+inputs.packageName + ';\n\n' : ''}}{{commentOutput}}
+public enum {{inputs.enumName}} {
+	{{focus('ENUM_ITEM0; // TODO: happy codding! (created by vscode extension new-file-by-type)')}}
+}

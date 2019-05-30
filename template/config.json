@@ -5,7 +5,6 @@
 	"suffix": "",
 	"flat": false,
 	"indent": "{{defaultConf.indent}}",
-	"encoding": "{{defaultConf.encoding}}",
 	"user": "{{defaultConf.user}}",
 	"placeHolder": "{{i18n('templateSelectPlaceHolder')}}",
 	"showHidden": false,
@@ -17,18 +16,17 @@
 		{
 			"type": "path",
 			"name": "srcPath",
-			"prompt": "i18n('inputs.srcPath.prompt')",
-			"placeHolder": "i18n('inputs.srcPath.placeHolder')",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
 			"suggest": {
-				"selected": true,
 				"value": "src/"
 			}
 		},
 		{
 			"type": "text",
 			"name": "filename",
-			"prompt": "i18n('inputs.filename.prompt')",
-			"placeHolder": "i18n('inputs.filename.placeHolder')",
+			"prompt": "{{i18n('inputs.filename.prompt')}}",
+			"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
 			"suggest": {
 				"selected": true,
 				"value": "main"
@@ -39,16 +37,15 @@
 		"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
 		"dateFormat": "YYYY-MM-DD",
 		"startLine": "/**",
-		"lineHeader": "* ",
+		"lineHeader": " * ",
 		"endLine": " */",
 		"items": [
 			"{{comment.copyright}}",
-			"\n",
+			"",
 			"@author {{user}}",
 			"@date {{date}}",
 			"@version {{version}}"
 		]
-	
 	},
 	"match": {
 		"always": true

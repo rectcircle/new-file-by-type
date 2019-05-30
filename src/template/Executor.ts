@@ -14,8 +14,7 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 	let openedFilePaths: string[] = [];
 	let defaultConf = { // 默认配置
 		indent: 0,
-		user: '',
-		encoding: 'utf8',
+		user: ''
 	};
 	let now = new Date();
 	let year = now.getFullYear();
@@ -28,7 +27,6 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 	let suffix = '';
 	let flat = false;
 	let indent = 0;
-	let encoding = 'utf8';
 	let user = os.userInfo().username;
 	let placeHolder = '';
 	let targets:any[] = [];
@@ -41,10 +39,6 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 	let commentOutput = '';
 	let inputs: any = {};
 	let date: string = moment(now).format('YYYY-MM-DD');
-	// 比较特殊的 focus 命令：用于实现编辑器selection
-	function focus(str?: string) {
-		return `__focus<%${str}%>`;
-	}
 	// 提供的函数
 	let helper = {
 		// 返回数组中第一个不等于undefined的元素
@@ -210,7 +204,6 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 					suffix : suffix,
 					flat : flat,
 					indent : indent,
-					encoding : encoding,
 					user : user,
 					placeHolder : placeHolder,
 					targets : targets,
@@ -225,7 +218,6 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 					commentOutput: commentOutput,
 					inputs: inputs,
 					// 比较特殊的 focus 命令：用于实现编辑器selection
-					focus: focus,
 					// 提供的函数
 					helper: helper,
 					i18n: function (key:string) {

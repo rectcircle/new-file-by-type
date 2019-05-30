@@ -1,0 +1,30 @@
+{{inputs.packageName ? 'package '+inputs.packageName + ';\n\n' : ''}}import org.junit.*;
+{{commentOutput}}
+public class {{inputs.junitClassName}}Test {
+
+	@BeforeClass
+	public static void init() {
+		
+	}
+
+	@Before 
+	public void setUp() {
+		
+	}
+
+	@Test
+	public void test() {
+		${0:// TODO: happy codding! (created by vscode extension new-file-by-type)}
+	}
+
+	@After
+	public void tearDown() {
+		
+	}
+
+	@AfterClass
+	public static void destroy() {
+		
+	}
+
+}

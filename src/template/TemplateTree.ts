@@ -14,8 +14,6 @@ export interface OutputItem {
 	originPath?: string;
 	exists: boolean;
 	content?: string | Buffer; // TODO Buffer类型，考虑null和大文件，文件拷贝优化和设置进度条
-	encoding: string;
-	selection?: [[number, number], [number, number]];
 }
 
 export class Node {
@@ -25,7 +23,7 @@ export class Node {
 	public readonly path: string;
 	public configuration: Configuration;
 	public langPack: I18n;
-	private engine: TemplateEngine;
+	public engine: TemplateEngine;
 	public constructor(nodePath: string, parent?: Node) {
 		this.path = nodePath;
 		this.parent = parent;
@@ -64,6 +62,18 @@ export class Node {
 				}
 			}
 		}
+		// 对子树进行排序
+		now.children.sort((a, b) => {
+			if (a.weight !== b.weight) {
+				return a.weight - b.weight;
+			}
+			if (a.name < b.name) {
+				return -1;
+			} else if (a.name > b.name) {
+				return 1;
+			}
+			return 0;
+		});
 		return now;
 	}
 	updateEngine(activeDirectory: string | undefined = undefined) {
@@ -101,24 +111,27 @@ export class Node {
 		return false;
 	}
 
-	get encoding(): string {
-		return this.engine.render(this.configuration.encoding);
-	}
-
 	get name(): string {
 		return this.engine.render(this.configuration.name);
 	}
 
-	get description(): string {
-		return this.engine.render(this.configuration.description);
+	get description(): string | undefined {
+		try {
+			return this.engine.render(this.configuration.description);
+		} catch (error) {
+			if ((error.message as string).startsWith('i18n Error')) {
+				return undefined;
+			}
+			throw error;
+		}
+	}
+
+	get weight(): number {
+		return this.engine.renderAny(this.configuration.weight);
 	}
 
 	get flat(): boolean {
 		return this.configuration.flat;
-	}
-
-	get snippet(): boolean {
-		return this.configuration.snippet;
 	}
 
 	getInput(idx: number) {
@@ -172,33 +185,14 @@ export class Node {
 	get commentOutput() {
 		const comment = this.configuration.comment;
 		return [
-			comment.startLine,
+			comment.startLine || '',
 			...comment.items.map(item => comment.lineHeader + this.engine.render(item)),
-			comment.endLine
+			comment.endLine || ''
 		].join('\n');
 	}
 
 	setCommentOutput(commentOutput: string) {
 		this.engine.setCommentOutput(commentOutput);
-	}
-
-	private getSelection(content: string): [[number, number], [number, number]] | undefined {
-		const contentLines = content.split('\n');
-		let cols = [] as number[];
-		let line = -1;
-		for (let i = 0; i < contentLines.length; i++) {
-			let r = this.engine.tryFocus(contentLines[i]);
-			if (r !== undefined) {
-				line = i;
-				cols = r;
-				break;
-			}
-		}
-		const selection = line === -1 ? undefined : cols.map(col => [line, col]);
-		if (selection !== undefined && selection.length === 1) {
-			selection.push(selection[0]);
-		}
-		return selection as any;
 	}
 
 	public async renderTpl(): Promise<OutputItem[]>{
@@ -214,14 +208,10 @@ export class Node {
 				tpl = tpl.replace(/\t/g, new Array(indent).fill(' ').join('') );
 			}
 			let content = this.engine.render(tpl);
-			const selection = this.getSelection(content);
-			content = this.engine.handleFocus(content);
 			result.push({
 				exists: await fs.existsAsync(target.filepath),
 				content: content,
-				targetPath: target.filepath,
-				selection: selection,
-				encoding: this.engine.get('encoding')
+				targetPath: target.filepath
 			});
 		}
 		return result;

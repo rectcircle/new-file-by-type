@@ -1,6 +1,18 @@
 {
 	"class": "Class",
-	"classDescription": "Create a Java Class",
+	"class.description": "Create a Java Class",
+	"interface": "Interface",
+	"interface.description": "Create a Java Interface",
+	"package": "Package",
+	"package.description": "Create a Java Package",
+	"enum": "Enum",
+	"enum.description": "Create a Java Enum",
+	"annotation": "Annotation",
+	"annotation.description": "Create a Java Annotation",
+	"junit": "JUnitTestCase",
+	"junit.description": "Create a JUnit Test Case",
+	"properties": "Java Properties",
+	"properties.description": "Create a Java Properties File",
 	"templateSelectPlaceHolder": "Please select a file type",
 	"projectSelectPlaceHolder": "Please select a project directory",
 	"inputs.srcPath.placeHolder": "Please Select Java Source Root Directory (input or select a directory)",
@@ -15,5 +27,12 @@
 	"inputs.packageName.confirmDetailText": "(Press ↵ finish selection)",
 	"inputs.packageName.currentDirectoryText": "Default package",
 	"inputs.className.prompt": "Please input class name",
-	"inputs.className.placeHolder": "Please input class name"
+	"inputs.className.placeHolder": "Please input class name",
+	"inputs.interfaceName.prompt": "Please input interface name",
+	"inputs.interfaceName.placeHolder": "Please input interface name",
+	"inputs.enumName.prompt": "Please input interface name",
+	"inputs.enumName.placeHolder": "Please input interface name",
+	"inputs.junitClassName.prompt": "Please input the class name to be tested",
+	"inputs.junitClassName.placeHolder": "Please input the class name to be tested",
+	"inputs.srcPath.placeHolder.properties": "Please Select directory where the Properties file is located (input or select a directory)"
 }

@@ -9,8 +9,6 @@ import makeExecutor from "./Executor";
 const TPL_PATTERN = /{{(.*?)}}/g;
 const TPL_ESCAPE = /\\{\\{(.*?)\\}\\}/g;
 const TPL_ONE_PATTERN = /^\s*{{(.*?)}}\s*$/;
-const TPL_FOCUS = /__focus<%(.*?)%>/;
-const TPL_FOCUS_BUILD_IN = /__focus<%(.*?)%>/g;
 
 const defaultConf = {
 	indent() {
@@ -21,9 +19,6 @@ const defaultConf = {
 	},
 	user() {
 		return os.userInfo().username;
-	},
-	encoding() {
-		return vscode.workspace.getConfiguration('files').get('encoding');
 	}
 };
 
@@ -42,7 +37,6 @@ export default class TemplateEngine {
 		this.executor.set("version", this.renderAny(this.conf.version));
 		this.executor.set("flat", this.renderAny(this.conf.flat));
 		this.executor.set("indent", this.renderAny(this.conf.indent));
-		this.executor.set("encoding", this.renderAny(this.conf.encoding));
 		this.executor.set("user", this.renderAny(this.conf.user));
 		this.executor.set("placeHolder", this.renderAny(this.conf.placeHolder));
 		this.executor.set("targets", this.renderAny(this.conf.targets));
@@ -98,25 +92,6 @@ export default class TemplateEngine {
 	private isOnePattern(str: string) {
 		const m = str.match(/{{/g); // 只允许存在一个 {{
 		return TPL_ONE_PATTERN.test(str) && m !== null && m.length === 1;
-	}
-
-	tryFocus(str: string): undefined | [number] | [number, number]{
-		const m = str.match(TPL_FOCUS);
-		if (m === null || m.length !== 2) {
-			return undefined;
-		}
-		let start = str.indexOf("__focus");
-		const p = this.handleFocus(str).substr(start);
-		if (p === '') {
-			return [start];
-		} else {
-			return [start, start + p.length];
-		}
-	}
-
-	handleFocus(str: string) {
-		let result = str.replace(TPL_FOCUS_BUILD_IN, '$1');
-		return result;
 	}
 
 	render(str: string): string | any {

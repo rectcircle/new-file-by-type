@@ -1,8 +1,6 @@
 {
-	"name": "{{ i18n('class') }}",
-	"description": "{{ i18n('class.description') }}",
 	"suffix": "java",
-	"weight": 100,
+	"weight": 500,
 	"targets": [
 		{
 			"filepath": "{{ customize['fullTargetPath'] }}",
@@ -16,7 +14,7 @@
 			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
 			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
 			"suggest": {
-				"value": "{{ helper.firstNotEmpty(helper.descendant(projectFolder, 4) ,['src/main/java/', 'src/test/java/', 'src/'])}}"
+				"value": "src/test/java/"
 			}
 		},
 		{
@@ -36,26 +34,13 @@
 		},
 		{
 			"type": "text",
-			"name": "className",
-			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.className + '.' + suffix)}}",
+			"name": "junitClassName",
+			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.junitClassName + 'Test.' + suffix)}}",
 			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
 			"suggest": {
 				"selected": true,
 				"value": "Main"
 			}
 		}
-	],
-	"comment": {
-		"dateFormat": "YYYY-MM-DD",
-		"startLine": "/**",
-		"lineHeader": " * ",
-		"endLine": " */",
-		"items": [
-			"{{comment.copyright}}",
-			"",
-			"@author {{user}}",
-			"@date {{date}}",
-			"@version {{version}}"
-		]
-	}
+	]
 }

@@ -1,6 +1,6 @@
 import * as Ajv from "ajv"; 
 import "../util/fs";
-import { depthMerge, mergeArray } from "../util/common";
+import { depthMerge, mergeArray, depthCopy } from "../util/common";
 import fs from "../util/fs";
 import * as defaultConfigObject from  "../default-config.json";
 import * as configSchema from "../config.schema.json";
@@ -74,7 +74,7 @@ export default class Configuration {
 		}
 		const t = new Configuration();
 		t.namespace = namespace;
-		let config = {};
+		let config : any = {};
 		if (exist) {
 			const configString = (await fs.readFileAsync(filepath)).toString("utf8");
 			const ajv = new Ajv();
@@ -84,6 +84,11 @@ export default class Configuration {
 			config = JSON.parse(configString);
 		}
 		t.config = depthMerge(defaultConfig ? defaultConfig.config : this.DEFAULT.config, config);
+		// 以下处理不能覆盖的属性
+		t.config.name = config.name;
+		t.config.description = config.description;
+		t.config.weight = config.weight;
+		// 加载用户在settings中的配置
 		t.loadUserConfiguration();
 		return t;
 	}
@@ -91,7 +96,7 @@ export default class Configuration {
 	private loadUserConfiguration() {
 		let userConfList = UserConfiguration.getInstance().matchTemplateConf(this.namespace);
 		for (let userConf of userConfList) {
-			const copy = depthMerge(userConf);
+			const copy = depthCopy(userConf);
 			// 删除inputs，特殊要进行更精细的合并
 			delete copy.inputs;
 			this.config = depthMerge(this.config, copy);
@@ -103,11 +108,30 @@ export default class Configuration {
 	}
 
 	get name(): string {
-		return this.config['name'];
+		const name = this.config['name'];
+		if (name !== undefined) {
+			return name;
+		}
+		const sp = this.namespace.split('.');
+		return `{{i18n('${sp.pop() || '.'}')}}`;
 	}
 
 	get description(): string {
-		return this.config['description'];
+		const description = this.config['description'];
+		if (description !== undefined) {
+			return description;
+		}
+		const sp = this.namespace.split('.');
+		let folderName: string = sp.pop() || '.';
+		return `{{i18n('${folderName}.description')}}`;
+	}
+
+	get weight(): number {
+		const weight = this.config['weight'];
+		if (weight === undefined) {
+			return Number.MAX_SAFE_INTEGER;
+		}
+		return weight;
 	}
 
 	get version(): string{
@@ -120,10 +144,6 @@ export default class Configuration {
 
 	get flat(): boolean {
 		return this.config['flat'];
-	}
-
-	get snippet(): boolean {
-		return this.config['snippet'];
 	}
 
 	get placeHolder(): string {
@@ -140,10 +160,6 @@ export default class Configuration {
 
 	get indent(): number | string {
 		return this.config['indent'];
-	}
-
-	get encoding(): string {
-		return this.config['encoding'];
 	}
 
 	get user(): string {

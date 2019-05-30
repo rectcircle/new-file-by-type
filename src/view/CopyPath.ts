@@ -39,8 +39,7 @@ export default class CopyPath extends ViewBase<string, boolean> {
 					isDirectory: !item.isFile,
 					targetPath: item.target,
 					originPath: item.origin,
-					exists: inputs.needCheckPaths.indexOf(item.target) !== -1,
-					encoding: this.tree.root.encoding
+					exists: inputs.needCheckPaths.indexOf(item.target) !== -1
 				});
 			}
 		}

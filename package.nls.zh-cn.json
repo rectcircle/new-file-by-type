@@ -20,7 +20,6 @@
 	"new-file-by-type.template.version": "模板注释版本",
 	"new-file-by-type.template.flat": "模板选择器是否展平展示",
 	"new-file-by-type.template.indent": "文件缩进类型：0  - 使用`Tab`，非零 - 使用`indent`个空格",
-	"new-file-by-type.template.encoding": "文件编码，默认为 `files.encoding`",
 	"new-file-by-type.template.user": "开发者，将会展示在文件模板的注释中",
 	"new-file-by-type.template.suffix": "文件后缀",
 	"new-file-by-type.template.targets": "模板文件路径和输出路径配置",

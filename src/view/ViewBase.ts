@@ -65,65 +65,59 @@ export default class ViewBase<P = any, T = any>{
 		}
 	}
 
-	public async saveAndFocus(outputs: OutputItem[], opened = true, snippet = false) {
+	public async saveAndFocus(outputs: OutputItem[], snippet = false) {
 		let number = 1;
+		let encoding:string = vscode.workspace.getConfiguration('files').get('encoding') || 'utf8';
 		for (let output of outputs) {
 			// 处理目录
 			if (output.isDirectory) {
 				await fs.mkdirRecursiveAsync(output.targetPath);
 				continue;
 			}
-
-			// 如果存在则先打开，防止覆盖无法找回
-			if (await fs.existsAndIsFileAsync(output.targetPath) && opened) {
-				const textDocument = await vscode.workspace.openTextDocument(outputs[0].targetPath);
-				await vscode.window.showTextDocument(textDocument, {
-					preview: false
-				});
-			}
-
 			// 写文件系统
-			if (output.content === undefined) {
-				if (output.originPath && output.originPath !== output.targetPath) {
+			if (snippet) {
+				// snippet 方式写文件
+				await fs.ensureFileExistsAsync(output.targetPath);
+				let content = output.content;
+				if (content === undefined) {
+					content = (output.originPath ? (await fs.readFileAsync(output.originPath)).toString() : '');
+				}
+				if (content.constructor === Buffer) {
+					content = content.toString();
+				}
+				const textDocument = await vscode.workspace.openTextDocument(output.targetPath);
+				const editor = await vscode.window.showTextDocument(textDocument, {
+					preview: false // 常驻而不是可以被覆盖
+				});
+				// 清空所有
+				await editor.edit(eb => {
+					eb.delete(new vscode.Range(
+						textDocument.lineAt(0).range.start,
+						textDocument.lineAt(textDocument.lineCount - 1).range.end));
+				});
+				// 插入snippet
+				await editor.insertSnippet(new vscode.SnippetString(content as string));
+				await textDocument.save();
+			} else {
+				if (output.content === undefined) {
+					if (output.originPath && output.originPath !== output.targetPath) {
+						await fs.createOrClearFileAsync(output.targetPath);
+						await fs.copyAsync(output.originPath, output.targetPath);
+					}
+				} else if (typeof (output.content) === 'string') {
 					await fs.createOrClearFileAsync(output.targetPath);
-					await fs.copyAsync(output.originPath, output.targetPath);
-				}
-			} else if (typeof(output.content) === 'string') {
-				await fs.createOrClearFileAsync(output.targetPath);
-				if (!snippet) {
-					await fs.writeFileAsync(output.targetPath, iconv.encode(output.content, 'gbk'));
-				}
-			} else if (output.content instanceof Buffer) {
-				await fs.createOrClearFileAsync(output.targetPath);
-				if (!snippet) {
-					await fs.writeFileAsync(output.targetPath, output.content);
+					if (!snippet) {
+						await fs.writeFileAsync(output.targetPath, iconv.encode(output.content, encoding));
+					}
+				} else if (output.content instanceof Buffer) {
+					await fs.createOrClearFileAsync(output.targetPath);
+					if (!snippet) {
+						await fs.writeFileAsync(output.targetPath, output.content);
+					}
 				}
 			}
-
 			Logger.info(`(${number++}/${outputs.length}) Write file ${output.targetPath}` +
-				output.originPath ? `from ${output.originPath}` : '');
-
-			if (!opened) {
-				continue;
-			}
-
-			const textDocument = await vscode.workspace.openTextDocument(outputs[0].targetPath);
-
-			let selection: vscode.Range | undefined = undefined;
-			if (output.selection && !snippet) {
-				selection = new vscode.Range(
-					output.selection[0][0],
-					output.selection[0][1],
-					output.selection[1][0],
-					output.selection[1][1]);
-			}
-			const editor = await vscode.window.showTextDocument(textDocument, {
-				preview: false,
-				selection: selection
-			});
-			if (snippet && output.content && typeof(output.content) === "string" ){
-				await editor.insertSnippet(new vscode.SnippetString(output.content));
-			}
+				(output.originPath ? `from ${output.originPath}` : ''));
 		}
 	}
 

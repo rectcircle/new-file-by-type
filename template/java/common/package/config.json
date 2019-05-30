@@ -1,11 +1,10 @@
 {
-	"name": "{{ i18n('class') }}",
-	"description": "{{ i18n('class.description') }}",
+	"weight": 600,
 	"suffix": "java",
-	"weight": 100,
+	"snippet": true,
 	"targets": [
 		{
-			"filepath": "{{ customize['fullTargetPath'] }}",
+			"filepath": "{{ path.resolve(customize['fullFileDirPath'], 'package-info.java') }}",
 			"tplpath": "tpl"
 		}
 	],
@@ -33,29 +32,6 @@
 				"pathSeparator": ".",
 				"basePath": "{{customize['fullSrcPath']}}"
 			}
-		},
-		{
-			"type": "text",
-			"name": "className",
-			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.className + '.' + suffix)}}",
-			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
-			"suggest": {
-				"selected": true,
-				"value": "Main"
-			}
 		}
-	],
-	"comment": {
-		"dateFormat": "YYYY-MM-DD",
-		"startLine": "/**",
-		"lineHeader": " * ",
-		"endLine": " */",
-		"items": [
-			"{{comment.copyright}}",
-			"",
-			"@author {{user}}",
-			"@date {{date}}",
-			"@version {{version}}"
-		]
-	}
+	]
 }

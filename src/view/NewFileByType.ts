@@ -125,7 +125,7 @@ export default class NewFileByType extends ViewBase<string | undefined, void> {
 		const result = await this.timeline.render(this.activeDirectory);
 		if (result) {
 			this.recordUsed(result.node);
-			this.saveAndFocus(result.outputs.filter(o=>result.filteredPaths.indexOf(o.targetPath) !== -1), true, result.node.snippet);
+			this.saveAndFocus(result.outputs.filter(o=>result.filteredPaths.indexOf(o.targetPath) !== -1), true);
 		}
 	}
 }

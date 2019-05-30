@@ -8,7 +8,7 @@ export default class UserConfiguration{
 	public recentUseMaxNumber: number = 3;
 	/** 最近使用数据来源 */
 	public recentUseDataFrom: "workspace" | "global" = 'workspace';
-	public recentUseSortBy: "time" | "frequency" = "frequency";
+	public recentUseSortBy: "time" | "frequency" = "time";
 	public template: {[key: string]: any} = {};
 	//TODO 是否显示隐藏文件的配置
 

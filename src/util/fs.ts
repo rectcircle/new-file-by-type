@@ -36,6 +36,13 @@ export default {
 		await this.mkdirRecursiveAsync(path.dirname(dirpath));
 		await this.mkdirAsync(dirpath);
 	},
+	async ensureFileExistsAsync(filepath: string) {
+		if (await this.existsAsync(filepath)) {
+			return;
+		}
+		await this.mkdirRecursiveAsync(path.dirname(filepath));
+		await this.writeFileAsync(filepath, '');
+	},
 	async createOrClearFileAsync(filepath: string) {
 		if (await this.existsAsync(filepath)) {
 			if (!(await this.statAsync(filepath)).isFile()) {

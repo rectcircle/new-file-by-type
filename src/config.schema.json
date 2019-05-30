@@ -129,6 +129,20 @@
 		"Comment": {
 			"type": "object",
 			"description": "comment config",
+			"default": {
+				"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
+				"dateFormat": "YYYY-MM-DD",
+				"startLine": "/**",
+				"lineHeader": " * ",
+				"endLine": " */",
+				"items": [
+					"{{comment.copyright}}",
+					"",
+					"@author {{user}}",
+					"@date {{date}}",
+					"@version {{version}}"
+				]
+			},
 			"properties": {
 				"dateFormat": {
 					"description": "code comment date format",
@@ -199,6 +213,11 @@
 			"type": "string",
 			"default": "{{ i18n('description') }}"
 		},
+		"weight": {
+			"description": "Template sort weight",
+			"type": "number",
+			"default": 100
+		},
 		"version": {
 			"description": "default version will use in comment",
 			"type": "string",
@@ -206,11 +225,6 @@
 		},
 		"flat": {
 			"description": "subtype flat display",
-			"type": "boolean",
-			"default": false
-		},
-		"snippet": {
-			"description": "is snippet",
 			"type": "boolean",
 			"default": false
 		},
@@ -226,11 +240,6 @@
 				}
 			]
 		},
-		"encoding": {
-			"type": "string",
-			"description": "file encoding",
-			"default": "{{defaultConf.encoding}}"
-		},
 		"user": {
 			"type": "string",
 			"description": "coder name can use in tpl",
@@ -243,6 +252,8 @@
 		},
 		"showHidden": {
 			"description": "show hidden directory",
+			"type": "boolean",
+			"default": "false"
 		},
 		"targets": {
 			"description": "template file path and output path config",
@@ -258,22 +269,20 @@
 		},
 		"inputs": {
 			"type": "array",
-			"default": [
-				{
+			"default": [{
 					"type": "path",
 					"name": "srcPath",
-					"prompt": "i18n('inputs.srcPath.prompt')",
-					"placeHolder": "i18n('inputs.srcPath.placeHolder')",
+					"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+					"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
 					"suggest": {
-						"selected": true,
 						"value": "src/"
 					}
-				}, 
+				},
 				{
 					"type": "text",
 					"name": "filename",
-					"prompt": "i18n('inputs.filename.prompt')",
-					"placeHolder": "i18n('inputs.filename.placeHolder')",
+					"prompt": "{{i18n('inputs.filename.prompt')}}",
+					"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
 					"suggest": {
 						"selected": true,
 						"value": "main"
