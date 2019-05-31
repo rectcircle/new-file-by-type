@@ -98,7 +98,7 @@ export default class NewFileByType extends ViewBase<string | undefined, void> {
 				if (this.activeDirectory.startsWith(workspaceFolder.uri.fsPath)) {
 					return true;
 				}
-				await vscode.window.showErrorMessage(this.tree.i18n('activeFileMustInWorkspace'));
+				vscode.window.showErrorMessage(this.tree.i18n('activeFileMustInWorkspace'));
 				return false;
 			}
 		}
@@ -119,7 +119,7 @@ export default class NewFileByType extends ViewBase<string | undefined, void> {
 				throw new Error('ActivePath must exists: ' + activePath);
 			}
 		}
-		if (!this.checkWorkspace()) {
+		if (!await this.checkWorkspace()) {
 			return;
 		}
 		const result = await this.timeline.render(this.activeDirectory);

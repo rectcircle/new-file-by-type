@@ -1,6 +1,5 @@
 {
 	"name": "Java",
-	"description": "Java项目",
 	"flat": true,
 	"match": {
 		"always": false,

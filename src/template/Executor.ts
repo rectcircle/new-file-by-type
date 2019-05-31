@@ -41,14 +41,29 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 	let date: string = moment(now).format('YYYY-MM-DD');
 	// 提供的函数
 	let helper = {
-		// 返回数组中第一个不等于undefined的元素
-		firstNotEmpty: function(...values: any[]) {
-			for (let value of values) {
-				if (value !== undefined) {
-					return value;
+		// 将数组展平，并过滤掉不存在的，为null或undefined的元素, 并去重
+		flatAndFilterSuggestPath: function (basePath: string, ...values: any[]) : string[] | undefined {
+			function flat(arg: any): any[] {
+				if (Array.isArray(arg)) {
+					const result = [];
+					for (let item of arg) {
+						result.push(...flat(item));
+					}
+					return result;
+				} else {
+					return [arg];
 				}
 			}
-			return undefined;
+			const filteredResult = flat(values).filter(p => {
+				return p !== undefined && p !== null && fs.existsSync(path.resolve(basePath, p));
+			});
+			const result: string[] = [];
+			for (let p of filteredResult) {
+				if (result.indexOf(p) === -1) {
+					result.push(p);
+				}
+			}
+			return result;
 		},
 		// 获取到激活的编辑器所在目录，相对于basePath的相对路径
 		// (basePath="/a/b/src", activeDirectory="/a/b/src/cn/rectcircle", pathSeparator='.') => "cn.rectcircle"

@@ -7,7 +7,7 @@ import NewFileByType from './view/newFileByType';
 import UserConfiguration from './UserConfiguration';
 import { errorHandle } from './util/exception';
 import fs from './util/fs';
-import { recordStartupAndShowChangeLog, getOutputChannel, recordWorkspaceOpened, activePath } from './util/vscode';
+import { recordStartupAndShowChangeLog, getOutputChannel, recordWorkspaceOpened } from './util/vscode';
 import CopyPath from './view/CopyPath';
 import DeletePath from './view/DeletePath';
 import MovePath from './view/MovePath';
@@ -18,7 +18,7 @@ import openWorkspace from './view/component/OpenWorkspace';
 
 const DEFAULT_TPL_PATH = path.resolve(__dirname, '../', 'template');
 
-async function updateTemplateTree() {
+async function getTemplateTree() {
 	const tplPath = vscode.workspace.getConfiguration('new-file-by-type.global').get<string>('templatePath') || DEFAULT_TPL_PATH;
 	console.log('Template Tree update!');
 	try {
@@ -32,15 +32,8 @@ async function updateTemplateTree() {
 	}
 }
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export async function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "new-file-by-type-v1" is now active!');
-	let tree = await updateTemplateTree();
-	const command = new Command(context);
+async function updateCommand(command: Command, context: vscode.ExtensionContext){
+	let tree = await getTemplateTree();
 	// 注册命令
 	command.register(
 		'new-file-by-type.new',
@@ -68,6 +61,18 @@ export async function activate(context: vscode.ExtensionContext) {
 		'new-file-by-type.open-workspace',
 		async () => await openWorkspace(tree, context.globalState)
 	);
+}
+
+// this method is called when your extension is activated
+// your extension is activated the very first time the command is executed
+export async function activate(context: vscode.ExtensionContext) {
+
+	// Use the console to output diagnostic information (console.log) and errors (console.error)
+	// This line of code will only be executed once when your extension is activated
+	console.log('Congratulations, your extension "new-file-by-type-v1" is now active!');
+	// 注册命令
+	const command = new Command(context);
+	await updateCommand(command, context);
 	// 实现更新日志展示
 	recordStartupAndShowChangeLog(context.globalState);
 	// 记录工作空间状态
@@ -80,7 +85,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			e.affectsConfiguration("editor.insertSpaces") ||
 			e.affectsConfiguration("editor.tabSize") ) {
 			UserConfiguration.updateInstance();
-			tree = await updateTemplateTree();
+			await updateCommand(command, context);
 		}
 	});
 	// 创建日志输出

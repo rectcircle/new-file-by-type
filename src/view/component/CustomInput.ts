@@ -4,7 +4,7 @@ import TemplateTree, { Node } from "../../template/TemplateTree";
 import ViewTimeline from "./ViewTimeline";
 import { UserInput } from '../newFileByType';
 import showPathInput from './showPathInput';
-import { InputItem } from '../../template/Configuration';
+import { InputItem, SelectItem } from '../../template/Configuration';
 import { CheckRule } from '../../util/vscode';
 
 export default class CustomInput extends ViewBase {
@@ -51,8 +51,8 @@ export default class CustomInput extends ViewBase {
 		return function (value: string): string | undefined { return undefined; };
 	}
 
-	private async input(inputConf: InputItem, node: Node, inputsLength: number): Promise<string | undefined> {
-		let value: string | undefined = inputConf.value;
+	private async input(inputConf: InputItem, node: Node, inputsLength: number): Promise<string | string[] | undefined> {
+		let value: string | string[] | undefined = inputConf.value;
 		// 用户自定义了value，直接跳过
 		if (value !== undefined) {
 			if (node.inputsLength !== inputsLength + 1 ) {
@@ -93,6 +93,24 @@ export default class CustomInput extends ViewBase {
 				valueSelection: suggest.selected && suggest.value.length === 0 ?  undefined : [0, suggest.value[0].length],
 				validateInput: this.checkRule(inputConf.checkRules as any)
 			});
+		} else if (inputConf.type === "select") {
+			const result: string | SelectItem | string[] | SelectItem[] | undefined = await vscode.window.showQuickPick(inputConf.items as any, {
+				canPickMany: inputConf.option.canSelectMany,
+				placeHolder: inputConf.placeHolder,
+			});
+			if (Array.isArray(result)) {
+				value = result.map<string>(r => {
+					if (typeof (r) === "string") {
+						return r;
+					} else {
+						return r.value;
+					}
+				});
+			} else if (result === undefined || typeof(result) === "string") {
+				value = result;
+			} else {
+				value = (result as SelectItem).value;
+			}
 		}
 		if (value !== undefined) {
 			if (node.inputsLength !== inputsLength + 1 ) {

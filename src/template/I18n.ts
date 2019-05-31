@@ -23,7 +23,11 @@ export default class I18n {
 			for (let subName of (await fs.readdirAsync(i18nPath))) {
 				const subPath = path.resolve(i18nPath, subName);
 				const key = subName.split('.')[0];
-				nowDicts[key] = JSON.parse((await fs.readFileAsync(subPath)).toString('utf8'));
+				try {
+					nowDicts[key] = JSON.parse((await fs.readFileAsync(subPath)).toString('utf8'));
+				} catch (e) {
+					throw new Error(`I18n file load error: ${subPath}\nError message: ${e.stack}`);
+				}
 			}
 		}
 		i.dicts = depthMerge(superI18n ? superI18n.dicts : {}, nowDicts);

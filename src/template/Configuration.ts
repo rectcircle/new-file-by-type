@@ -14,8 +14,17 @@ export interface MatchItem {
 	always?: boolean;
 }
 
+export interface SelectItem {
+	label: string;
+	description?: string;
+	detail?: string;
+	picked?: boolean;
+	alwaysShow?: boolean;
+	value: string;
+}
+
 export interface InputItem {
-	type: "path" | "text";
+	type: "path" | "text" | "select";
 	name: string;
 	value?: string;
 	prompt: string;
@@ -26,6 +35,7 @@ export interface InputItem {
 		selected: boolean;
 		value: Array<string> | string | undefined;
 	};
+	items: string[] | SelectItem[];
 	option: {
 		parentDirectoryText: string;
 		pathSeparator: string;
@@ -39,6 +49,7 @@ export interface InputItem {
 		returnType: "file" | "directory" | "all";
 		allowNoExist: boolean;
 		basePath: string;
+		canSelectMany: boolean;
 	};
 }
 
@@ -79,7 +90,7 @@ export default class Configuration {
 			const configString = (await fs.readFileAsync(filepath)).toString("utf8");
 			const ajv = new Ajv();
 			if (ajv.validate(configSchema, configString)) {
-				throw new Error('config file error:' + ajv.errorsText());
+				throw new Error(`config file error: ${filepath}\nError message:` + ajv.errorsText());
 			}
 			config = JSON.parse(configString);
 		}
@@ -186,6 +197,7 @@ export default class Configuration {
 				after: i.after || undefined,
 				checkRules: i.checkRules || [],
 				suggest: i.suggest,
+				items: i.items || [],
 				option: {
 					parentDirectoryText: option.parentDirectoryText || this.defaultInputI18nTpl(i.name, 'parentDirectoryText'),
 					pathSeparator: option.pathSeparator || path.sep,
@@ -198,7 +210,8 @@ export default class Configuration {
 					allowNoExist: option.allowNoExist === undefined ? true : option.allowNoExist,
 					resultExistAndTypeErrorText: option.resultExistAndTypeErrorText || this.defaultInputI18nTpl(i.name, 'resultExistAndTypeErrorText'),
 					returnType: option.returnType || 'directory',
-					basePath: option.basePath || '{{projectFolder}}'
+					basePath: option.basePath || '{{projectFolder}}',
+					canSelectMany: option.canSelectMany === undefined ? false : option.canSelectMany
 				}
 			};
 			return result;

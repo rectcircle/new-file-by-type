@@ -51,5 +51,8 @@
 
 	"directory.placeHolder": "Please select or enter target directory",
 	"project.currentDirectoryText": "Project root directory",
-	"moveOrCopy.targetPathIsSubPath": "The target path for copying or moving is not allowed to be a subdirectory of the selected directory"
+	"moveOrCopy.targetPathIsSubPath": "The target path for copying or moving is not allowed to be a subdirectory of the selected directory",
+
+	"java.description": "Java Project",
+	"c-cpp.description": "C/C++ Project"
 }
