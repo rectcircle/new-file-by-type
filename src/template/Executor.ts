@@ -9,6 +9,8 @@ import { TemplateRenderException } from "../util/exception";
 
 // 利用函数闭包和eval实现一个字符串代码执行器
 export default function makeExecutor(conf: Configuration, langPack: I18n) {
+	/** 以下为内置只读变量 */
+	let happyCodding = '// TODO: happy codding! (created by vscode extension new-file-by-type)';
 	/* 以下为初始化存在的变量 */
 	let language = 'en';
 	let openedFilePaths: string[] = [];
@@ -92,6 +94,16 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 			const result:string[] = [];
 			for (let i = pathNames.length; i >= 1; i--){
 				result.push(pathNames.slice(0, i).join(pathSeparator));
+			}
+			return result;
+		},
+		// (basePath = '/a', filePath = '/a/src/b/c') => ['src/b/c', 'src/b', 'src']
+		ancestor: function (basePath: string, filePath: string, pathSeparator:string = path.sep) {
+			const relativePath = path.relative(basePath, filePath);
+			const arr = relativePath.split(pathSeparator);
+			const result: string[] = [];
+			for (let i = arr.length; i >= 1 ; i--){
+				result.push(arr.slice(0, i).join(pathSeparator));
 			}
 			return result;
 		},

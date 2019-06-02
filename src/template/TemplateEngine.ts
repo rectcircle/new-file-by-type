@@ -6,9 +6,9 @@ import { TemplateRenderException } from "../util/exception";
 import * as os from 'os';
 import makeExecutor from "./Executor";
 
-const TPL_PATTERN = /{{(.*?)}}/g;
-const TPL_ESCAPE = /\\{\\{(.*?)\\}\\}/g;
-const TPL_ONE_PATTERN = /^\s*{{(.*?)}}\s*$/;
+const TPL_PATTERN = /{{([\s\S]*?)}}/g;
+const TPL_ESCAPE = /\\{\\{([\s\S]*?)\\}\\}/g;
+const TPL_ONE_PATTERN = /^\s*{{([\s\S]*?)}}\s*$/;
 
 const defaultConf = {
 	indent() {

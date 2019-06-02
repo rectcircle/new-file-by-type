@@ -1,0 +1,7 @@
+{{commentOutput}}
+
+${0:{{happyCodding}}}
+
+module.exports = {
+
+};

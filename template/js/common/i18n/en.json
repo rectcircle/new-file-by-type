@@ -1,0 +1,17 @@
+{
+	"templateSelectPlaceHolder": "Please select a file type",
+	"none": "None",
+	"none.description": "Create a Common JavaScript file",
+	"commonjs.description": "Create a commonJS Module",
+
+	"inputs.imports.prompt": "Current selection: ",
+	"inputs.imports.placeHolder": "Please select the source directory (input or select a directory)",
+	"inputs.imports.parentDirectoryText": "..(return to the upper directory)",
+	"inputs.imports.confirmText": "Confirm use: ",
+	"inputs.imports.suggestText": "Suggest",
+	"inputs.imports.directoryText": "Directory",
+	"inputs.imports.fileText": "File",
+	"inputs.imports.confirmDetailText": "(Press ↵ to complete the selection)",
+	"inputs.imports.currentDirectoryText": "Project root directory",
+	"inputs.imports.resultExistAndTypeErrorText": "\"{resultPath}\" already exists, type is {nowTypeText}, expect type is {expectTypeText}"
+}

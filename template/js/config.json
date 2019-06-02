@@ -1,0 +1,8 @@
+{
+	"name": "JavaScript",
+	"flat": false,
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["package.json", "**/*.js"]
+	}
+}

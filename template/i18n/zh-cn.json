@@ -54,5 +54,6 @@
 	"moveOrCopy.targetPathIsSubPath": "复制或移动的目标路径不允许是选中目录的子目录",
 
 	"java.description": "Java 项目",
-	"c-cpp.description": "C/C++项目"
+	"c-cpp.description": "C/C++项目",
+	"js.description": "JavaScript 项目"
 }

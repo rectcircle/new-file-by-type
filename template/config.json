@@ -20,7 +20,7 @@
 			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
 			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
 			"suggest": {
-				"value": "src/"
+				"value": "src"
 			}
 		},
 		{

@@ -54,5 +54,6 @@
 	"moveOrCopy.targetPathIsSubPath": "The target path for copying or moving is not allowed to be a subdirectory of the selected directory",
 
 	"java.description": "Java Project",
-	"c-cpp.description": "C/C++ Project"
+	"c-cpp.description": "C/C++ Project",
+	"js.description": "JavaScript Project"
 }

@@ -83,8 +83,10 @@ export default class CustomInput extends ViewBase {
 				suggests: suggest.value,
 				resultExistAndTypeErrorText: inputConf.option.resultExistAndTypeErrorText,
 				checkRule: this.checkRule(inputConf.checkRules as any),
-				canSelectMany: false
-			});
+				canSelectMany: inputConf.option.canSelectMany,
+				canSelectEmpty: inputConf.option.canSelectEmpty,
+			} as any);
+			
 		} else if (inputConf.type === "text") {
 			value = await vscode.window.showInputBox({
 				placeHolder: placeHolder,

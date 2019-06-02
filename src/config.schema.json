@@ -130,7 +130,7 @@
 						},
 						"allowNoExist": {
 							"type": "boolean",
-							"default": "true"
+							"default": true
 						},
 						"resultExistAndTypeErrorText": {
 							"type": "string",
@@ -143,6 +143,14 @@
 						"basePath": {
 							"type": "string",
 							"default": "{{projectFolder}}"
+						},
+						"canSelectMany": {
+							"type": "boolean",
+							"default": false
+						},
+						"canSelectEmpty": {
+							"type": "boolean",
+							"default": false
 						}
 					}
 				}
@@ -314,7 +322,7 @@
 					"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
 					"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
 					"suggest": {
-						"value": "src/"
+						"value": "src"
 					}
 				},
 				{

@@ -50,6 +50,7 @@ export interface InputItem {
 		allowNoExist: boolean;
 		basePath: string;
 		canSelectMany: boolean;
+		canSelectEmpty: boolean;
 	};
 }
 
@@ -211,7 +212,8 @@ export default class Configuration {
 					resultExistAndTypeErrorText: option.resultExistAndTypeErrorText || this.defaultInputI18nTpl(i.name, 'resultExistAndTypeErrorText'),
 					returnType: option.returnType || 'directory',
 					basePath: option.basePath || '{{projectFolder}}',
-					canSelectMany: option.canSelectMany === undefined ? false : option.canSelectMany
+					canSelectMany: option.canSelectMany === undefined ? false : option.canSelectMany,
+					canSelectEmpty: option.canSelectEmpty === undefined ? false : option.canSelectEmpty
 				}
 			};
 			return result;

@@ -45,6 +45,7 @@ class PathInput {
 	value?: string;
 	useRelative: boolean;
 	canSelectMany: boolean;
+	canSelectEmpty: boolean;
 
 	multiResult: string[][] = [];
 	result: string[] = [];
@@ -79,6 +80,7 @@ class PathInput {
 		this.resolve = () => { };
 		this.quickPick = null as any;
 		this.canSelectMany = myOption.canSelectMany;
+		this.canSelectEmpty = myOption.canSelectEmpty;
 		this.multiSelectCancelText = myOption.multiSelectCancelText;
 	}
 
@@ -541,7 +543,7 @@ class PathInput {
 			items.push(this.makeConfirmButton());
 		}
 		// 添加多选按钮
-		if (await this.multiResult.length !== 0) {
+		if (await this.multiResult.length !== 0 || this.canSelectMany) {
 			items.push(this.makeMultiConfirmButton());
 		}
 		// 多选模式显示新创建的
@@ -654,6 +656,7 @@ export interface PathInputOption {
 	useRelative?: boolean;
 	checkRule?: CheckRule;
 	canSelectMany?: boolean;
+	canSelectEmpty?: boolean;
 }
 
 const DEFAULT_PATH_INPUT_OPTION = {
@@ -678,6 +681,7 @@ const DEFAULT_PATH_INPUT_OPTION = {
 	value: undefined,
 	useRelative: true,
 	canSelectMany: false,
+	canSelectEmpty: false,
 	checkRule: function(){} as CheckRule
 };
 
