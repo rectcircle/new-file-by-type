@@ -1,9 +1,9 @@
 {{commentOutput}}
-
+import Vue from 'vue';
 {{
 	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `import * as ${name} from '${relative}'`)
 }}
 
-${0:{{happyCodding}}}
-
-export {};
+const vm = new Vue({
+	$0
+});

@@ -1,0 +1,7 @@
+{
+	"templateSelectPlaceHolder": "Please select a file type",
+	"entry": "Entry",
+	"entry.description": "Create a vue entry file",
+	"component": "Single file component",
+	"component.description": "Create a Vue Single file component"
+}

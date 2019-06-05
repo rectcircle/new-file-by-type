@@ -5,7 +5,7 @@ import I18n from "./I18n";
 import * as globby from "globby";
 import TemplateEngine from "./TemplateEngine";
 
-const CONFIG_FILENAME = "config.json";
+const CONFIG_FILENAME = "config.jsonc";
 const I18N_PATH = "i18n";
 
 export interface OutputItem {
@@ -183,12 +183,16 @@ export class Node {
 	}
 
 	get commentOutput() {
+		if (!this.configuration.renderComment) {
+			// 用户关闭了注释
+			return '';
+		}
 		const comment = this.configuration.comment;
 		return [
 			comment.startLine || '',
 			...comment.items.map(item => comment.lineHeader + this.engine.render(item)),
 			comment.endLine || ''
-		].join('\n');
+		].join('\n') + '\n';
 	}
 
 	setCommentOutput(commentOutput: string) {

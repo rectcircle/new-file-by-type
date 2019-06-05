@@ -1,6 +1,7 @@
 {
 	"weight": 700,
 	"suffix": "properties",
+	"renderComment": false,
 	"inputs": [
 		{
 			"type": "path",

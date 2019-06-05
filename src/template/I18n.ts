@@ -35,13 +35,13 @@ export default class I18n {
 	}
 
 	public get(key: string, locale: string = 'en') {
-		if (this.dicts[locale] || this.dicts[locale][key]) {
+		if (this.dicts[locale] && this.dicts[locale][key]) {
 			return this.dicts[locale][key];
 		}
-		if (this.dicts['en'] || this.dicts['en'][key]) {
+		if (this.dicts['en'] && this.dicts['en'][key]) {
 			return this.dicts['en'][key];
 		}
-		throw new Error(`i18n Error, "${key}" not found `);
+		return `i18n Warning, "${key}" not found`;
 	}
 
 }

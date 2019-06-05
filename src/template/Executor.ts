@@ -67,6 +67,26 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 			}
 			return result;
 		},
+		nodeImports: function (targetPath: string, importPaths: string[], toString: (name: string, relative: string, extname: string) => string) {
+			let result = [];
+			let targetDirPath = path.dirname(targetPath);
+			for (let p of importPaths) {
+				let importFullPath = path.resolve(projectFolder, p);
+				let filename = path.basename(p);
+				let extname = path.extname(filename);
+				filename = filename.replace(extname, '');
+				let relative = path.relative(targetDirPath, importFullPath);
+				if (!relative.startsWith('.')) {
+					relative = './' + relative;
+				}
+				relative = relative.replace(extname, '');
+				result.push(toString(filename, relative, extname));
+			}
+			if (result.length === 0) {
+				return '';
+			}
+			return result.join('\n') + '\n';
+		},
 		// 获取到激活的编辑器所在目录，相对于basePath的相对路径
 		// (basePath="/a/b/src", activeDirectory="/a/b/src/cn/rectcircle", pathSeparator='.') => "cn.rectcircle"
 		activeDirectoryRelativeBasePath: function(basePath: string, pathSeparator: string = path.sep) {

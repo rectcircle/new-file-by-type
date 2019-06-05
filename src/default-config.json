@@ -1,9 +1,10 @@
 {
-	"name": "{{ i18n('name') }}",
-	"description": "{{ i18n('description') }}",
+	"name": "默认从key为`文件夹名.name`的i18n文件中读取",
+	"description": "默认从key为`文件夹名.description`的i18n文件中读取",
 	"version": "0.0.1",
 	"suffix": "",
 	"flat": false,
+	"renderComment": true,
 	"indent": "{{defaultConf.indent}}",
 	"user": "{{defaultConf.user}}",
 	"placeHolder": "{{i18n('templateSelectPlaceHolder')}}",
@@ -20,7 +21,7 @@
 			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
 			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
 			"suggest": {
-				"value": "src/"
+				"value": "src"
 			}
 		},
 		{

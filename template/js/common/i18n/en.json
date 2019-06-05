@@ -2,16 +2,13 @@
 	"templateSelectPlaceHolder": "Please select a file type",
 	"none": "None",
 	"none.description": "Create a Common JavaScript file",
-	"commonjs.description": "Create a commonJS Module",
+	"commonjs-module.description": "Create a commonJS Module",
+	"es6-module.description": "Create a ES6 Module",
+	"class.description": "Create a Class",
 
-	"inputs.imports.prompt": "Current selection: ",
-	"inputs.imports.placeHolder": "Please select the source directory (input or select a directory)",
-	"inputs.imports.parentDirectoryText": "..(return to the upper directory)",
-	"inputs.imports.confirmText": "Confirm use: ",
-	"inputs.imports.suggestText": "Suggest",
-	"inputs.imports.directoryText": "Directory",
-	"inputs.imports.fileText": "File",
-	"inputs.imports.confirmDetailText": "(Press ↵ to complete the selection)",
-	"inputs.imports.currentDirectoryText": "Project root directory",
-	"inputs.imports.resultExistAndTypeErrorText": "\"{resultPath}\" already exists, type is {nowTypeText}, expect type is {expectTypeText}"
+	"inputs.classImplType.placeHolder": "Please select a class implementation",
+	"classImplType.tradition": "Tradition",
+	"inputs.moduleImpl.placeHolder": "Please select the implementation of the module",
+	"moduleImpl.commonjs-module": "commonjs Module",
+	"moduleImpl.es6": "ES6 Module"
 }

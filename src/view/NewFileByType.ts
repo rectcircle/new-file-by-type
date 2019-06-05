@@ -11,6 +11,7 @@ import fs from '../util/fs';
 import { Constant } from '../UserConfiguration';
 import showPathInput from './component/showPathInput';
 import openWorkspace from './component/OpenWorkspace';
+import { recordRecentUsage } from '../util/vscode';
 
 export interface UserInput extends FilteredOutputs {
 	node: Node;
@@ -43,41 +44,38 @@ export default class NewFileByType extends ViewBase<string | undefined, void> {
 		this.timeline.registerLast(this.coverOrCancelSelect);
 	}
 
-	private addToUsage(path: string, usage: { frequency: { [key: string]: number }, time: string[] }) {
-		// 处理频次
-		let exist = false;
-		for (let key in usage.frequency) {
-			if (key === path) {
-				usage.frequency[key]++; 
-				exist = true;
-				break;
-			}
-		}
-		if (!exist) {
-			usage.frequency[path] = 1;
-		}
-		// 处理时间顺序
-		exist = false;
-		usage.time = usage.time.filter(p => p !== path);
-		usage.time.unshift(path);
-		return usage;
-	}
+	// private addToUsage(path: string, usage: { frequency: { [key: string]: number }, time: string[] }) {
+	// 	// 处理频次
+	// 	let exist = false;
+	// 	for (let key in usage.frequency) {
+	// 		if (key === path) {
+	// 			usage.frequency[key]++; 
+	// 			exist = true;
+	// 			break;
+	// 		}
+	// 	}
+	// 	if (!exist) {
+	// 		usage.frequency[path] = 1;
+	// 	}
+	// 	// 处理时间顺序
+	// 	exist = false;
+	// 	usage.time = usage.time.filter(p => p !== path);
+	// 	usage.time.unshift(path);
+	// 	return usage;
+	// }
 
-	private recordUsed(node: Node) {
-		const recentUsagesInGlobal: any = this.globalState.get(Constant.RECENT_USE_STORAGE_KEY) || { frequency:{}, time:[]};
-		const recentUsagesInWorkspace: any = this.workspaceState.get(Constant.RECENT_USE_STORAGE_KEY) || { frequency: {}, time: [] };
-		this.globalState.update(Constant.RECENT_USE_STORAGE_KEY, this.addToUsage(node.path, recentUsagesInGlobal));
-		this.workspaceState.update(Constant.RECENT_USE_STORAGE_KEY, this.addToUsage(node.path, recentUsagesInWorkspace));
-	}
+	// private recordUsed(node: Node) {
+	// 	const recentUsagesInGlobal: any = this.globalState.get(Constant.RECENT_USE_STORAGE_KEY) || { frequency:{}, time:[]};
+	// 	const recentUsagesInWorkspace: any = this.workspaceState.get(Constant.RECENT_USE_STORAGE_KEY) || { frequency: {}, time: [] };
+	// 	this.globalState.update(Constant.RECENT_USE_STORAGE_KEY, this.addToUsage(node.path, recentUsagesInGlobal));
+	// 	this.workspaceState.update(Constant.RECENT_USE_STORAGE_KEY, this.addToUsage(node.path, recentUsagesInWorkspace));
+	// }
 
 	public async checkWorkspace() {
 		// 检查是否存在打开的工作空间
 		if (!vscode.workspace.workspaceFolders) {
 			const clicked = await vscode.window.showErrorMessage(this.tree.i18n('needOpenWorkspace'), 'Open...');
 			if (clicked !== undefined) {
-				// TODO 自己实现一个打开文件夹功能
-				// await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file('/Users/sunben/Workspace/learn/compilation-principle/dragonbook'));
-				// await vscode.commands.executeCommand('workbench.action.files.openFileFolder');
 				await openWorkspace(this.tree, this.globalState);
 			}
 			return false;
@@ -125,7 +123,7 @@ export default class NewFileByType extends ViewBase<string | undefined, void> {
 		const result = await this.timeline.render(this.activeDirectory);
 		if (result) {
 			console.log(result.inputs);
-			this.recordUsed(result.node);
+			recordRecentUsage(this.globalState, this.workspaceState, result.node);
 			this.saveAndFocus(result.outputs.filter(o=>result.filteredPaths.indexOf(o.targetPath) !== -1), true);
 		}
 	}

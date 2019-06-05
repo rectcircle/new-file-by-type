@@ -151,6 +151,18 @@
 						"canSelectEmpty": {
 							"type": "boolean",
 							"default": false
+						},
+						"multiConfirmText": {
+							"type": "string",
+							"default": "Finish Multi-select"
+						},
+						"multiConfirmDetailText": {
+							"type": "string",
+							"default": "(Press \"Enter\" to finish multi-select)"
+						},
+						"multiSelectCancelText": {
+							"type": "string",
+							"default": "(Press \"Enter\" to cancel selection)"
 						}
 					}
 				}
@@ -273,6 +285,11 @@
 			"description": "subtype flat display",
 			"type": "boolean",
 			"default": false
+		},
+		"renderComment": {
+			"description": "Whether to render comments",
+			"type": "boolean",
+			"default": true
 		},
 		"indent": {
 			"description": "file indent type: 0 - use [Tab], non-zero - use `indent` number space",

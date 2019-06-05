@@ -6,7 +6,7 @@ import { TemplateRenderException } from "../util/exception";
 import * as os from 'os';
 import makeExecutor from "./Executor";
 
-const TPL_PATTERN = /{{([\s\S]*?)}}/g;
+const TPL_PATTERN = /{{([\s\S]*?)}}\n{0,1}/g; // 吞掉1个换行，方便排版
 const TPL_ESCAPE = /\\{\\{([\s\S]*?)\\}\\}/g;
 const TPL_ONE_PATTERN = /^\s*{{([\s\S]*?)}}\s*$/;
 

@@ -1,5 +1,25 @@
 {
 	"common": "Common",
 	"common.description": "Create a Common JavaScript Type",
-	"templateSelectPlaceHolder": "Please select a project type"
+	"react": "React",
+	"react.description": "Create a React JavaScript Type",
+	"vue": "Vue",
+	"vue.description": "Create a Vue JavaScript Type",
+	"jquery": "JQuery",
+	"jquery.description": "Create a JQuery JavaScript Type",
+	"templateSelectPlaceHolder": "Please select a project type",
+
+	"inputs.imports.prompt": "Current selection: ",
+	"inputs.imports.placeHolder": "Please select the source directory (input or select a directory)",
+	"inputs.imports.parentDirectoryText": "..(return to the upper directory)",
+	"inputs.imports.confirmText": "Confirm use: ",
+	"inputs.imports.suggestText": "Suggest",
+	"inputs.imports.directoryText": "Directory",
+	"inputs.imports.fileText": "File",
+	"inputs.imports.confirmDetailText": "(Press ↵ to select this item)",
+	"inputs.imports.currentDirectoryText": "Project root directory",
+	"inputs.imports.multiConfirmText": "Finish Multi-select",
+	"inputs.imports.multiConfirmDetailText": "(Press ↵ to finish multi-select)",
+	"inputs.imports.multiSelectCancelText": "(Press ↵ to cancel selection)",
+	"inputs.imports.resultExistAndTypeErrorText": "\"{resultPath}\" already exists, type is {nowTypeText}, expect type is {expectTypeText}"
 }

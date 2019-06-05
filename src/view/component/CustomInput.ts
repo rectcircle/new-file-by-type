@@ -85,6 +85,9 @@ export default class CustomInput extends ViewBase {
 				checkRule: this.checkRule(inputConf.checkRules as any),
 				canSelectMany: inputConf.option.canSelectMany,
 				canSelectEmpty: inputConf.option.canSelectEmpty,
+				multiConfirmText: inputConf.option.multiConfirmText,
+				multiConfirmDetailText: inputConf.option.multiConfirmDetailText,
+				multiSelectCancelText: inputConf.option.multiSelectCancelText,
 			} as any);
 			
 		} else if (inputConf.type === "text") {
@@ -98,7 +101,7 @@ export default class CustomInput extends ViewBase {
 		} else if (inputConf.type === "select") {
 			const result: string | SelectItem | string[] | SelectItem[] | undefined = await vscode.window.showQuickPick(inputConf.items as any, {
 				canPickMany: inputConf.option.canSelectMany,
-				placeHolder: inputConf.placeHolder,
+				placeHolder: placeHolder,
 			});
 			if (Array.isArray(result)) {
 				value = result.map<string>(r => {

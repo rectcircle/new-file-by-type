@@ -4,7 +4,7 @@ import TemplateTree, { Node } from "../../template/TemplateTree";
 import { Constant } from "../../UserConfiguration";
 import { QuickPickItem } from "vscode";
 import ViewTimeline from "./ViewTimeline";
-import { listWorkspaceFolderPath } from "../../util/vscode";
+import { listWorkspaceFolderPath, getRecentUsage } from "../../util/vscode";
 
 export default class TemplateSelect extends ViewBase<Node | string | undefined, Node|null>{
 
@@ -16,33 +16,14 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 		this.timeline = timeline;
 	}
 
-	private getRecentNodeList(recentUseMaxNumber ?: number): Node[] {
+	private async getRecentNodeList(recentUseMaxNumber ?: number): Promise<Node[]> {
 		let result: Node[] = [];
 		recentUseMaxNumber = recentUseMaxNumber || this.config.recentUseMaxNumber;
-		if (!this.config.showRecentUsed) {
-			return result;
-		}
-		let recentUsages:any;
-		if (this.config.recentUseDataFrom === "global") {
-			recentUsages = this.globalState.get(Constant.RECENT_USE_STORAGE_KEY);
-		} else if (this.config.recentUseDataFrom === "workspace") {
-			recentUsages = this.workspaceState.get(Constant.RECENT_USE_STORAGE_KEY);
-		}
-
-		if (!recentUsages) {
-			return result;
-		}
-		let paths:string[];
-		if (this.config.recentUseSortBy === "frequency") {
-			paths = Object.entries<number>(recentUsages.frequency)
-				.sort((a, b) => b[1] - a[1])
-				.slice(0, recentUseMaxNumber)
-				.map(v => v[0]);
-		} else {
-			paths = (recentUsages.time as Array<string>).slice(0, recentUseMaxNumber);
-		}
+		let paths = await getRecentUsage(this.globalState, this.workspaceState, this.config);
+		paths = paths.slice(0, recentUseMaxNumber);
 		result = this.tree.findLeafNodeByPath(paths);
-		return paths.map(p => result.find(n => n.path === p )) as Node[];
+		result = paths.map(p => result.find(n => n.path === p)) as Node[];
+		return result;
 	}
 
 	private async matchNodeChildren(node?: Node) {
@@ -54,19 +35,19 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 		return nodes.map(node => {
 			return {
 				label: (node.children.length === 0 ? '$(file-code) ' : '$(file-directory) ') + node.name,
-				description: tag || node.namespace,
+				description: (tag || '') + ' ' + node.namespace,
 				detail: node.description ? Constant.ALIGN_STRING + node.description : undefined,
 				node: node
 			};
 		});
 	}
 
-	public getRecentMoreNodeList(nodes: Node[]): Node | null {
+	public async getRecentMoreNodeList(nodes: Node[]): Promise<Node | null> {
 		if (nodes.length === 0) {
 			return null;
 		}
 		const allRecentNodeParentNode = new Node('');
-		allRecentNodeParentNode.children = this.getRecentNodeList(Number.MAX_SAFE_INTEGER);
+		allRecentNodeParentNode.children = await this.getRecentNodeList(Number.MAX_SAFE_INTEGER);
 		if (allRecentNodeParentNode.children.length <= nodes.length) {
 			return null;
 		}
@@ -80,8 +61,8 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 		let result: QuickPickItem & { node: Node } | undefined;
 		if (node === undefined || typeof (node) === "string") {
 			this.activeDirectory = node;
-			const recentUsageNodesList = this.getRecentNodeList();
-			const recentMoreNode = this.getRecentMoreNodeList(recentUsageNodesList);
+			const recentUsageNodesList = await this.getRecentNodeList();
+			const recentMoreNode = await this.getRecentMoreNodeList(recentUsageNodesList);
 			const matchNodeList = await this.matchNodeChildren();
 			//显示列表
 			result = await vscode.window.showQuickPick(

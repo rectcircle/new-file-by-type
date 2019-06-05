@@ -36,6 +36,8 @@
 	"inputs.srcPath.resultExistAndTypeErrorText": "{resultPath} 已经存在, 类型为 {nowTypeText}, 期望类型为 {expectTypeText}",
 	"inputs.filename.prompt": "请输入文件名",
 	"inputs.filename.placeHolder": "请输入文件名",
+	"inputs.className.prompt": "请输入类名",
+	"inputs.className.placeHolder": "请输入类名",
 
 	"common.prompt": "当前选择：",
 	"common.placeHolder": "请选择目标目录或输入目标文件",

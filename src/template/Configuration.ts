@@ -8,6 +8,7 @@ import * as os from 'os';
 import * as path from 'path';
 import { CheckRule } from "../util/vscode";
 import UserConfiguration from "../UserConfiguration";
+import * as json5 from 'json5';
 
 export interface MatchItem {
 	workspaceFolderGlobs?: string[];
@@ -51,6 +52,9 @@ export interface InputItem {
 		basePath: string;
 		canSelectMany: boolean;
 		canSelectEmpty: boolean;
+		multiConfirmText: string;
+		multiConfirmDetailText: string;
+		multiSelectCancelText: string;
 	};
 }
 
@@ -90,10 +94,10 @@ export default class Configuration {
 		if (exist) {
 			const configString = (await fs.readFileAsync(filepath)).toString("utf8");
 			const ajv = new Ajv();
-			if (ajv.validate(configSchema, configString)) {
+			config = json5.parse(configString);
+			if (!ajv.validate(configSchema, config)) {
 				throw new Error(`config file error: ${filepath}\nError message:` + ajv.errorsText());
 			}
-			config = JSON.parse(configString);
 		}
 		t.config = depthMerge(defaultConfig ? defaultConfig.config : this.DEFAULT.config, config);
 		// 以下处理不能覆盖的属性
@@ -174,6 +178,10 @@ export default class Configuration {
 		return this.config['indent'];
 	}
 
+	get renderComment(): boolean {
+		return this.config['renderComment'];
+	}
+
 	get user(): string {
 		return this.config['user'] || os.userInfo.name;
 	}
@@ -213,7 +221,10 @@ export default class Configuration {
 					returnType: option.returnType || 'directory',
 					basePath: option.basePath || '{{projectFolder}}',
 					canSelectMany: option.canSelectMany === undefined ? false : option.canSelectMany,
-					canSelectEmpty: option.canSelectEmpty === undefined ? false : option.canSelectEmpty
+					canSelectEmpty: option.canSelectEmpty === undefined ? false : option.canSelectEmpty,
+					multiConfirmText: option.multiConfirmText || this.defaultInputI18nTpl(i.name, 'multiConfirmText'),
+					multiConfirmDetailText: option.multiConfirmDetailText || this.defaultInputI18nTpl(i.name, 'multiConfirmDetailText'),
+					multiSelectCancelText: option.multiSelectCancelText || this.defaultInputI18nTpl(i.name, 'multiSelectCancelText'),
 				}
 			};
 			return result;

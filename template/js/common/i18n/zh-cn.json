@@ -2,16 +2,13 @@
 	"templateSelectPlaceHolder": "请选择文件类型",
 	"none": "None",
 	"none.description": "创建通用 JavaScript 文件",
-	"commonjs.description": "创建一个 commonJS 模块",
+	"commonjs-module.description": "创建一个 commonJS 模块",
+	"es6-module.description": "创建一个 ES6 模块",
+	"class.description": "创建一个类",
 
-	"inputs.imports.prompt": "当前选择：",
-	"inputs.imports.placeHolder": "请选择需要导入的源文件（输入或选择一个目录）",
-	"inputs.imports.parentDirectoryText": "..（返回上层目录）",
-	"inputs.imports.confirmText": "确定使用：",
-	"inputs.imports.suggestText": "建议",
-	"inputs.imports.directoryText": "目录",
-	"inputs.imports.fileText": "文件",
-	"inputs.imports.confirmDetailText": "(按 ↵ 键完成选择)",
-	"inputs.imports.currentDirectoryText": "项目根目录",
-	"inputs.imports.resultExistAndTypeErrorText": "{resultPath} 已经存在, 类型为 {nowTypeText}, 期望类型为 {expectTypeText}"
+	"inputs.classImplType.placeHolder": "请选择类实现方式",
+	"classImplType.tradition": "传统方式",
+	"inputs.moduleImpl.placeHolder": "请选择模块的实现方式",
+	"moduleImpl.commonjs-module": "commonjs 模块",
+	"moduleImpl.es6": "ES6 模块"
 }

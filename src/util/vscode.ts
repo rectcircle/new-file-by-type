@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
-import { Constant } from '../UserConfiguration';
+import UserConfiguration, { Constant } from '../UserConfiguration';
 import * as path from 'path';
+import { Node } from '../template/TemplateTree';
+import fs from './fs';
 
 export type CheckRule = (value: string) => string | undefined | Promise<string | undefined>;
 
@@ -97,4 +99,84 @@ export function listWorkspaceFolderPath() {
 		suggest = vscode.workspace.workspaceFolders.map(w => w.uri.fsPath);
 	}
 	return suggest;
+}
+
+interface UsageRecord {
+	frequency: {
+		[p: string]: number
+	};
+	time: string[];
+}
+
+function addToUsage(path: string, usage: UsageRecord) {
+	// 处理频次
+	let exist = false;
+	for (let key in usage.frequency) {
+		if (key === path) {
+			usage.frequency[key]++; 
+			exist = true;
+			break;
+		}
+	}
+	if (!exist) {
+		usage.frequency[path] = 1;
+	}
+	// 处理时间顺序
+	exist = false;
+	usage.time = usage.time.filter(p => p !== path);
+	usage.time.unshift(path);
+	return usage;
+}
+
+// 记录最近使用
+export function recordRecentUsage(globalState: vscode.Memento, workspaceState: vscode.Memento, node: Node) {
+	const recentUsagesInGlobal: any = globalState.get(Constant.RECENT_USE_STORAGE_KEY) || { frequency: {}, time: [] };
+	const recentUsagesInWorkspace: any = workspaceState.get(Constant.RECENT_USE_STORAGE_KEY) || { frequency: {}, time: [] };
+	globalState.update(Constant.RECENT_USE_STORAGE_KEY, addToUsage(node.path, recentUsagesInGlobal));
+	workspaceState.update(Constant.RECENT_USE_STORAGE_KEY, addToUsage(node.path, recentUsagesInWorkspace));
+}
+
+async function fixRecentUsage(state: vscode.Memento) {
+	const recentUsages: UsageRecord | undefined = state.get(Constant.RECENT_USE_STORAGE_KEY);
+	if (recentUsages === undefined) {
+		return;
+	}
+	const newUsages: UsageRecord = {
+		frequency: {},
+		time: []
+	};
+	for (let p in recentUsages.frequency) {
+		if (await fs.existsAsync(p)) {
+			newUsages.frequency[p] = recentUsages.frequency[p];
+		}
+	}
+	for (let p of recentUsages.time) {
+		if (await fs.existsAsync(p)) {
+			newUsages.time.push(p);
+		}
+	}
+	state.update(Constant.RECENT_USE_STORAGE_KEY, newUsages);
+}
+// 获取最近使用
+export async function getRecentUsage(globalState: vscode.Memento, workspaceState: vscode.Memento, config: UserConfiguration): Promise<string[]> {
+	await fixRecentUsage(globalState);
+	await fixRecentUsage(workspaceState);
+	let recentUsages: any;
+	if (config.recentUseDataFrom === "global") {
+		recentUsages = globalState.get(Constant.RECENT_USE_STORAGE_KEY);
+	} else if (config.recentUseDataFrom === "workspace") {
+		recentUsages = workspaceState.get(Constant.RECENT_USE_STORAGE_KEY);
+	}
+	if (!recentUsages) {
+		return [];
+	}
+	let paths: string[];
+	if (config.recentUseSortBy === "frequency") {
+		paths = Object.entries<number>(recentUsages.frequency)
+			.sort((a, b) => b[1] - a[1])
+			.map(v => v[0]);
+	} else {
+		paths = (recentUsages.time as Array<string>);
+	}
+	return paths;
 }
