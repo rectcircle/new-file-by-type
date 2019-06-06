@@ -57,5 +57,6 @@
 
 	"java.description": "Java 项目",
 	"c-cpp.description": "C/C++项目",
-	"js.description": "JavaScript 项目"
+	"js.description": "JavaScript 项目",
+	"license.description": "为项目添加开源许可证"
 }

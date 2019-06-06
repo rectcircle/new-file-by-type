@@ -1,0 +1,14 @@
+{
+	"inputs.srcPath.prompt": "Current selection: ",
+	"inputs.srcPath.placeHolder": "Please select the open source license directory (input or select a directory)",
+	"inputs.srcPath.parentDirectoryText": "..(return to the upper directory)",
+	"inputs.srcPath.confirmText": "Confirm use: ",
+	"inputs.srcPath.suggestText": "Suggest",
+	"inputs.srcPath.directoryText": "Directory",
+	"inputs.srcPath.fileText": "File",
+	"inputs.srcPath.confirmDetailText": "(Press ↵ to complete the selection)",
+	"inputs.srcPath.currentDirectoryText": "Project root directory",
+	"inputs.srcPath.resultExistAndTypeErrorText": "\"{resultPath}\" already exists, type is {nowTypeText}, expect type is {expectTypeText}",
+
+	"inputs.license.placeHolder": "Please select an open source license type"
+}

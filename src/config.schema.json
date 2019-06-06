@@ -175,7 +175,7 @@
 				"filepath": {
 					"description": "target file path to generate",
 					"type": "string",
-					"default": "{{ inputs.path.resolve(projectFolder, inputs.filename + ( suffix ?  '.' + suffix : '') )}}"
+					"default": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}"
 				},
 				"tplpath": {
 					"description": "template file path",
