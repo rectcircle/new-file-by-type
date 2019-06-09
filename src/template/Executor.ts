@@ -151,6 +151,8 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 				const subNames = fs.readdirSync(path.resolve(basePath, ...result));
 				if (subNames.length !== 1) {
 					return result.join(pathSeparator);
+				} else if (fs.statSync(path.resolve(basePath, subNames[0])).isFile()){
+					return result.join(pathSeparator);
 				}
 				result.push(subNames[0]);
 			}

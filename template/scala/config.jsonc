@@ -1,0 +1,8 @@
+{
+	"name": "Scala",
+	"flat": true,
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["*.sbt", "**/*.scala"]
+	}
+}

@@ -1,6 +1,7 @@
 {
-	"weight": 400,
-	"suffix": "java",
+	"name": "Class",
+	"suffix": "scala",
+	"weight": 200,
 	"targets": [
 		{
 			"filepath": "{{ customize['fullTargetPath'] }}",
@@ -14,7 +15,7 @@
 			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
 			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
 			"suggest": {
-				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/java', 'src/test/java', 'src'])}}"
+				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder ,['src/main/scala', 'src/test/scala', 'src'])}}"
 			}
 		},
 		{
@@ -34,13 +35,26 @@
 		},
 		{
 			"type": "text",
-			"name": "annotationName",
-			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.annotationName + '.' + suffix)}}",
+			"name": "className",
+			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.className + '.' + suffix)}}",
 			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
 			"suggest": {
 				"selected": true,
 				"value": "Main"
 			}
 		}
-	]
+	],
+	"comment": {
+		"dateFormat": "YYYY-MM-DD",
+		"startLine": "/**",
+		"lineHeader": " * ",
+		"endLine": " */",
+		"items": [
+			"{{comment.copyright}}",
+			"",
+			"@author {{user}}",
+			"@date {{date}}",
+			"@version {{version}}"
+		]
+	}
 }

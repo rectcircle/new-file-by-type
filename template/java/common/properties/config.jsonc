@@ -10,7 +10,7 @@
 			"placeHolder": "{{i18n('inputs.srcPath.placeHolder.properties')}}",
 			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
 			"suggest": {
-				"value": "src/main/resource"
+				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/resource', 'src'])}}"
 			}
 		},
 		{

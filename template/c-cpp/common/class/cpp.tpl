@@ -4,7 +4,7 @@
 
 {{inputs.className}}::{{inputs.className}}()
 {
-	${0:// TODO: happy codding! (created by vscode extension new-file-by-type)}
+	${0:{{happyCodding}}}
 }
 
 {{inputs.className}}::~{{inputs.className}}()

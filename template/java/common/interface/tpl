@@ -1,4 +1,4 @@
 {{inputs.packageName ? 'package '+inputs.packageName + ';\n\n' : ''}}{{commentOutput}}
 public interface {{inputs.interfaceName}} {
-	${0:// TODO: happy codding! (created by vscode extension new-file-by-type)}
+	${0:{{happyCodding}}}
 }

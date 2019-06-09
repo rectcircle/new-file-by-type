@@ -3,5 +3,5 @@
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface {{inputs.annotationName}} {
-	${0:// TODO: happy codding! (created by vscode extension new-file-by-type)}
+	${0:{{happyCodding}}}
 }

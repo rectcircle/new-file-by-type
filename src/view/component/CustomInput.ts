@@ -55,12 +55,19 @@ export default class CustomInput extends ViewBase {
 		let value: string | string[] | undefined = inputConf.value;
 		// 用户自定义了value，直接跳过
 		if (value !== undefined) {
-			if (node.inputsLength !== inputsLength + 1 ) {
-				this.timeline.willRepeat(false);
-			} else {
-				this.timeline.willNext(false);
+			const checkResult = await this.checkRule(inputConf.checkRules as any)(value);
+			if (checkResult === undefined) {
+				if (node.inputsLength !== inputsLength + 1 ) {
+					this.timeline.willRepeat(false);
+				} else {
+					this.timeline.willNext(false);
+				}
+				return value;
 			}
-			return value;
+			// 重新将value设置为undefined
+			value = undefined;
+			// 显示警告
+			vscode.window.showWarningMessage(checkResult);
 		}
 		// 正常情况，用户输入
 		const suggest = this.getSuggest(inputConf);

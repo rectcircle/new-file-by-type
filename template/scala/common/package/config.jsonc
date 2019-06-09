@@ -1,9 +1,11 @@
 {
-	"weight": 400,
-	"suffix": "java",
+	"name": "Package Object",
+	"weight": 700,
+	"suffix": "scala",
+	"snippet": true,
 	"targets": [
 		{
-			"filepath": "{{ customize['fullTargetPath'] }}",
+			"filepath": "{{ path.resolve(customize['fullFileDirPath'], 'package.scala') }}",
 			"tplpath": "tpl"
 		}
 	],
@@ -14,13 +16,13 @@
 			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
 			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
 			"suggest": {
-				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/java', 'src/test/java', 'src'])}}"
+				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/scala', 'src/test/scala', 'src'])}}"
 			}
 		},
 		{
 			"type": "path",
 			"name": "packageName",
-			"checkRules": "{{checkRules.packageName}}",
+			"checkRules": "{{[checkRules.packageName,  (value) => (value === undefined || value === '') ? i18n('checkRules.notRootPackage') : undefined]}}",
 			"value": "{{helper.activeDirectoryRelativeBasePath(customize['fullSrcPath'], '.') }}",
 			"after": "{{customize['fullFileDirPath'] = path.resolve(customize['fullSrcPath'],  path.join(...inputs.packageName.split('.')))}}",
 			"suggest": {
@@ -30,16 +32,6 @@
 			"option": {
 				"pathSeparator": ".",
 				"basePath": "{{customize['fullSrcPath']}}"
-			}
-		},
-		{
-			"type": "text",
-			"name": "annotationName",
-			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.annotationName + '.' + suffix)}}",
-			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
-			"suggest": {
-				"selected": true,
-				"value": "Main"
 			}
 		}
 	]

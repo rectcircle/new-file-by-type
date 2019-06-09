@@ -14,7 +14,7 @@
 			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
 			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
 			"suggest": {
-				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, helper.descendant(projectFolder, 4) ,['src/main/java', 'src/test/java', 'src'])}}"
+				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/java', 'src/test/java', 'src'])}}"
 			}
 		},
 		{

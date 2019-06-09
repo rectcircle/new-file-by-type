@@ -14,7 +14,7 @@ public class {{inputs.junitClassName}}Test {
 
 	@Test
 	public void test() {
-		${0:// TODO: happy codding! (created by vscode extension new-file-by-type)}
+		${0:{{happyCodding}}}
 	}
 
 	@After

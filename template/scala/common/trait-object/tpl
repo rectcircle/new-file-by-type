@@ -1,0 +1,8 @@
+{{inputs.packageName ? 'package '+inputs.packageName + '\n\n' : ''}}{{commentOutput}}
+trait {{inputs.traitName}} {
+	$1
+}
+
+object {{inputs.traitName}} {
+	${0:{{happyCodding}}}
+}
