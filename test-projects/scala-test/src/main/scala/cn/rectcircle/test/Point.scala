@@ -1,0 +1,12 @@
+package cn.rectcircle.test
+
+/**
+ * Copyright (c) 2019, Rectcircle. All rights reserved.
+ * 
+ * @author Rectcircle
+ * @date 2019-06-09
+ * @version 0.0.1
+ */
+class Point(val x: Int, val y: Int) {
+  override def toString = s"Point($x, $y)"
+}
