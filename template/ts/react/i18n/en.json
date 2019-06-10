@@ -1,0 +1,6 @@
+{
+	"templateSelectPlaceHolder": "Please select a file type",
+	"component.description": "Create a React Component Class",
+	"inputs.className.prompt": "Please input class name (React component name)",
+	"inputs.className.placeHolder": "Please input class name"
+}

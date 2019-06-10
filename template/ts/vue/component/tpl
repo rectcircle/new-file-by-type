@@ -1,0 +1,29 @@
+<template>
+	
+</template>
+
+<script lang="ts">
+{{commentOutput}}
+import Vue from 'vue'
+import Component from 'vue-class-component'
+{{
+	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative, extname) => {
+		return `import ${name} from '${relative + (extname === '.vue' ? '.vue' : '')}'`;
+	})
+}}
+
+@Component({
+  props: {
+    ${1:propMessage}: ${2:String}
+  }
+})
+export default class ${3:{{inputs.filename}}} extends Vue {
+	${0:{{happyCodding}}}
+}
+</script>
+
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+</style>

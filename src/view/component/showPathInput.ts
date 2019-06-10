@@ -8,8 +8,6 @@ import * as os from "os";
 import { listMountPath } from "../../util/common";
 const format = require('string-format-obj');
 
-// TODO : window下盘符问题
-
 type MyQuickPickItem = vscode.QuickPickItem & {
 	type: "item" | "confirm" | "suggest" | "back" | "multiConfirm" | "selected"
 	result: string[]

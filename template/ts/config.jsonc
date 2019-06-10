@@ -1,0 +1,8 @@
+{
+	"name": "TypeScript",
+	"flat": false,
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["package.json", "**/*.ts"]
+	}
+}

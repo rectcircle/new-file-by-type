@@ -59,6 +59,6 @@
 	"c-cpp.description": "C/C++ 项目",
 	"js.description": "JavaScript 项目",
 	"license.description": "为项目添加开源许可证",
-	"scala.description": "Scala 项目"
-
+	"scala.description": "Scala 项目",
+	"ts.description": "TypeScript"
 }

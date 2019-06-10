@@ -59,5 +59,6 @@
 	"c-cpp.description": "C/C++ Project",
 	"js.description": "JavaScript Project",
 	"license.description": "Select a open source License for Project",
-	"scala.description": "Scala Project"
+	"scala.description": "Scala Project",
+	"ts.description": "TypeScript"
 }
