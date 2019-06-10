@@ -11,6 +11,7 @@ import { TemplateRenderException } from "../util/exception";
 export default function makeExecutor(conf: Configuration, langPack: I18n) {
 	/** 以下为内置只读变量 */
 	let happyCodding = '// TODO: happy codding! (created by vscode extension new-file-by-type)';
+	let happyCoddingString = 'TODO: happy codding! (created by vscode extension new-file-by-type)';
 	/* 以下为初始化存在的变量 */
 	let language = 'en';
 	let openedFilePaths: string[] = [];

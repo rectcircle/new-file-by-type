@@ -60,5 +60,7 @@
 	"js.description": "JavaScript Project",
 	"license.description": "Select a open source License for Project",
 	"scala.description": "Scala Project",
-	"ts.description": "TypeScript"
+	"ts.description": "TypeScript project",
+	"web": "Web",
+	"web.description": "Web front-end project"
 }

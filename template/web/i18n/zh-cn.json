@@ -1,0 +1,6 @@
+{
+	"html.description": "创建 HTML 文件",
+	"css.description": "创建 CSS 文件",
+	"less.description": "创建 Less 文件",
+	"sass.description": "创建 Sass 文件"
+}

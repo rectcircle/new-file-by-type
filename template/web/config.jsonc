@@ -1,0 +1,8 @@
+{
+	"name": "Web",
+	"flat": false,
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["package.json", "**/*.js", "**/*.html", "**/*.css", "**/*.sass", "**/*.less"]
+	}
+}

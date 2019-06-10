@@ -1,0 +1,28 @@
+{
+	"name": "CSS",
+	"weight": 200,
+	"suffix": "css",
+	"renderComment": false,
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": ["src", "css", "src/css", "style", "src/style"]
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"prompt": "{{i18n('inputs.filename.prompt')}}",
+			"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
+			"suggest": {
+				"selected": true,
+				"value": "index"
+			}
+		}
+	]
+}

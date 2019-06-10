@@ -60,5 +60,7 @@
 	"js.description": "JavaScript 项目",
 	"license.description": "为项目添加开源许可证",
 	"scala.description": "Scala 项目",
-	"ts.description": "TypeScript"
+	"ts.description": "TypeScript 项目",
+	"web": "Web",
+	"web.description": "Web 前端项目"
 }
