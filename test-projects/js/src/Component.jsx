@@ -20,7 +20,7 @@ class Component extends React.Component {
   }
 
   render() {
-	// TODO: happy codding! (created by vscode extension new-file-by-type)
+	// TODO: happy coding! (created by vscode extension new-file-by-type)
   }
 
 }

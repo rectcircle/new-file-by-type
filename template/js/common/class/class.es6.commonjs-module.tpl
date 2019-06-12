@@ -11,7 +11,7 @@ class {{inputs.className}} {
 	}
 
 	${3:method}($4) {
-		${0:{{happyCodding}}}
+		${0:{{happyCoding}}}
 	}
 }
 

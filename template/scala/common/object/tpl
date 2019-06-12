@@ -1,4 +1,4 @@
 {{inputs.packageName ? 'package '+inputs.packageName + '\n\n' : ''}}{{commentOutput}}
 object {{inputs.objectName}} {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }

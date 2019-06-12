@@ -12,6 +12,6 @@ export ${1:default} class {{inputs.className}} {
 	}
 
 	${5:${6:method}($7) {
-		${0:{{happyCodding}}}
+		${0:{{happyCoding}}}
 	\}}
 }

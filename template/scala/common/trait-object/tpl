@@ -4,5 +4,5 @@ trait {{inputs.traitName}} {
 }
 
 object {{inputs.traitName}} {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }

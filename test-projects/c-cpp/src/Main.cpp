@@ -6,4 +6,4 @@
  * @version 0.0.1
  */
 
-// TODO: happy codding! (created by vscode extension new-file-by-type)
+// TODO: happy coding! (created by vscode extension new-file-by-type)

@@ -10,8 +10,8 @@ import { TemplateRenderException } from "../util/exception";
 // 利用函数闭包和eval实现一个字符串代码执行器
 export default function makeExecutor(conf: Configuration, langPack: I18n) {
 	/** 以下为内置只读变量 */
-	let happyCodding = '// TODO: happy codding! (created by vscode extension new-file-by-type)';
-	let happyCoddingString = 'TODO: happy codding! (created by vscode extension new-file-by-type)';
+	let happyCoding = '// TODO: happy coding! (created by vscode extension new-file-by-type)';
+	let happyCodingString = 'TODO: happy coding! (created by vscode extension new-file-by-type)';
 	/* 以下为初始化存在的变量 */
 	let language = 'en';
 	let openedFilePaths: string[] = [];
@@ -19,6 +19,7 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 		indent: 0,
 		user: ''
 	};
+	let encoding = 'utf8';
 	let now = new Date();
 	let year = now.getFullYear();
 	// 以下为用户选择了在当前打开或选中的文件所在的目录
@@ -239,11 +240,14 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 				return eval(tpl);
 			} catch (e) {
 				const context = {
+					happyCoding: happyCoding,
+					happyCodingString: happyCodingString,
 					langPack: langPack, // 参数
 					// 初始化就应该配置好的变量，不允许修改
 					language: language, 
 					openedFilePaths: openedFilePaths, 
 					defaultConf: defaultConf,
+					encoding: encoding,
 					useActive: useActive,
 					activeDirectory: activeDirectory,
 					now: now,

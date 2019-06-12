@@ -17,7 +17,7 @@ class {{inputs.className}} extends React.Component {
 	}
 
 	render() {
-		${0:{{happyCodding}}}
+		${0:{{happyCoding}}}
 	}
 
 }

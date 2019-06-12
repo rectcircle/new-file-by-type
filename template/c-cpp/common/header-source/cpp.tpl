@@ -2,4 +2,4 @@
 
 #include "{{inputs.filename}}.h"
 
-${0:{{happyCodding}}}
+${0:{{happyCoding}}}

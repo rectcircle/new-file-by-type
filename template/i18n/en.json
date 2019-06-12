@@ -62,5 +62,7 @@
 	"scala.description": "Scala Project",
 	"ts.description": "TypeScript project",
 	"web": "Web",
-	"web.description": "Web front-end project"
+	"web.description": "Web front-end project",
+	"afile.description": "Create common file",
+	"python.description": "Python project"
 }

@@ -12,7 +12,7 @@ import Component from 'vue-class-component'
   }
 })
 export default class App extends Vue {
-  // TODO: happy codding! (created by vscode extension new-file-by-type)
+  // TODO: happy coding! (created by vscode extension new-file-by-type)
 }
 </script>
 

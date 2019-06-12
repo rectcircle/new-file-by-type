@@ -1,0 +1,8 @@
+{
+	"name": "Python",
+	"flat": false,
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["requirements.txt", "**/*.py"]
+	}
+}

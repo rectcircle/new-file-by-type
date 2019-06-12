@@ -9,7 +9,7 @@ function {{inputs.className}}($1) {
 }
 
 {{inputs.className}}.prototype.${3:method} = function ($4) {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 };
 
 module.exports = {{inputs.className}};

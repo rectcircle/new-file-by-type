@@ -62,5 +62,7 @@
 	"scala.description": "Scala 项目",
 	"ts.description": "TypeScript 项目",
 	"web": "Web",
-	"web.description": "Web 前端项目"
+	"web.description": "Web 前端项目",
+	"afile.description": "创建通用文件",
+	"python.description": "Python 项目"
 }

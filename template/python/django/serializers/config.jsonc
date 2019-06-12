@@ -1,0 +1,61 @@
+{
+	"name": "Serializers",
+	"weight": 500,
+	"suffix": "py",
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "{{inputs.serializersBase}}.tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'src', path.basename(projectFolder))}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"prompt": "{{i18n('inputs.filename.prompt')}}",
+			"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
+			"suggest": {
+				"selected": true,
+				"value": "serializers"
+			}
+		},
+		{
+			"type": "select",
+			"name": "serializersBase",
+			"items": [
+				{
+					"label": "serializers.ModelSerializer",
+					"value": "ModelSerializer"
+				},
+				{
+					"label": "serializers.Serializer",
+					"value": "Serializer"
+				}
+			]
+		}
+
+	],
+	"comment": {
+		"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
+		"dateFormat": "YYYY-MM-DD",
+		"startLine": "",
+		"lineHeader": "# ",
+		"endLine": "",
+		"items": [
+			"{{comment.copyright}}",
+			"@author {{user}}",
+			"@date {{date}}",
+			"@version {{version}}"
+		]
+	}
+}

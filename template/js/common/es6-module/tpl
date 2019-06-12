@@ -4,6 +4,6 @@
 	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `import * as ${name} from '${relative}'`)
 }}
 
-${0:{{happyCodding}}}
+${0:{{happyCoding}}}
 
 export {};

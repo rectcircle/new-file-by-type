@@ -1,4 +1,4 @@
 {{inputs.packageName ? 'package '+inputs.packageName + ';\n\n' : ''}}{{commentOutput}}
 public enum {{inputs.enumName}} {
-	${0:ENUM_ITEM0; // TODO: happy codding! (created by vscode extension new-file-by-type)')}
+	${0:ENUM_ITEM0; // TODO: happy coding! (created by vscode extension new-file-by-type)')}
 }

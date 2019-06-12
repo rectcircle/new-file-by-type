@@ -14,7 +14,7 @@ public class {{inputs.junitClassName}}Test {
 
 	@Test
 	public void test() {
-		${0:{{happyCodding}}}
+		${0:{{happyCoding}}}
 	}
 
 	@After

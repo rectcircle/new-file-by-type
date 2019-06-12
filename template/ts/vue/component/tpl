@@ -18,7 +18,7 @@ import Component from 'vue-class-component'
   }
 })
 export default class ${3:{{inputs.filename}}} extends Vue {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }
 </script>
 

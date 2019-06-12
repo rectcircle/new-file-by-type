@@ -8,6 +8,6 @@
 	<title>${4:Document}</title>
 </head>
 <body>
-	${0:<!-- {{happyCoddingString}} -->}
+	${0:<!-- {{happyCodingString}} -->}
 </body>
 </html>

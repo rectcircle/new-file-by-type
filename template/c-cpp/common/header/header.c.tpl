@@ -3,6 +3,6 @@
 #ifndef __{{inputs.filename.toUpperCase()}}_H__
 #define __{{inputs.filename.toUpperCase()}}_H__
 
-${0:{{happyCodding}}}
+${0:{{happyCoding}}}
 
 #endif

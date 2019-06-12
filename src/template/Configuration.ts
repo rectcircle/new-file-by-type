@@ -68,6 +68,7 @@ export interface Comment {
 	dateFormat: string;
 	startLine: string;
 	lineHeader: string;
+	// lineTail: string;
 	endLine: string;
 	items: string[];
 }

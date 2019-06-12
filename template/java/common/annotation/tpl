@@ -3,5 +3,5 @@
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface {{inputs.annotationName}} {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }

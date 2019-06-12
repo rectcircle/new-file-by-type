@@ -5,5 +5,5 @@
 	hasPackageDeclare ? 'package '+inputs.packageName.split('.').slice(0, -1).join('.') + '\n\n' : ''
 }}
 package object {{customize['packageObjectName']}} {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }

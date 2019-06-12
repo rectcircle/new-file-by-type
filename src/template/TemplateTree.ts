@@ -188,11 +188,15 @@ export class Node {
 			return '';
 		}
 		const comment = this.configuration.comment;
-		return [
-			comment.startLine || '',
-			...comment.items.map(item => comment.lineHeader + this.engine.render(item)),
-			comment.endLine || ''
-		].join('\n') + '\n';
+		const result = [];
+		if (comment.startLine && comment.startLine !== '') {
+			result.push(comment.startLine);
+		}
+		result.push(...comment.items.map(item => comment.lineHeader + this.engine.render(item)));
+		if (comment.endLine && comment.endLine !== '') {
+			result.push(comment.endLine);
+		}
+		return result.join('\n') + '\n';
 	}
 
 	setCommentOutput(commentOutput: string) {

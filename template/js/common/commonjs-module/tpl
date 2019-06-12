@@ -4,7 +4,7 @@
 	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `const ${name} = require('${relative}')`)
 }}
 
-${0:{{happyCodding}}}
+${0:{{happyCoding}}}
 
 module.exports = {
 

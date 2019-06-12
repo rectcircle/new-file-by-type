@@ -8,6 +8,6 @@ package cn.rectcircle.test
  * @version 0.0.1
  */
 object PointObject {
-  // TODO: happy codding! (created by vscode extension new-file-by-type)
+  // TODO: happy coding! (created by vscode extension new-file-by-type)
   def apply() = new Point(0, 0)
 }

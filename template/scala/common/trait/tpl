@@ -1,4 +1,4 @@
 {{inputs.packageName ? 'package '+inputs.packageName + '\n\n' : ''}}{{commentOutput}}
 trait {{inputs.traitName}} {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }

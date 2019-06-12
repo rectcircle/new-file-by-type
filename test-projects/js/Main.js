@@ -13,7 +13,7 @@ class Main {
   }
 
   method() {
-    // TODO: happy codding! (created by vscode extension new-file-by-type)
+    // TODO: happy coding! (created by vscode extension new-file-by-type)
   }
 }
 

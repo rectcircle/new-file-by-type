@@ -13,7 +13,7 @@ export ${1:default} class {{inputs.className}} extends React.Component<${2:any},
 	}
 
 	render() {
-		${0:{{happyCodding}}}
+		${0:{{happyCoding}}}
 	}
 
 }

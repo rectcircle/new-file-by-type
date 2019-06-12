@@ -9,5 +9,5 @@ export ${1:default} function {{inputs.className}}($2) {
 }
 
 {{inputs.className}}.prototype.${4:method} = function ($5) {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 };

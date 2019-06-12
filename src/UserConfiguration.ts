@@ -13,7 +13,7 @@ export default class UserConfiguration{
 	//TODO 是否显示隐藏文件的配置
 
 	private constructor() {
-		const globalConf = vscode.workspace.getConfiguration('new-file-by-type').get('global');
+		const globalConf: any = vscode.workspace.getConfiguration('new-file-by-type').get('global');
 		if (global === undefined) {
 			return;
 		}

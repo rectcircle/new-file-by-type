@@ -4,7 +4,7 @@
 
 {{inputs.className}}::{{inputs.className}}()
 {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }
 
 {{inputs.className}}::~{{inputs.className}}()

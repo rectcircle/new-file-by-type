@@ -48,6 +48,8 @@ export default class TemplateEngine {
 	initEnv() {
 		// 用户语言
 		this.executor.set("language", vscode.env.language.toLowerCase());
+		// 用户选择编码
+		this.executor.set("encoding", vscode.workspace.getConfiguration('files').get('encoding') || 'utf8');
 		// 可以使用的默认配置项
 		const defaultConfValue: any = {};
 		Object.keys(defaultConf).forEach(key => defaultConfValue[key] = (defaultConf as any)[key]());

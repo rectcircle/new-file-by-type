@@ -4,5 +4,5 @@ class {{inputs.className}}${1:($2)} {
 }
 
 object {{inputs.className}} {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }

@@ -69,9 +69,7 @@
 									"alwaysShow": {
 										"type": "boolean"
 									},
-									"value": {
-										"type": "string"
-									}
+									"value": true
 								},
 								"required": ["label", "value"]
 							}
@@ -339,7 +337,7 @@
 					"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
 					"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
 					"suggest": {
-						"value": "src"
+						"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'src')}}"
 					}
 				},
 				{

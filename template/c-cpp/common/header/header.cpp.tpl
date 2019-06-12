@@ -2,4 +2,4 @@
 
 #pragma once
 
-${0:{{happyCodding}}}
+${0:{{happyCoding}}}

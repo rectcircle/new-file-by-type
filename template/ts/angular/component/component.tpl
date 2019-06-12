@@ -10,5 +10,5 @@ import { ${1:Component, OnInit}$2 } from '@angular/core';
   styleUrls: [$5]
 })
 export class {{inputs.className}} ${6:implements OnInit} {
-	${0:{{happyCodding}}}
+	${0:{{happyCoding}}}
 }
