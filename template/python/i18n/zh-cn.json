@@ -1,5 +1,6 @@
 {
 	"templateSelectPlaceHolder": "请选择项目或者文件类型",
+
 	"django": "Django",
 	"django.description": "选择 Django 项目",
 	"models.description": "创建 Django Model 文件",
@@ -7,10 +8,23 @@
 	"views.description": "创建 Django View 文件",
 	"serializers.description": "创建 Django REST framework 序列化器",
 
+	"common": "Common",
+	"common.description": "通用 Python 项目",
+	"module.description": "创建 Python 模块",
+	"script.description": "创建 Python 脚本",
+	"commonfile.description": "创建通用 Python 文件",
+	"class.description": "创建 Python 类",
+
+	"flask": "Flask",
+	"flask.description": "Flask 项目",
+	"entry.description": "创建 Flask 应用入口",
+	"blueprint.description": "创建 Flask 蓝图",
+
 	"inputs.djangoVersion.placeHolder": "请选择 Django 版本",
 	"inputs.viewType.placeHolder": "请选择 Django View 的实现方式",
 	"inputs.viewType.items.function-based": "基于函数",
 	"inputs.viewType.items.class-based": "基于类",
-	"inputs.viewType.items.drf-class-based": "基于 django rest framework 视图类"
-	
+	"inputs.viewType.items.drf-class-based": "基于 django rest framework 视图类",
+	"inputs.moduleName.prompt": "请输入模块名",
+	"inputs.moduleName.placeHolder": "请输入模块名"
 }

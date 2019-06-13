@@ -69,6 +69,19 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 			}
 			return result;
 		},
+		pascalToUnderline: function (pascalString: string) {
+			let result = '';
+			const isUpperCase = (c: string): boolean => c >= 'A' && c <= 'Z';
+			for (let i = 0; i < pascalString.length; i++){
+				const c = pascalString.charAt(i);
+				if (result !== '' && isUpperCase(c) && (i===0 || (!isUpperCase(pascalString.charAt(i-1))))) { // 同时处理类似UserDAO的情况
+					result += '_' + c.toLowerCase();
+				} else {
+					result += c.toLowerCase();
+				}
+			}
+			return result;
+		},
 		nodeImports: function (targetPath: string, importPaths: string[], toString: (name: string, relative: string, extname: string) => string) {
 			let result = [];
 			let targetDirPath = path.dirname(targetPath);

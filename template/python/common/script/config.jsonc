@@ -1,0 +1,37 @@
+{
+	"name": "Script",
+	"suffix": "py",
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'src', path.basename(projectFolder))}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"suggest": {
+				"selected": true,
+				"value": "script"
+			}
+		}
+	],
+	"comment": {
+		"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
+		"dateFormat": "YYYY-MM-DD",
+		"startLine": "",
+		"lineHeader": "# ",
+		"endLine": "",
+		"items": [
+			"{{comment.copyright}}",
+			"@author {{user}}",
+			"@date {{date}}",
+			"@version {{version}}"
+		]
+	}
+}

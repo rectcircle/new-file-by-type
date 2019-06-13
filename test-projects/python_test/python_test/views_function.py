@@ -10,4 +10,3 @@ def my_view(request):
   if request.method == 'GET':
     # TODO: happy coding! (created by vscode extension new-file-by-type)
     return HttpResponse('result')
-
