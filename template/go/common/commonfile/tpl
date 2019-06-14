@@ -1,0 +1,7 @@
+{{commentOutput}}
+
+// Package {{inputs.packageName}} ${1:description...}
+package {{inputs.packageName}}
+
+
+${0:{{happyCoding}}}

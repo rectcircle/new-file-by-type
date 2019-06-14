@@ -64,5 +64,6 @@
 	"web": "Web",
 	"web.description": "Web 前端项目",
 	"afile.description": "创建通用文件",
-	"python.description": "Python 项目"
+	"python.description": "Python 项目",
+	"go.description": "Go 项目"
 }

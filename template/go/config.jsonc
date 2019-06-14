@@ -1,0 +1,21 @@
+{
+	"name": "Go",
+	"flat": true,
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["**/*.go"]
+	},
+	"comment": {
+		"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
+		"dateFormat": "YYYY-MM-DD",
+		"startLine": "",
+		"lineHeader": "// ",
+		"endLine": "",
+		"items": [
+			"{{comment.copyright}}",
+			"Author: {{user}}",
+			"Date: {{date}}",
+			"Version: {{version}}"
+		]
+	}
+}

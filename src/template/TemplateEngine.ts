@@ -37,7 +37,6 @@ export default class TemplateEngine {
 		this.executor.set("version", this.renderAny(this.conf.version));
 		this.executor.set("flat", this.renderAny(this.conf.flat));
 		this.executor.set("indent", this.renderAny(this.conf.indent));
-		this.executor.set("user", this.renderAny(this.conf.user));
 		this.executor.set("placeHolder", this.renderAny(this.conf.placeHolder));
 		this.executor.set("targets", this.renderAny(this.conf.targets));
 		this.executor.set("comment", this.conf.comment); // 防止引用
@@ -62,6 +61,8 @@ export default class TemplateEngine {
 		this.executor.set("openedFilePaths", openedFilePaths);
 		// 设置后缀
 		this.executor.set("suffix", this.renderAny(this.conf.suffix));
+		//设置用户名
+		this.executor.set("user", this.renderAny(this.conf.user));
 	}
 
 	constructor(conf: Configuration, langPack: I18n, activeDirectory: string | undefined = undefined) {
@@ -124,9 +125,9 @@ export default class TemplateEngine {
 		if (typeof (value) === "string") {
 			result = this.render(value);
 		} else if (typeof (value) === "object") {
-			if (value.constructor === Array) {
+			if ((value as any).constructor === Array) {
 				result = this.renderArray(value as any);
-			} else if(value.constructor === Object) {
+			} else if ((value as any).constructor === Object) {
 				result = this.renderObject(value);
 			}
 		} else {

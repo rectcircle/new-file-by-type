@@ -64,5 +64,6 @@
 	"web": "Web",
 	"web.description": "Web front-end project",
 	"afile.description": "Create common file",
-	"python.description": "Python project"
+	"python.description": "Python project",
+	"go.description": "Go project"
 }

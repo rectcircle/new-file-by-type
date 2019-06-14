@@ -1,0 +1,42 @@
+{
+	"name": "Common",
+	"suffix": "go",
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "tpl"
+		},
+		{
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + '_test' + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "test.tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, `src/github.com/${user.toLowerCase()}`, 'src/github.com', 'src')}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "packageName",
+			"suggest": {
+				"selected": true,
+				"value": "{{path.basename(inputs.srcPath)}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"suggest": {
+				"selected": true,
+				"value": "main"
+			}
+		}
+	]
+}
