@@ -36,7 +36,7 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 			return {
 				label: (node.children.length === 0 ? '$(file-code) ' : '$(file-directory) ') + node.name,
 				description: (tag || '') + ' ' + node.namespace,
-				detail: node.description ? Constant.ALIGN_STRING + node.description : undefined,
+				detail: node.description && this.config.showTemplateSelectorDetail ? Constant.ALIGN_STRING + node.description : undefined,
 				node: node
 			};
 		});

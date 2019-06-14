@@ -100,6 +100,12 @@
 					"scope": "window",
 					"description": "%new-file-by-type.configuration.global.showRecentUsed%"
 				},
+				"new-file-by-type.global.showTemplateSelectorDetail": {
+					"default": true,
+					"type": "boolean",
+					"scope": "window",
+					"description": "%new-file-by-type.configuration.global.showTemplateSelectorDetail%"
+				},
 				"new-file-by-type.global.recentUseMaxNumber": {
 					"default": 3,
 					"type": "number",
@@ -178,23 +184,7 @@
 								"default": false
 							},
 							"targets": {
-								"description": "%new-file-by-type.template.targets%",
-								"type": "array",
-								"items": {
-									"type": "object",
-									"properties": {
-										"filepath": {
-											"description": "%new-file-by-type.template.targets.filepath%",
-											"type": "string",
-											"default": "{{ inputs.path.resolve(projectFolder, inputs.filename + ( suffix ?  '.' + suffix : '') )}}"
-										},
-										"tplpath": {
-											"description": "%new-file-by-type.template.targets.tplpath%",
-											"type": "string",
-											"default": "tpl"
-										}
-									}
-								}
+								"$ref": "https://raw.githubusercontent.com/rectcircle/new-file-by-type/master/src/config.schema.json#/definitions/Target"
 							},
 							"placeHolder": {
 								"description": "%new-file-by-type.template.targets.placeHolder%",

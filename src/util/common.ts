@@ -12,14 +12,14 @@ export function depthCopy<T>(source: T): T {
 	if (typeof (source) !== "object") {
 		return source;
 	}
-	if (source.constructor === Array) {
+	if ((source as any).constructor === Array) {
 		const result: any[] = [];
 		for (let value of source as any) {
 			result.push(depthCopy(value));
 		}
 		return result as any;
 	}
-	if (source.constructor === Object) {
+	if ((source as any).constructor === Object) {
 		const result: any = {};
 		for (let key in source) {
 			result[key] = depthCopy(source[key]);

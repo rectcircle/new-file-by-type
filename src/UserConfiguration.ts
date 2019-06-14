@@ -3,14 +3,15 @@ import * as minimatch from "minimatch";
 
 export default class UserConfiguration{
 	public templatePath?: string;
-	public debug: boolean = false;
+	// public debug: boolean = false;
 	public showRecentUsed: boolean = true;
 	public recentUseMaxNumber: number = 3;
+	public showTemplateSelectorDetail: boolean = true;
 	/** 最近使用数据来源 */
 	public recentUseDataFrom: "workspace" | "global" = 'workspace';
 	public recentUseSortBy: "time" | "frequency" = "time";
 	public template: {[key: string]: any} = {};
-	//TODO 是否显示隐藏文件的配置
+	// 是否显示隐藏文件的配置：已迁移到模板配置中
 
 	private constructor() {
 		const globalConf: any = vscode.workspace.getConfiguration('new-file-by-type').get('global');

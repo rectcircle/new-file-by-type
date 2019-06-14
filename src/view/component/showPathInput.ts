@@ -5,7 +5,7 @@ import { Stats } from "fs";
 import { CheckRule } from "../../util/vscode";
 import { Constant } from "../../UserConfiguration";
 import * as os from "os";
-import { listMountPath } from "../../util/common";
+import { listMountPath, stringSummary } from "../../util/common";
 const format = require('string-format-obj');
 
 type MyQuickPickItem = vscode.QuickPickItem & {
@@ -99,13 +99,17 @@ class PathInput {
 		return result.join(this.pathSeparator);
 	}
 
-	private humanResult(result ?: string[]) {
+	private humanResult(result ?: string[], summary = true) {
 		result = result || this.result;
-		return result.length === 0 ? this.currentDirectoryText : this.formatResult(result);
+		let resultString = result.length === 0 ? this.currentDirectoryText :this.formatResult(result);
+		if (summary) {
+			resultString = stringSummary(resultString, 80);
+		}
+		return resultString;
 	}
 
 	private updateTitle(result?: string[]) {
-		this.quickPick.title = this.title + this.humanResult(result);
+		this.quickPick.title = this.title + this.humanResult(result, false);
 	}
 
 	private async needConfirmButton() {
