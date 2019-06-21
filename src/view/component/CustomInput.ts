@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import ViewBase from "../ViewBase";
-import TemplateTree, { Node } from "../../template/TemplateTree";
+import TemplateTree, { Node, OutputItem } from "../../template/TemplateTree";
 import ViewTimeline from "./ViewTimeline";
 import { UserInput } from '../newFileByType';
 import showPathInput from './showPathInput';
@@ -161,6 +161,12 @@ export default class CustomInput extends ViewBase {
 		}
 		if (node.inputsLength === inputsLength) {
 			const outputs = await node.renderTpl();
+			const needCheckPathFun = (o: OutputItem) => {
+				if (o.saveType !== "override") {
+					return false;
+				}
+				return o.exists;
+			};
 			return {
 				node: node,
 				projectFolder: projectFolder,
@@ -168,8 +174,8 @@ export default class CustomInput extends ViewBase {
 				outputs: outputs,
 				inputsLength: inputsLength,
 
-				filteredPaths: outputs.filter(o=>!o.exists).map(o=>o.targetPath),
-				needCheckPaths: outputs.filter(o => o.exists).map(o => o.targetPath),
+				filteredPaths: outputs.filter(o=>!needCheckPathFun(o)).map(o=>o.targetPath),
+				needCheckPaths: outputs.filter(needCheckPathFun).map(o => o.targetPath),
 				willCheckIndex: 0,
 			};
 		} else {

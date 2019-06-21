@@ -3,9 +3,11 @@ import * as os from 'os';
 const fs = require("../util/fs").default;
 import * as path from 'path';
 import * as moment from "moment";
+import axios1 from "axios";
 import I18n from "./I18n";
 import { TemplateRenderException } from "../util/exception";
 
+const axios = axios1; // 编译器会进行重命名
 
 // 利用函数闭包和eval实现一个字符串代码执行器
 export default function makeExecutor(conf: Configuration, langPack: I18n) {
@@ -36,6 +38,8 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 	let targets:any[] = [];
 	let version = '0.0.1';
 	let comment: any = {};
+	// 声明
+	let declaration = {};
 	// 自定义变量
 	let customize: any = {};
 	// 以下为额外产生的变量
@@ -193,6 +197,9 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 			}
 			return result;
 		},
+		download: function (url: string) {
+			return axios.get(url).then(resp => resp.data);
+		}
 	};
 	function i18n(key: string) {
 		return langPack.get(key, language);
@@ -276,6 +283,8 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 					targets : targets,
 					version : version,
 					comment : comment,
+					// 声明
+					declaration: declaration,
 					// 自定义变量
 					customize: customize,
 					// 日期
@@ -292,8 +301,7 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 					},
 					checkRules:checkRules
 				};
-				// const requires = ['path', 'fs', 'os', 'moment'];
-				const requires = ['path', 'fs', 'os']; // moment 不暴露出去
+				const requires = ['path', 'fs', 'os', 'axios', 'moment'];
 				throw new TemplateRenderException(`render template Error: expression: ${tpl}`, tpl , e,  context, requires);
 			}
 		},

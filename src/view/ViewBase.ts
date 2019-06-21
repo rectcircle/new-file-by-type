@@ -4,6 +4,7 @@ import TemplateTree, { OutputItem } from "../template/TemplateTree";
 import UserConfiguration from '../UserConfiguration';
 import fs from '../util/fs';
 import { Logger } from '../util/log';
+import * as clipboardy from "clipboardy";
 
 export interface PathAndType {
 	isFile: boolean;
@@ -75,6 +76,19 @@ export default class ViewBase<P = any, T = any>{
 				continue;
 			}
 			// 写文件系统
+			if (output.saveType === "clipboard") {
+				let content: string = '';
+				if (output.content === undefined) {
+					content = output.originPath ? (await fs.readFileAsync(output.originPath)).toString() : ''; 
+				} else if (typeof (output.content) === "string") {
+					content = output.content;
+				} else if (output.content.constructor === Buffer) {
+					content = output.content.toString();
+				}
+				clipboardy.write(content);
+				vscode.window.showInformationMessage('Copy to clipboard successful!');
+				continue;
+			}
 			if (snippet) {
 				// snippet 方式写文件
 				await fs.ensureFileExistsAsync(output.targetPath);
@@ -89,14 +103,21 @@ export default class ViewBase<P = any, T = any>{
 				const editor = await vscode.window.showTextDocument(textDocument, {
 					preview: false // 常驻而不是可以被覆盖
 				});
-				// 清空所有
-				await editor.edit(eb => {
-					eb.delete(new vscode.Range(
-						textDocument.lineAt(0).range.start,
-						textDocument.lineAt(textDocument.lineCount - 1).range.end));
-				});
-				// 插入snippet
-				await editor.insertSnippet(new vscode.SnippetString(content as string));
+				// 覆盖的情况下：清空所有
+				if (output.saveType === "override") {
+					await editor.edit(eb => {
+						eb.delete(new vscode.Range(
+							textDocument.lineAt(0).range.start,
+							textDocument.lineAt(textDocument.lineCount - 1).range.end));
+					});
+				}
+				if (output.saveType === "append" || output.saveType === "override") {
+					// "append" 需要插入到文件尾部
+					await editor.insertSnippet(new vscode.SnippetString(content as string), textDocument.lineAt(textDocument.lineCount - 1).range.end);
+				} else if(output.saveType === "insert") {
+					// insert：即光标所在位置
+					await editor.insertSnippet(new vscode.SnippetString(content as string));
+				}
 				await textDocument.save();
 			} else {
 				if (output.content === undefined) {

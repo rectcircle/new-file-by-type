@@ -1,0 +1,20 @@
+{
+	"name": "GitIgnore",
+	"renderComment": false,
+	"targets": [{
+		"filepath": "{{ path.resolve(projectFolder, '.gitignore')}}",
+		"tplcontent": "{{ helper.download(inputs.gitignoreTplUrl) }}",
+		"saveType": "append"
+	}],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "select",
+			"name": "gitignoreTplUrl",
+			"items": "{{ declaration.loadGitIgnoreTemplateList() }}"
+		}
+	],
+	"match": {
+		"workspaceFolderGlobs": [".git"]
+	}
+}

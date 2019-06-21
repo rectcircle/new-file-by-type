@@ -61,6 +61,8 @@ export interface InputItem {
 export interface Target {
 	filepath: string;
 	tplpath: string;
+	tplcontent: string;
+	saveType: string;
 }
 
 export interface Comment {
@@ -194,6 +196,11 @@ export default class Configuration {
 	get showHidden() {
 		return this.config['showHidden'] === undefined ? false : this.config['showHidden'];
 	}
+
+	get declaration(): string {
+		return this.config['declaration'];
+	}
+
 
 	get inputs(): InputItem[] {
 		let inputs = (this.config['inputs'] as any[]).map(i => {

@@ -1,0 +1,4 @@
+{
+	"inputs.gitignoreTplUrl.prompt": "请选择 gitignore 模板",
+	"inputs.gitignoreTplUrl.placeHolder": "请选择 gitignore 模板"
+}

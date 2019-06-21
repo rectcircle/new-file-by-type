@@ -1,0 +1,4 @@
+{
+	"inputs.gitignoreTplUrl.prompt": "Please select gitignore template",
+	"inputs.gitignoreTplUrl.placeHolder": "Please select gitignore template"
+}

@@ -44,6 +44,10 @@
 					"description": "if type is select, it must give as options",
 					"oneOf": [
 						{
+							"type": "string",
+							"default": "{{ JavaScript-Statement }}"
+						},
+						{
 							"type": "array",
 							"items": {
 								"type": "string"
@@ -179,6 +183,20 @@
 					"description": "template file path",
 					"type": "string",
 					"default": "tpl"
+				},
+				"tplcontent": {
+					"description": "template content, Priority is higher than tplpath",
+					"type": "string"
+				},
+				"saveType": {
+					"description": "tpl save type",
+					"enum": [
+						"override",
+						"append",
+						"insert",
+						"clipboard"
+					],
+					"default": "override"
 				}
 			}
 		},
@@ -327,6 +345,11 @@
 			"description": "template select view placeHolder text",
 			"type": "string",
 			"default": "{{i18n('templateSelectPlaceHolder')}}"
+		},
+		"declaration": {
+			"description": "Custom function variable declaration, filename",
+			"type": "string",
+			"default": "declaration.js"
 		},
 		"inputs": {
 			"type": "array",

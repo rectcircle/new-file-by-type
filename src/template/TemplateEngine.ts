@@ -9,6 +9,7 @@ import makeExecutor from "./Executor";
 const TPL_PATTERN = /{{([\s\S]*?)}}\n{0,1}/g; // 吞掉1个换行，方便排版
 const TPL_ESCAPE = /\\{\\{([\s\S]*?)\\}\\}/g;
 const TPL_ONE_PATTERN = /^\s*{{([\s\S]*?)}}\s*$/;
+const DECLARATION_ELLIPSIS = /\/\*<\.\.\.>\*\/[\s\S]*?\/\*<\.\.\.\/>\*\//g;
 
 const defaultConf = {
 	indent() {
@@ -74,6 +75,12 @@ export default class TemplateEngine {
 			this.executor.set('activeDirectory', activeDirectory);
 		}
 		this.initEnv();
+	}
+
+	loadDeclaration(source: string) {
+		// 删除开发期间需要的文件
+		source = source.replace(DECLARATION_ELLIPSIS, '');
+		this.executor.exec(source);
 	}
 
 	setInputs(value: any) {

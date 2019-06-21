@@ -102,7 +102,7 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 			if (result.node.isLeaf()) {
 				this.timeline.willNext();
 				// 更新模板引擎数据
-				result.node.updateEngine(this.activeDirectory);
+				await result.node.updateEngine(this.activeDirectory);
 			} else {
 				this.timeline.willRepeat();
 			}

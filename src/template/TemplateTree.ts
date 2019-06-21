@@ -13,6 +13,7 @@ export interface OutputItem {
 	targetPath: string;
 	originPath?: string;
 	exists: boolean;
+	saveType: "override" | "append" | "insert" | "clipboard";
 	content?: string | Buffer; // TODO Buffer类型，考虑null和大文件，文件拷贝优化和设置进度条
 }
 
@@ -76,8 +77,14 @@ export class Node {
 		});
 		return now;
 	}
-	updateEngine(activeDirectory: string | undefined = undefined) {
+	async updateEngine(activeDirectory: string | undefined = undefined) {
 		this.engine = new TemplateEngine(this.configuration, this.langPack, activeDirectory);
+		if (this.configuration.declaration) {
+			const p = path.resolve(this.path, this.configuration.declaration);
+			const source = (await fs.readFileAsync(p)).toString();
+			// 加载声明
+			this.engine.loadDeclaration(source);
+		}
 	}
 	private async loadConfig() {
 		this.configuration = await Configuration.load(
@@ -209,8 +216,13 @@ export class Node {
 		// 渲染并设置注释
 		this.setCommentOutput(this.commentOutput);
 		const result = [] as OutputItem[];
-		for (let target of (this.engine.get('targets') as Target[]) ) {
-			let tpl = (await fs.readFileAsync(path.resolve(this.path, target.tplpath))).toString('utf8'); // TODO 添加异常提示
+		for (let target of (this.engine.get('targets') as Target[])) {
+			let tpl: string = '';
+			if (target.tplcontent) {
+				tpl = await target.tplcontent; 
+			} else {
+				tpl = (await fs.readFileAsync(path.resolve(this.path, target.tplpath))).toString('utf8'); // TODO 添加异常提示
+			}
 			let indent = this.configuration.indent;
 			if (indent !== 0) {
 				tpl = tpl.replace(/\t/g, new Array(indent).fill(' ').join('') );
@@ -219,7 +231,8 @@ export class Node {
 			result.push({
 				exists: await fs.existsAsync(target.filepath),
 				content: content,
-				targetPath: target.filepath
+				targetPath: target.filepath,
+				saveType: (target.saveType || "override") as any
 			});
 		}
 		return result;

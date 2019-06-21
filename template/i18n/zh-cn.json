@@ -65,5 +65,6 @@
 	"web.description": "Web 前端项目",
 	"afile.description": "创建通用文件",
 	"python.description": "Python 项目",
-	"go.description": "Go 项目"
+	"go.description": "Go 项目",
+	"gitignore.description": "添加 gitignore 模板到 .gitignore 文件"
 }

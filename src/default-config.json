@@ -11,7 +11,8 @@
 	"showHidden": false,
 	"targets": [{
 		"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}",
-		"tplpath": "tpl"
+		"tplpath": "tpl",
+		"saveType": "override"
 	}],
 	"inputs": [
 		{

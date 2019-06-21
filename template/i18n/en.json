@@ -65,5 +65,6 @@
 	"web.description": "Web front-end project",
 	"afile.description": "Create common file",
 	"python.description": "Python project",
-	"go.description": "Go project"
+	"go.description": "Go project",
+	"gitignore.description": "Add gitignore template to .gitignore file"
 }
