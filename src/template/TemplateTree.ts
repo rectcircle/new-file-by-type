@@ -25,6 +25,7 @@ export class Node {
 	public configuration: Configuration;
 	public langPack: I18n;
 	public engine: TemplateEngine;
+	public declarationSource?: string;
 	public constructor(nodePath: string, parent?: Node) {
 		this.path = nodePath;
 		this.parent = parent;
@@ -33,6 +34,7 @@ export class Node {
 		this.configuration = Configuration.DEFAULT;
 		this.langPack = I18n.DEFAULT;
 		this.engine = TemplateEngine.DEFAULT;
+		this.declarationSource = undefined;
 	}
 	public static async buildTree(nodePath: string, parent?: Node): Promise<Node> {
 		// 构建树并设置父子关系
@@ -54,6 +56,13 @@ export class Node {
 		await now.loadI18n();
 		// 设置模板引擎
 		now.engine = new TemplateEngine(now.configuration, now.langPack);
+		// 读取用户自定义的js函数
+		if (now.configuration.declaration) {
+			const declarationPath = path.resolve(now.path, now.configuration.declaration);
+			if (await fs.existsAndIsFileAsync(declarationPath)) {
+				now.declarationSource = (await fs.readFileAsync(declarationPath)).toString();
+			}
+		}
 		// 加载子树
 		if ((await fs.statAsync(nodePath)).isDirectory()) {
 			for (let subName of (await fs.readdirAsync(nodePath))) {
@@ -79,11 +88,9 @@ export class Node {
 	}
 	async updateEngine(activeDirectory: string | undefined = undefined) {
 		this.engine = new TemplateEngine(this.configuration, this.langPack, activeDirectory);
-		if (this.configuration.declaration) {
-			const p = path.resolve(this.path, this.configuration.declaration);
-			const source = (await fs.readFileAsync(p)).toString();
+		if (this.declarationSource) {
 			// 加载声明
-			this.engine.loadDeclaration(source);
+			this.engine.loadDeclaration(this.declarationSource);
 		}
 	}
 	private async loadConfig() {
