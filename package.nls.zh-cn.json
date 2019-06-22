@@ -9,6 +9,7 @@
 	"new-file-by-type.open-workspace.title": "打开工作空间...(使用自定义路径选择器)",
 	"new-file-by-type.configuration.title": "根据文件或项目类型创建文件插件配置",
 	"new-file-by-type.configuration.global.templatePath": "自定义模板目录路径",
+		"new-file-by-type.configuration.global.searchDelay": "网络搜索延迟该配置的毫秒数进行搜索",
 	"new-file-by-type.configuration.global.showRecentUsed": "是否显示最近使用的文件模板",
 	"new-file-by-type.configuration.global.showTemplateSelectorDetail": "是否展示模板选择器项目的Detail介绍",
 	"new-file-by-type.configuration.global.recentUseMaxNumber": "最近使用项目的最大数目",

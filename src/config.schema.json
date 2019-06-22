@@ -20,7 +20,7 @@
 			"type": "object",
 			"properties": {
 				"type": {
-					"enum": ["path", "text", "select"],
+					"enum": ["path", "text", "select", "search"],
 					"description": "input type",
 					"default": "text"
 				},
@@ -98,6 +98,10 @@
 				"option": {
 					"type": "object",
 					"properties": {
+						"title": {
+							"type": "string",
+							"default": "select view title"
+						},
 						"parentDirectoryText":{
 							"type":"string",
 							"default": "{{i18n('inputs.name.parentDirectoryText')}}"
@@ -189,14 +193,22 @@
 					"type": "string"
 				},
 				"saveType": {
-					"description": "tpl save type",
+					"description": "tpl save type (targetType = \"file\")",
 					"enum": [
 						"override",
 						"append",
-						"insert",
-						"clipboard"
+						"insert"
 					],
 					"default": "override"
+				},
+				"targetType": {
+					"enum": [
+						"file",
+						"clipboard",
+						"command",
+						"browser"
+					],
+					"default": "file"
 				}
 			}
 		},

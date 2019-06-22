@@ -1,0 +1,8 @@
+{
+	"maven.descriptin": "Maven 仓库搜索",
+	"inputs.artifact.placeHolder": "请输入关键字",
+	"inputs.artifact.title": "Maven 仓库搜索",
+	"inputs.version.placeHolder": "请选择依赖版本",
+	"inputs.content.placeHolder": "请选择依赖管理工具",
+	"mavenNetworkError": "在搜索 maven 仓库过程中发生错误，请检查网络"
+}

@@ -66,5 +66,7 @@
 	"afile.description": "Create common file",
 	"python.description": "Python project",
 	"go.description": "Go project",
-	"gitignore.description": "Add gitignore template to .gitignore file"
+	"gitignore.description": "Add gitignore template to .gitignore file",
+	"search": "Search",
+	"search.description": "Query content from the web"
 }

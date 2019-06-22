@@ -6,6 +6,7 @@ import * as moment from "moment";
 import axios1 from "axios";
 import I18n from "./I18n";
 import { TemplateRenderException } from "../util/exception";
+const cheerio = require("cheerio");
 
 const axios = axios1; // 编译器会进行重命名
 
@@ -301,7 +302,7 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 					},
 					checkRules:checkRules
 				};
-				const requires = ['path', 'fs', 'os', 'axios', 'moment'];
+				const requires = ['path', 'fs', 'os', 'axios', 'moment', 'cheerio'];
 				throw new TemplateRenderException(`render template Error: expression: ${tpl}`, tpl , e,  context, requires);
 			}
 		},

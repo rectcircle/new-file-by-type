@@ -5,6 +5,7 @@ import UserConfiguration from '../UserConfiguration';
 import fs from '../util/fs';
 import { Logger } from '../util/log';
 import * as clipboardy from "clipboardy";
+import { openExternal, executeCommand } from '../util/vscode';
 
 export interface PathAndType {
 	isFile: boolean;
@@ -66,6 +67,19 @@ export default class ViewBase<P = any, T = any>{
 		}
 	}
 
+	private async saveToClipBoard(content: string) {
+		clipboardy.write(content);
+		vscode.window.showInformationMessage('Copy to clipboard successful!');		
+	}
+
+	private async openBrowser(content: string) {
+		await openExternal(content);
+	}
+
+	private async executeCommand(content: string) {
+		await executeCommand(content);
+	}
+
 	public async saveAndFocus(outputs: OutputItem[], snippet = false) {
 		let number = 1;
 		let encoding:string = vscode.workspace.getConfiguration('files').get('encoding') || 'utf8';
@@ -76,7 +90,7 @@ export default class ViewBase<P = any, T = any>{
 				continue;
 			}
 			// 写文件系统
-			if (output.saveType === "clipboard") {
+			if (output.targetType !== "file") {
 				let content: string = '';
 				if (output.content === undefined) {
 					content = output.originPath ? (await fs.readFileAsync(output.originPath)).toString() : ''; 
@@ -85,8 +99,13 @@ export default class ViewBase<P = any, T = any>{
 				} else if (output.content.constructor === Buffer) {
 					content = output.content.toString();
 				}
-				clipboardy.write(content);
-				vscode.window.showInformationMessage('Copy to clipboard successful!');
+				if (output.targetType === "clipboard") {
+					await this.saveToClipBoard(content);
+				} else if (output.targetType === "browser") {
+					await this.openBrowser(content);
+				} else if (output.targetType === "command") {
+					await this.executeCommand(content);
+				}
 				continue;
 			}
 			if (snippet) {

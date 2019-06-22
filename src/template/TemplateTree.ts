@@ -13,8 +13,9 @@ export interface OutputItem {
 	targetPath: string;
 	originPath?: string;
 	exists: boolean;
-	saveType: "override" | "append" | "insert" | "clipboard";
-	content?: string | Buffer; // TODO Buffer类型，考虑null和大文件，文件拷贝优化和设置进度条
+	saveType: "override" | "append" | "insert";
+	targetType: "file" | "clipboard" | "command" | "browser";
+	content?: string | Buffer;
 }
 
 export class Node {
@@ -239,7 +240,8 @@ export class Node {
 				exists: await fs.existsAsync(target.filepath),
 				content: content,
 				targetPath: target.filepath,
-				saveType: (target.saveType || "override") as any
+				saveType: (target.saveType || "override") as any,
+				targetType: (target.targetType || "file") as any
 			});
 		}
 		return result;

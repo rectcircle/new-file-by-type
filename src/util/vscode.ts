@@ -180,3 +180,30 @@ export async function getRecentUsage(globalState: vscode.Memento, workspaceState
 	}
 	return paths;
 }
+
+const NEW_FILE_BY_TYPE_TERMINAL_NAME = 'new file by type';
+
+export async function executeCommand(cmd: string) {
+	// let targetTerminal: vscode.Terminal | undefined = undefined;
+	// for (let t of vscode.window.terminals) {
+	// 	if (t.name === NEW_FILE_BY_TYPE_TERMINAL_NAME) {
+	// 		targetTerminal = t;
+	// 		break;
+	// 	}
+	// }
+	// if (targetTerminal === undefined) {
+	// 	targetTerminal = vscode.window.createTerminal(NEW_FILE_BY_TYPE_TERMINAL_NAME);
+	// }
+	// targetTerminal.show();
+	// targetTerminal.sendText(cmd);
+	const task = new vscode.Task(
+		{
+			type: "shell"
+		},
+		vscode.TaskScope.Workspace,
+		"new-file-by-type execute command",
+		"new-file-by-type",
+		new vscode.ShellExecution(cmd)
+	);
+	await vscode.tasks.executeTask(task);
+}

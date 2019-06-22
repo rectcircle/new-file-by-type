@@ -9,6 +9,7 @@ import * as path from 'path';
 import { CheckRule } from "../util/vscode";
 import UserConfiguration from "../UserConfiguration";
 import * as json5 from 'json5';
+import { SearchHandler } from "../view/component/showSearchBox";
 
 export interface MatchItem {
 	workspaceFolderGlobs?: string[];
@@ -25,7 +26,7 @@ export interface SelectItem {
 }
 
 export interface InputItem {
-	type: "path" | "text" | "select";
+	type: "path" | "text" | "select" | "search";
 	name: string;
 	value?: string;
 	prompt: string;
@@ -36,8 +37,9 @@ export interface InputItem {
 		selected: boolean;
 		value: Array<string> | string | undefined;
 	};
-	items: string[] | SelectItem[];
+	items: string[] | SelectItem[] | SearchHandler<any>;
 	option: {
+		title: string;
 		parentDirectoryText: string;
 		pathSeparator: string;
 		confirmText: string;
@@ -59,6 +61,7 @@ export interface InputItem {
 }
 
 export interface Target {
+	targetType: string;
 	filepath: string;
 	tplpath: string;
 	tplcontent: string;
@@ -216,6 +219,7 @@ export default class Configuration {
 				suggest: i.suggest,
 				items: i.items || [],
 				option: {
+					title: option.title || this.defaultInputI18nTpl(i.name, 'title'),
 					parentDirectoryText: option.parentDirectoryText || this.defaultInputI18nTpl(i.name, 'parentDirectoryText'),
 					pathSeparator: option.pathSeparator || path.sep,
 					confirmText: option.confirmText || this.defaultInputI18nTpl(i.name, 'confirmText'),

@@ -94,6 +94,11 @@
 					"scope": "window",
 					"description": "%new-file-by-type.configuration.global.templatePath%"
 				},
+				"new-file-by-type.global.searchDelay": {
+					"type": "number",
+					"scope": "window",
+					"description": "%new-file-by-type.configuration.global.searchDelay%"
+				},
 				"new-file-by-type.global.showRecentUsed": {
 					"default": true,
 					"type": "boolean",
@@ -227,6 +232,7 @@
 	"dependencies": {
 		"ajv": "^6.10.0",
 		"axios": "^0.19.0",
+		"cheerio": "^1.0.0-rc.3",
 		"clipboardy": "^2.1.0",
 		"drivelist": "^8.0.6",
 		"globby": "^9.2.0",

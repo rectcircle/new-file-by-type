@@ -9,6 +9,7 @@
 	"new-file-by-type.open-workspace.title": "Open Workspace...(Use Custom path selector)",
 	"new-file-by-type.configuration.title": "New File By File or Project Type Extension",
 	"new-file-by-type.configuration.global.templatePath": "Custom template directory path",
+	"new-file-by-type.configuration.global.searchDelay": "Network search input delay the ms to trigger",
 	"new-file-by-type.configuration.global.showRecentUsed": "Whether to display the most recently used file template",
 	"new-file-by-type.configuration.global.showTemplateSelectorDetail": "Whether to display the detail introduction of the template selector project",
 	"new-file-by-type.configuration.global.recentUseMaxNumber": "Maximum number of recently used projects",

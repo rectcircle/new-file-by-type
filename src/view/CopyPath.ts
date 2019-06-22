@@ -40,7 +40,8 @@ export default class CopyPath extends ViewBase<string, boolean> {
 					targetPath: item.target,
 					originPath: item.origin,
 					exists: inputs.needCheckPaths.indexOf(item.target) !== -1,
-					saveType: "override"
+					saveType: "override",
+					targetType: "file"
 				});
 			}
 		}

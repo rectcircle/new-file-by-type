@@ -4,6 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const axios = require('axios');
 const moment = require('moment');
+const cheerio = require('cheerio');
 let happyCoding = "// TODO: happy coding! (created by vscode extension new-file-by-type)";
 let happyCodingString = "TODO: happy coding! (created by vscode extension new-file-by-type)";
 let langPack = {
@@ -247,6 +248,7 @@ module.exports = {
 	os,
 	axios,
 	moment,
+	cheerio,
 	happyCoding,
 	happyCodingString,
 	language,

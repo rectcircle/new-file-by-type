@@ -1,0 +1,7 @@
+{
+	"name": "Search",
+	"renderComment": false,
+	"match": {
+		"always": true
+	}
+}

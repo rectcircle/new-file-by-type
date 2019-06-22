@@ -6,6 +6,7 @@ import { UserInput } from '../newFileByType';
 import showPathInput from './showPathInput';
 import { InputItem, SelectItem } from '../../template/Configuration';
 import { CheckRule } from '../../util/vscode';
+import showSearchBox from './showSearchBox';
 
 export default class CustomInput extends ViewBase {
 	private timeline: ViewTimeline;
@@ -96,7 +97,6 @@ export default class CustomInput extends ViewBase {
 				multiConfirmDetailText: inputConf.option.multiConfirmDetailText,
 				multiSelectCancelText: inputConf.option.multiSelectCancelText,
 			} as any);
-			
 		} else if (inputConf.type === "text") {
 			value = await vscode.window.showInputBox({
 				placeHolder: placeHolder,
@@ -123,6 +123,17 @@ export default class CustomInput extends ViewBase {
 			} else {
 				value = (result as SelectItem).value;
 			}
+		} else if (inputConf.type === "search") {
+			const result = await showSearchBox<string>({
+				placeholder: placeHolder,
+				searchDelay: this.config.searchDelay,
+				title: inputConf.option.title,
+				searchHandler: inputConf.items as any,
+				canSelectMany: inputConf.option.canSelectMany,
+				defaultKeyword: inputConf.suggest ? inputConf.suggest.value as string : ''
+				
+			});
+			value = result;
 		}
 		if (value !== undefined) {
 			if (node.inputsLength !== inputsLength + 1 ) {

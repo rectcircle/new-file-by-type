@@ -8,6 +8,7 @@ const {
 	os,
 	axios,
 	moment,
+	cheerio,
 	happyCoding,
 	happyCodingString,
 	language,
@@ -72,7 +73,7 @@ declaration['loadGitIgnoreTemplateList'] = async function () {
 		})
 		return result
 	} catch(e) {
-		throw new Error('Attach gitignore template list error, Please check your network')
+		throw new Error(i18n('attachGitignoreNetworkError'))
 	}
 }
 

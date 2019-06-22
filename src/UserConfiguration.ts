@@ -7,6 +7,7 @@ export default class UserConfiguration{
 	public showRecentUsed: boolean = true;
 	public recentUseMaxNumber: number = 3;
 	public showTemplateSelectorDetail: boolean = true;
+	public searchDelay: number = 400;
 	/** 最近使用数据来源 */
 	public recentUseDataFrom: "workspace" | "global" = 'workspace';
 	public recentUseSortBy: "time" | "frequency" = "time";

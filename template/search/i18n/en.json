@@ -1,0 +1,8 @@
+{
+	"maven.descriptin": "Maven Repository Search",
+	"inputs.artifact.placeHolder": "Please input keyword",
+	"inputs.artifact.title": "Maven Repository Search",
+	"inputs.version.placeHolder": "Please select development version",
+	"inputs.content.placeHolder": "Please select the dependency management tool",
+	"mavenNetworkError": "Maven search has a network error, please check your network"
+}
