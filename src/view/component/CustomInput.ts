@@ -166,7 +166,7 @@ export default class CustomInput extends ViewBase {
 		if (value !== undefined) {
 			inputsLength++;
 			inputs[inputItem.name] = value;
-			node.setInputs(inputs, inputItem);
+			await node.setInputs(inputs, inputItem);
 		} else {
 			return undefined;
 		}

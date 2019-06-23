@@ -1,0 +1,62 @@
+/*
+https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh&dt=t&q=test
+*/
+{
+	"targets": [
+		{
+			"targetType": "{{inputs.action.action}}",
+			"tplcontent": "{{inputs.action.arg}}"
+		}
+	],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "text",
+			"name": "twoPartyLanguage",
+			"value": "en,zh-CN"
+		},
+		{
+			"type": "search",
+			"name": "translation",
+			"items": "{{declaration['googleTranslateHandler']}}"
+		},
+		{
+			"type": "select",
+			"name": "action",
+			"items": [
+				{
+					"label": "{{i18n('copyToClipborad')}}",
+					"detail": "$(clippy) {{inputs.translation.result}}",
+					"value": {
+						"action": "clipboard",
+						"arg": "{{inputs.translation.result}}"
+					}
+				},
+				{
+					"label": "{{i18n('openGoogleTranslate')}}",
+					"detail": "$(link) {{inputs.translation.googlePageUrl}}",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.translation.googlePageUrl}}"
+					}
+				},
+				{
+					"label": "{{i18n('openBaiduTranslate')}}",
+					"detail": "$(link) {{inputs.translation.baiduPageUrl}}",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.translation.baiduPageUrl}}"
+					}
+				},
+				{
+					"label": "{{i18n('openYoudaoTranslate')}}",
+					"detail": "$(link) {{inputs.translation.youdaoDictPageUrl}}",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.translation.youdaoDictPageUrl}}"
+					}
+				}
+			]
+		}
+	]
+}

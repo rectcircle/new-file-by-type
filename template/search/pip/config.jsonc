@@ -1,0 +1,29 @@
+/*
+https://pypi.org/pypi/%3Cpackage_name%3E/json/
+https://warehouse.readthedocs.io/api-reference/json/
+*/
+{
+	"name": "PIP",
+	"targets": [
+		{
+			"targetType": "clipboard",
+			"tplcontent": "{{inputs.project.packagename}}=={{inputs.project.version}}"
+		}, {
+			"targetType": "{{inputs.action.action}}",
+			"tplcontent": "{{inputs.action.arg}}"
+		}
+	],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "search",
+			"name": "project",
+			"items": "{{declaration['pipSearchHandler']}}"
+		},
+		{
+			"type": "select",
+			"name": "action",
+			"items": "{{declaration['downloadPackageInfoAndAction'](inputs.project)}}"
+		}
+	]
+}

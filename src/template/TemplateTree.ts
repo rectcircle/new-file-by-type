@@ -186,10 +186,10 @@ export class Node {
 		this.engine.setProjectFolder(projectFolder);
 	}
 	
-	setInputs(inputs: any, originInput: InputItem) {
+	async setInputs(inputs: any, originInput: InputItem) {
 		this.engine.setInputs(inputs);
 		if (originInput.after) {
-			this.engine.render(originInput.after);
+			await this.engine.render(originInput.after);
 		}
 	}
 

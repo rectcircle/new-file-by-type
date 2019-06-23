@@ -1,8 +1,55 @@
 {
+	"baidu.description": "使用百度进行搜索",
+	"google.description": "使用谷歌进行搜索",
+	"maven.description": "搜索 Maven 仓库",
+	"pip.description": "搜索 python 包",
+	"stackoverflow.description": "在 stackoverflow 上搜索问题",
+	"networkError": "搜索过程中发生错误，请检查网络",
+	"enterSearch": "按 ↵ 进行搜索",
+
 	"maven.descriptin": "Maven 仓库搜索",
 	"inputs.artifact.placeHolder": "请输入关键字",
 	"inputs.artifact.title": "Maven 仓库搜索",
 	"inputs.version.placeHolder": "请选择依赖版本",
 	"inputs.content.placeHolder": "请选择依赖管理工具",
-	"mavenNetworkError": "在搜索 maven 仓库过程中发生错误，请检查网络"
+	"mavenNetworkError": "在搜索 maven 仓库过程中发生错误，请检查网络",
+	"npmNetworkError": "在搜索 npm 仓库过程中发生错误，请检查网络",
+	"pipNetworkError": "在搜索 pip 仓库过程中发生错误，请检查网络",
+
+	"npm.description": "NPM 包搜索",
+	"openNpmDetail": "打开 npmjs.org 详情页",
+	"openHomePage": "打开 项目主页",
+	"openRepository": "打开 代码仓库",
+	"openBugs": "打开 Bugs 页面",
+	"installPackage": "安装到项目",
+	"installPackageDev": "安装到项目 (使用 --save-dev 标志)",
+	"inputs.package.placeHolder": "请输入关键字",
+	"inputs.package.title": "NPM 包搜索",
+	"inputs.action.placeHolder": "请选择您要做什么",
+	
+	"openPipDetail": "打开 pypi.org 详情页",
+	"inputs.project.title": "PIP 项目搜索",
+	"inputs.project.placeHolder": "请输入关键字",
+
+	"inputs.keyword.title": "搜索",
+	"inputs.keyword.placeHolder": "请输入如关键字",
+
+	"translate": "翻译",
+	"translate.description": "使用Google翻译",
+	"inputs.twoPartyLanguage.prompt": "请输入两种语言",
+	"inputs.twoPartyLanguage.placeHolder": "请输入两种语言 (such as \"en,zh-CN\")",
+	"inputs.translation.title": "Google 翻译",
+	"inputs.translation.placeHolder": "请输入关键字",
+	"copyToClipborad": "将翻译结果拷贝到剪切板",
+	"openGoogleTranslate": "在 Google 翻译中进行翻译",
+	"openBaiduTranslate": "在百度翻译中进行翻译",
+	"openYoudaoTranslate": "在有道词典进行翻译",
+
+	"github.description": "Github 搜索",
+	"inputs.repo.title": "Github 搜索",
+	"inputs.repo.placeHolder": "请输入关键字",
+	"copyCloneToClipborad": "拷贝 Clone Url 到剪切板",
+	"cloneCommand": "将该仓库克隆到项目目录的父目录",
+	"openGitHomePage": "打开仓库首页",
+	"openGitIssuesPage": "打开 Issues 页面"
 }

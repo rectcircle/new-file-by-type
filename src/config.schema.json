@@ -202,11 +202,19 @@
 					"default": "override"
 				},
 				"targetType": {
-					"enum": [
-						"file",
-						"clipboard",
-						"command",
-						"browser"
+					"anyOf": [
+						{
+							"enum": [
+								"file",
+								"clipboard",
+								"command",
+								"browser"
+							]
+						},
+						{
+							"type": "string",
+							"description": "must is {{ JavaScript-Statement }}"
+						}
 					],
 					"default": "file"
 				}

@@ -1,8 +1,55 @@
 {
+	"baidu.description": "Search with Baidu",
+	"google.description": "Search with Google",
+	"maven.description": "Search for Maven Repositories",
+	"pip.description": "Search python package",
+	"stackoverflow.description": "Search for problems on stackoverflow",
+	"networkError": "Search has a network error, please check your network",
+	"enterSearch": "Press ↵ to Search",
+
 	"maven.descriptin": "Maven Repository Search",
 	"inputs.artifact.placeHolder": "Please input keyword",
 	"inputs.artifact.title": "Maven Repository Search",
 	"inputs.version.placeHolder": "Please select development version",
 	"inputs.content.placeHolder": "Please select the dependency management tool",
-	"mavenNetworkError": "Maven search has a network error, please check your network"
+	"mavenNetworkError": "Maven search has a network error, please check your network",
+	"npmNetworkError": "NPM search has a network error, please check your network",
+	"pipNetworkError": "PIP search has a network error, please check your network",
+
+	"npm.description": "NPM Package Search",
+	"openNpmDetail": "Open npm detail page by default browser",
+	"openHomePage": "Open home page by default browser",
+	"openRepository": "Open code repository by default browser",
+	"openBugs": "Open bugs page by default browser",
+	"installPackage": "Install the package to project",
+	"installPackageDev": "Install the package to project (use --save-dev flag)",
+	"inputs.package.placeHolder": "Please input keyword",
+	"inputs.package.title": "NPM Package Search",
+	"inputs.action.placeHolder": "Please select your action",
+	
+	"openPipDetail": "Open pip detail page by default browser",
+	"inputs.project.title": "PIP Project Search",
+	"inputs.project.placeHolder": "Please input keyword",
+
+	"inputs.keyword.title": "Search",
+	"inputs.keyword.placeHolder": "Please input keyword",
+
+	"translate": "Translate",
+	"translate.description": "Translate by Google",
+	"inputs.twoPartyLanguage.prompt": "Please input two party languaget",
+	"inputs.twoPartyLanguage.placeHolder": "Please input two party languaget (such as \"en,zh-CN\")",
+	"inputs.translation.title": "Google Translation",
+	"inputs.translation.placeHolder": "Please input keyword",
+	"copyToClipborad": "Copy the translation result to the clipboard",
+	"openGoogleTranslate": "Translate in Google Translate",
+	"openBaiduTranslate": "Translate in Baidu Translation",
+	"openYoudaoTranslate": "Translate in Yudao dictionary",
+
+	"github.description": "Github Search",
+	"inputs.repo.title": "Github Search",
+	"inputs.repo.placeHolder": "Please input keyword",
+	"copyCloneToClipborad": "Copy Clone Url to the clipboard",
+	"cloneCommand": "Clone the repository to the parent directory of the project directory",
+	"openGitHomePage": "Open the warehouse home page",
+	"openGitIssuesPage": "Open Issues page"
 }

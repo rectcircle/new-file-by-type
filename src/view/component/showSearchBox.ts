@@ -44,6 +44,7 @@ export class SearchBox<R> {
 	private resolve: (value?: R | R[] | PromiseLike<R | R[]> | undefined) => void = function () { };
 	private reject: (reason?: any) => void = function () { };
 	private error = false;
+	private cache:any = {};
 
 	private get defaultKeyword() {
 		return this.option.defaultKeyword || '';
@@ -89,7 +90,14 @@ export class SearchBox<R> {
 		this.quickPick.items = [];
 		this.quickPick.busy = true;
 		try {
-			const result = await this.searchHandler(this.keyword);
+			let result: any = [];
+			if (this.keyword === '') {
+				result = [];
+			} else if (this.cache[this.keyword] !== undefined) {
+				result = this.cache[this.keyword];
+			} else {
+				result = this.cache[this.keyword] = await this.searchHandler(this.keyword);
+			}
 			for (let i of result) {
 				i.alwaysShow = true;
 			}
@@ -103,6 +111,7 @@ export class SearchBox<R> {
 				return;
 			}
 			this.error = true;
+			this.quickPick.dispose();
 			this.reject(e);
 		}
 	}
