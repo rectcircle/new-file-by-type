@@ -38,7 +38,7 @@ const {
 	helper,
 	i18n,
 	checkRules,
-} = require('../../template-test/context');
+} = require('../../../template-test/context');
 /*<.../>*/
 
 // 以下是自定义函数的正文, 请将的声明的函数或者变量放置到 declaration 中

@@ -1,5 +1,7 @@
 {
 	"new-file-by-type.new.title": "New File By File or Project Type",
+	"new-file-by-type.search.title": "Search for common development resources",
+	"new-file-by-type.translate.title": "Translate",
 	"new-file-by-type.new-in-current-path.title": "Create a File on Current File Directory",
 	"new-file-by-type.copy-file.title": "Create a Copy of Current File (cp)",
 	"new-file-by-type.delete-file.title": "Delete Current File (rm -r)",

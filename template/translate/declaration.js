@@ -38,15 +38,12 @@ const {
 	helper,
 	i18n,
 	checkRules,
-} = require('../../../template-test/context');
+} = require('../../template-test/context');
 inputs['twoPartyLanguage'] = 'en,zh-CN';
 /*<.../>*/
 
 // 以下是自定义函数的正文, 请将的声明的函数或者变量放置到 declaration 中
 
-/**
- * 从 https://github.com/dvcs/gitignore 和 https://github.com/github/gitignore 获取模板列表
- */
 const util = require('util')
 const options = {
 	method: 'get',

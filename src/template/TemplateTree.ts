@@ -107,6 +107,18 @@ export class Node {
 			path.resolve(this.path, I18N_PATH),
 			this.parent ? this.parent.langPack : undefined);
 	}
+	public getSubtree(namespace: string): Node | undefined {
+		if (namespace === this.namespace) {
+			return this;
+		}
+		for (let child of this.children) {
+			let node = child.getSubtree(namespace);
+			if (node !== undefined) {
+				return node;
+			}
+		}
+		return undefined;
+	}
 	public isLeaf() {
 		return this.children.length === 0;
 	}
@@ -253,7 +265,7 @@ export class Node {
 
 export default class TemplateTree {
 
-	private path: string;
+	public readonly path: string;
 	private tree?: Node;
 
 	private constructor(path: string) {
@@ -262,6 +274,23 @@ export default class TemplateTree {
 
 	get root(): Node {
 		return this.tree as Node;
+	}
+
+	get namespace(): string {
+		return this.tree ? this.tree.namespace : "";
+	}
+
+	public getSubtree(nodeNamespace: string): TemplateTree | undefined {
+		if (this.tree === undefined) {
+			return undefined;
+		}
+		let node = this.tree.getSubtree(nodeNamespace);
+		if (node === undefined) {
+			return undefined;
+		}
+		let tree = new TemplateTree(node.path);
+		tree.tree = node;
+		return tree;
 	}
 
 	public static async build(path: string) {

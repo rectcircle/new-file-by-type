@@ -1,5 +1,7 @@
 {
 	"new-file-by-type.new.title": "根据文件或项目类型创建文件", 
+	"new-file-by-type.search.title": "搜索常见开发资源",
+	"new-file-by-type.translate.title": "翻译",
 	"new-file-by-type.new-in-current-path.title": "在当前文件所在目录创建文件",
 	"new-file-by-type.copy-file.title": "拷贝当前文件 (cp)",
 	"new-file-by-type.delete-file.title": "删除当前文件 (rm -r)",

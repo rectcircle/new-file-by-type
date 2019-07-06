@@ -33,33 +33,45 @@ async function getTemplateTree() {
 }
 
 async function updateCommand(command: Command, context: vscode.ExtensionContext){
-	let tree = await getTemplateTree();
+	let rootTree = await getTemplateTree();
+	let newTree: TemplateTree = await rootTree.getSubtree('new') as any;
+	let searchTree: TemplateTree = await rootTree.getSubtree('search') as any;
+	let translateTree: TemplateTree = await rootTree.getSubtree('translate') as any;
+
 	// 注册命令
 	command.register(
 		'new-file-by-type.new',
-		new NewFileByType(tree, context.globalState, context.workspaceState),
+		new NewFileByType(newTree, context.globalState, context.workspaceState),
+		false);
+	command.register(
+		'new-file-by-type.search',
+		new NewFileByType(searchTree, context.globalState, context.workspaceState),
+		false);
+	command.register(
+		'new-file-by-type.translate',
+		new NewFileByType(translateTree, context.globalState, context.workspaceState),
 		false);
 	command.register(
 		'new-file-by-type.new-in-current-path',
-		new NewFileByType(tree, context.globalState, context.workspaceState));
+		new NewFileByType(newTree, context.globalState, context.workspaceState));
 	command.register(
 		'new-file-by-type.copy-file',
-		new CopyPath(tree, context.globalState, context.workspaceState));
+		new CopyPath(newTree, context.globalState, context.workspaceState));
 	command.register(
 		'new-file-by-type.delete-file',
-		new DeletePath(tree, context.globalState, context.workspaceState));
+		new DeletePath(newTree, context.globalState, context.workspaceState));
 	command.register(
 		'new-file-by-type.move-file',
-		new MovePath(tree, context.globalState, context.workspaceState));
+		new MovePath(newTree, context.globalState, context.workspaceState));
 	command.register(
 		'new-file-by-type.make-directory',
-		new MakeDirectory(tree, context.globalState, context.workspaceState));
+		new MakeDirectory(newTree, context.globalState, context.workspaceState));
 	command.register(
 		'new-file-by-type.path-operation',
-		new PathOperation(tree, context.globalState, context.workspaceState));
+		new PathOperation(newTree, context.globalState, context.workspaceState));
 	command.register(
 		'new-file-by-type.open-workspace',
-		async () => await openWorkspace(tree, context.globalState)
+		async () => await openWorkspace(newTree, context.globalState)
 	);
 }
 

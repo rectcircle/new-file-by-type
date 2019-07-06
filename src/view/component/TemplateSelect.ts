@@ -20,6 +20,7 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 		let result: Node[] = [];
 		recentUseMaxNumber = recentUseMaxNumber || this.config.recentUseMaxNumber;
 		let paths = await getRecentUsage(this.globalState, this.workspaceState, this.config);
+		paths = paths.filter(p => p.startsWith(this.tree.path));
 		paths = paths.slice(0, recentUseMaxNumber);
 		result = this.tree.findLeafNodeByPath(paths);
 		result = paths.map(p => result.find(n => n.path === p)) as Node[];
@@ -56,10 +57,18 @@ export default class TemplateSelect extends ViewBase<Node | string | undefined, 
 		allRecentNodeParentNode.engine = this.tree.root.engine;
 		return allRecentNodeParentNode;
 	}
-
+	// node: string 当前执行命令选中的一个文件或目录
+	// node: undefined 当前执行命令没有选中文件或目录
+	// node: Node 
 	public async render(node: Node | string | undefined): Promise<Node | null> {
 		let result: QuickPickItem & { node: Node } | undefined;
 		if (node === undefined || typeof (node) === "string") {
+			if (this.tree.root.isLeaf()) {
+				this.timeline.willNext(false);
+				// 更新模板引擎数据
+				await this.tree.root.updateEngine(this.activeDirectory);
+				return this.tree.root;
+			}
 			this.activeDirectory = node;
 			const recentUsageNodesList = await this.getRecentNodeList();
 			const recentMoreNode = await this.getRecentMoreNodeList(recentUsageNodesList);

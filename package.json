@@ -45,6 +45,16 @@
 				"category": "New"
 			},
 			{
+				"command": "new-file-by-type.search",
+				"title": "%new-file-by-type.search.title%",
+				"category": "New"
+			},
+			{
+				"command": "new-file-by-type.translate",
+				"title": "%new-file-by-type.translate.title%",
+				"category": "New"
+			},
+			{
 				"command": "new-file-by-type.new-in-current-path",
 				"title": "%new-file-by-type.new-in-current-path.title%",
 				"category": "New"
