@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 {{
-	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `import * as ${name} from '${relative}'`)
+	declaration.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `import * as ${name} from '${relative}'`)
 }}
 
 

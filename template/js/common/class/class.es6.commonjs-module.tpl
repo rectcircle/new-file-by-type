@@ -1,6 +1,6 @@
 {{commentOutput}}
 {{
-	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `const ${name} = require('${relative}')`)
+	declaration.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `const ${name} = require('${relative}')`)
 }}
 
 

@@ -1,7 +1,7 @@
 {{commentOutput}}
 import { ${1:Component, OnInit}$2 } from '@angular/core';
 {{
-	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `import * as ${name} from '${relative}'`)
+	declaration.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `import * as ${name} from '${relative}'`)
 }}
 
 @Component({

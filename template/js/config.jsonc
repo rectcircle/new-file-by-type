@@ -1,5 +1,6 @@
 {
 	"name": "JavaScript",
+	"declaration": "declaration.js",
 	"flat": false,
 	"match": {
 		"always": false,

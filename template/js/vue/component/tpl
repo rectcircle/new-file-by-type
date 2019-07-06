@@ -5,7 +5,7 @@
 <script>
 {{commentOutput}}
 {{
-	helper.nodeImports(targets[0].filepath, inputs.imports, (name, relative, extname) => {
+	declaration.nodeImports(targets[0].filepath, inputs.imports, (name, relative, extname) => {
 		return `import ${name} from '${relative + (extname === '.vue' ? '.vue' : '')}'`;
 	})
 }}

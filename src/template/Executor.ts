@@ -8,7 +8,7 @@ import I18n from "./I18n";
 import { TemplateRenderException } from "../util/exception";
 const cheerio = require("cheerio");
 
-const axios = axios1; // 编译器会进行重命名
+const axios = axios1; // 直接导入编译器会进行重命名
 
 // 利用函数闭包和eval实现一个字符串代码执行器
 export default function makeExecutor(conf: Configuration, langPack: I18n) {
@@ -74,6 +74,7 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 			}
 			return result;
 		},
+		// 帕斯卡命名法转下划线命名法
 		pascalToUnderline: function (pascalString: string) {
 			let result = '';
 			const isUpperCase = (c: string): boolean => c >= 'A' && c <= 'Z';
@@ -86,26 +87,6 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 				}
 			}
 			return result;
-		},
-		nodeImports: function (targetPath: string, importPaths: string[], toString: (name: string, relative: string, extname: string) => string) {
-			let result = [];
-			let targetDirPath = path.dirname(targetPath);
-			for (let p of importPaths) {
-				let importFullPath = path.resolve(projectFolder, p);
-				let filename = path.basename(p);
-				let extname = path.extname(filename);
-				filename = filename.replace(extname, '');
-				let relative = path.relative(targetDirPath, importFullPath);
-				if (!relative.startsWith('.')) {
-					relative = './' + relative;
-				}
-				relative = relative.replace(extname, '');
-				result.push(toString(filename, relative, extname));
-			}
-			if (result.length === 0) {
-				return '';
-			}
-			return result.join('\n') + '\n';
 		},
 		// 获取到激活的编辑器所在目录，相对于basePath的相对路径
 		// (basePath="/a/b/src", activeDirectory="/a/b/src/cn/rectcircle", pathSeparator='.') => "cn.rectcircle"
@@ -147,6 +128,8 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 			}
 			return result;
 		},
+		// openedFilePaths = ['/a/b/c.txt', /b/c/d.txt]
+		// (basePath = '/a', pathSeparator='/') =>  ['b/c.txt']
 		openedFileDirectoryPath: function(basePath: string, pathSeparator: string = path.sep): string[] {
 			const result: string[] = [];
 			for (let fsPath of openedFilePaths) {
@@ -177,7 +160,7 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 				result.push(subNames[0]);
 			}
 		},
-		// 深度遍历basePath子目录，返回目录路径数组
+		// 深度遍历（前序）basePath子目录，返回目录路径数组
 		tree: function(basePath: string, depth: number, pathSeparator: string = path.sep, parentPath: string[] = []) {
 			const result = [] as string[];
 			if (parentPath.length === depth) {
@@ -198,6 +181,7 @@ export default function makeExecutor(conf: Configuration, langPack: I18n) {
 			}
 			return result;
 		},
+		// Http Get 获取数据
 		download: function (url: string) {
 			return axios.get(url).then(resp => resp.data);
 		}

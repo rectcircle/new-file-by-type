@@ -62,6 +62,8 @@ export class Node {
 			const declarationPath = path.resolve(now.path, now.configuration.declaration);
 			if (await fs.existsAndIsFileAsync(declarationPath)) {
 				now.declarationSource = (await fs.readFileAsync(declarationPath)).toString();
+			} else {
+				now.declarationSource = parent ? parent.declarationSource : undefined;
 			}
 		}
 		// 加载子树
