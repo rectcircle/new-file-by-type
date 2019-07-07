@@ -18,6 +18,13 @@ export default class Command {
 				if (args.length === 0) {
 					const active = await activePath();
 					args = active ? [active] : [];
+				} else if (args.length === 2
+					&& args[0] instanceof vscode.Uri
+					&& Array.isArray(args[1])
+					&& (args[1] as Array<any>).reduce((a: boolean, b: any) => a && (b instanceof vscode.Uri), true)) {
+					args = (args[1] as Array<any>).map(p => p instanceof vscode.Uri ? p.fsPath : p);
+				} else {
+					args = args.map(p => p instanceof vscode.Uri ? p.fsPath : p);
 				}
 			} else {
 				args = [];

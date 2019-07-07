@@ -49,14 +49,15 @@ const {
 const util = require('util')
 const options = {
 	method: 'get',
+	timeout: 5000,
 	headers: {
 		'User-Agent': 'Mozilla/5.0',
 		'Referer': 'http://www.google.com/',
 		'Accept': 'application/json'
 	}
 }
-declaration['googleSearchHandler'] = async function (keyword) {
-	keyword = encodeURI(keyword)
+declaration['googleSearchHandler'] = async function (originKeyword) {
+	let keyword = encodeURI(originKeyword)
 	try {
 		let result = await axios.get(`https://www.google.com/complete/search?client=psy-ab&q=${keyword}`, options);
 		result =[result.data[0], ...result.data[1].map(i => i[0])].map(w => {
@@ -72,7 +73,15 @@ declaration['googleSearchHandler'] = async function (keyword) {
 			result.shift();
 		}
 		return result
-	} catch(e) {
+	} catch (e) {
+		if (e.errno === "ECONNREFUSED") {
+			return {
+				label: originKeyword,
+				description: '$(link)',
+				detail:  `中国大陆无法使用哦（${i18n('enterSearch')}）`,
+				value: w
+			}
+		}
 		throw new Error(i18n('networkError'))
 	}
 }

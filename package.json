@@ -90,12 +90,81 @@
 				"category": "New"
 			}
 		],
-		"keybindings": [
-			{
-				"command": "new-file-by-type.new",
-				"key": "Ctrl+Alt+N"
-			}
-		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "new-file-by-type.new-in-current-path",
+					"title": "%new-file-by-type.new-in-current-path.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.copy-file",
+					"title": "%new-file-by-type.copy-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.delete-file",
+					"title": "%new-file-by-type.delete-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.move-file",
+					"title": "%new-file-by-type.move-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.make-directory",
+					"title": "%new-file-by-type.make-directory.title%",
+					"category": "New"
+				}
+			],
+			"editor/title/context": [
+				{
+					"command": "new-file-by-type.new-in-current-path",
+					"title": "%new-file-by-type.new-in-current-path.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.copy-file",
+					"title": "%new-file-by-type.copy-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.delete-file",
+					"title": "%new-file-by-type.delete-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.move-file",
+					"title": "%new-file-by-type.move-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.make-directory",
+					"title": "%new-file-by-type.make-directory.title%",
+					"category": "New"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "new-file-by-type.new-in-current-path",
+					"title": "%new-file-by-type.new-in-current-path.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.copy-file",
+					"title": "%new-file-by-type.copy-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.delete-file",
+					"title": "%new-file-by-type.delete-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.move-file",
+					"title": "%new-file-by-type.move-file.title%",
+					"category": "New"
+				}, {
+					"command": "new-file-by-type.make-directory",
+					"title": "%new-file-by-type.make-directory.title%",
+					"category": "New"
+				}
+			]
+		},
+		"keybindings": [{
+			"command": "new-file-by-type.new",
+			"key": "Ctrl+Alt+N"
+		}],
 		"configuration": {
 			"title": "%new-file-by-type.configuration.title%",
 			"properties": {
@@ -174,8 +243,7 @@
 							"indent": {
 								"description": "%new-file-by-type.template.indent%",
 								"default": "{{defaultConf.indent}}",
-								"oneOf": [
-									{
+								"oneOf": [{
 										"type": "number"
 									},
 									{

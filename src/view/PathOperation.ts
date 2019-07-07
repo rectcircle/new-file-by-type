@@ -9,11 +9,13 @@ import { listWorkspaceFolderPath } from '../util/vscode';
 import DeletePath from './DeletePath';
 import MovePath from './MovePath';
 import * as os from 'os';
+import { strict } from 'assert';
 
-export default class PathOperation extends ViewBase<void, boolean> {
+export default class PathOperation extends ViewBase<string, boolean> {
 
 	protected timeline: ViewTimeline<void, boolean>;
 	protected executors: View<string>[];
+	protected activePaths: string[] | undefined= undefined;
 
 	constructor(tree: TemplateTree, globalState: vscode.Memento, workspaceState: vscode.Memento) {
 		super(tree, globalState, workspaceState);
@@ -29,6 +31,10 @@ export default class PathOperation extends ViewBase<void, boolean> {
 	}
 
 	private targetsSelect = async (): Promise<string[] | undefined> => {
+		if (this.activePaths) {
+			this.timeline.willNext(false);
+			return this.activePaths;
+		}
 		const result = await showPathInput('/', {
 			returnType: "all",
 			allowNoExist: false,
@@ -79,7 +85,8 @@ export default class PathOperation extends ViewBase<void, boolean> {
 		}
 	}
 
-	public async render(): Promise<boolean> {
+	public async render(...activePaths: string[]): Promise<boolean> {
+		this.activePaths = activePaths ? activePaths.filter(p => typeof(p) === "string") : undefined;
 		return await this.timeline.render() || false;
 	}
 }

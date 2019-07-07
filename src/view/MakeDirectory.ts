@@ -10,9 +10,10 @@ import WorkspaceSelect from './component/WorkspaceSelect';
 import { CheckRule } from '../util/vscode';
 
 
-export default class MakeDirectory extends ViewBase<void, void> {
+export default class MakeDirectory extends ViewBase<string|undefined, void> {
 
 	protected timeline: ViewTimeline<Node, string | undefined>;
+	activePath: string | undefined = undefined;
 
 	constructor(tree: TemplateTree | ViewBase, globalState?: vscode.Memento, workspaceState?: vscode.Memento) {
 		super(tree, globalState, workspaceState);
@@ -31,10 +32,20 @@ export default class MakeDirectory extends ViewBase<void, void> {
 		};
 	}
 
-	private inputDirectory = async (arg: [Node, string]) : Promise<string | undefined> => {
+	private inputDirectory = async (arg: [Node, string]): Promise<string | undefined> => {
+		let suggests: string[] = [];
+		if (this.activePath) {
+			if (await fs.existsAndIsDirectoryAsync(this.activePath)) {
+				suggests.push(this.activePath);
+			} else if (await fs.existsAndIsFileAsync(this.activePath)) {
+				suggests.push(path.dirname(this.activePath));
+			}
+		}
+		suggests = suggests.map(p => path.relative(arg[1], p));
 		let target = await showPathInput(arg[1], {
 			returnType: "directory",
 			allowNoExist: true,
+			suggests: suggests,
 			parentDirectoryText: this.tree.i18n('common.parentDirectoryText'),
 			pathSeparator: path.sep,
 			title: this.tree.i18n('common.prompt'),
@@ -58,7 +69,8 @@ export default class MakeDirectory extends ViewBase<void, void> {
 		}
 	}
 
-	public async render() {
+	public async render(activePath?: string) {
+		this.activePath = activePath;
 		const result = await this.timeline.render(this.tree.root);
 		if (result === undefined) {
 			return;

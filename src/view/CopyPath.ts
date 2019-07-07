@@ -48,7 +48,8 @@ export default class CopyPath extends ViewBase<string, boolean> {
 		return result;
 	}
 
-	public async render(...originPaths: string[]) {
+	public async render(...originPaths: any[]) {
+		originPaths = originPaths.filter(p => typeof (p) === "string");
 		if (originPaths.length === 0) {
 			vscode.window.showErrorMessage(this.tree.i18n('mustActiveFile'));
 		}

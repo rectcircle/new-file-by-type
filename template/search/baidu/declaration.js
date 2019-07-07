@@ -55,18 +55,27 @@ const options = {
 		'Accept': 'application/json'
 	}
 }
-declaration['baiduSearchHandler'] = async function (keyword) {
-	keyword = encodeURI(keyword)
+declaration['baiduSearchHandler'] = async function (originKeyword) {
+	let keyword = encodeURI(originKeyword)
 	try {
 		let result = await axios.get(`https://www.baidu.com/sugrec?json=1&prod=pc&wd=${keyword}`, options);
-		result = [keyword, ...result.data.g.map(i => i.q)].map(w => {
-			return {
-				label: w,
+		if (!result.data.g) {
+			result = [{
+				label: result.data.q,
 				description: '$(link)',
 				detail: i18n('enterSearch'),
-				value: w
-			}
-		})
+				value: result.data.q
+			}]
+		} else {
+			result = [originKeyword, ...result.data.g.map(i => i.q)].map(w => {
+				return {
+					label: w,
+					description: '$(link)',
+					detail: i18n('enterSearch'),
+					value: w
+				}
+			})
+		} 
 		return result
 	} catch(e) {
 		throw new Error(i18n('networkError'))
@@ -75,7 +84,7 @@ declaration['baiduSearchHandler'] = async function (keyword) {
 
 /*<...>*/
 async function test() {
-	const result = await declaration['baiduSearchHandler']('qq');
+	const result = await declaration['baiduSearchHandler']('宏颜获水');
 	console.log(result)
 }
 test();
