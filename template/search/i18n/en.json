@@ -9,7 +9,7 @@
 
 	"maven.descriptin": "Maven Repository Search",
 	"inputs.artifact.placeHolder": "Please input keyword",
-	"inputs.artifact.title": "Maven Repository Search",
+	"inputs.artifact.prompt": "Maven Repository Search",
 	"inputs.version.placeHolder": "Please select development version",
 	"inputs.content.placeHolder": "Please select the dependency management tool",
 	"mavenNetworkError": "Maven search has a network error, please check your network",
@@ -24,21 +24,21 @@
 	"installPackage": "Install the package to project",
 	"installPackageDev": "Install the package to project (use --save-dev flag)",
 	"inputs.package.placeHolder": "Please input keyword",
-	"inputs.package.title": "NPM Package Search",
+	"inputs.package.prompt": "NPM Package Search",
 	"inputs.action.placeHolder": "Please select your action",
 	
 	"openPipDetail": "Open pip detail page by default browser",
-	"inputs.project.title": "PIP Project Search",
+	"inputs.project.prompt": "PIP Project Search",
 	"inputs.project.placeHolder": "Please input keyword",
 
-	"inputs.keyword.title": "Search",
+	"inputs.keyword.prompt": "Search",
 	"inputs.keyword.placeHolder": "Please input keyword",
 
 	"translate": "Translate",
 	"translate.description": "Translate by Google",
 	"inputs.twoPartyLanguage.prompt": "Please input two party languaget",
 	"inputs.twoPartyLanguage.placeHolder": "Please input two party languaget (such as \"en,zh-CN\")",
-	"inputs.translation.title": "Google Translation",
+	"inputs.translation.prompt": "Google Translation",
 	"inputs.translation.placeHolder": "Please input keyword",
 	"copyToClipborad": "Copy the translation result to the clipboard",
 	"openGoogleTranslate": "Translate in Google Translate",
@@ -46,7 +46,7 @@
 	"openYoudaoTranslate": "Translate in Yudao dictionary",
 
 	"github.description": "Github Search",
-	"inputs.repo.title": "Github Search",
+	"inputs.repo.prompt": "Github Search",
 	"inputs.repo.placeHolder": "Please input keyword",
 	"copyCloneToClipborad": "Copy Clone Url to the clipboard",
 	"cloneCommand": "Clone the repository to the parent directory of the project directory",

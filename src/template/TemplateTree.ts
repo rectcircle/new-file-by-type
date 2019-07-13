@@ -126,7 +126,7 @@ export class Node {
 		if (!projectFolders) {
 			return [];
 		}
-		const matchConf = this.configuration.match;
+		const matchConf = this.engine.renderAny(this.configuration.match);
 		if (matchConf.always) {
 			return true;
 		}
@@ -160,7 +160,7 @@ export class Node {
 	}
 
 	get flat(): boolean {
-		return this.configuration.flat;
+		return this.engine.renderAny(this.configuration.flat);
 	}
 
 	getInput(idx: number) {
@@ -208,11 +208,11 @@ export class Node {
 	}
 
 	get showHidden(): boolean {
-		return this.configuration.showHidden;
+		return this.engine.renderAny(this.configuration.showHidden);
 	}
 
 	get commentOutput() {
-		if (!this.configuration.renderComment) {
+		if (! this.engine.renderAny(this.configuration.renderComment)) {
 			// 用户关闭了注释
 			return '';
 		}
@@ -225,7 +225,7 @@ export class Node {
 		if (comment.endLine && comment.endLine !== '') {
 			result.push(comment.endLine);
 		}
-		return result.join('\n') + '\n';
+		return this.engine.renderAny(result.join('\n') + '\n');
 	}
 
 	setCommentOutput(commentOutput: string) {
@@ -245,7 +245,7 @@ export class Node {
 			} else {
 				tpl = (await fs.readFileAsync(path.resolve(this.path, target.tplpath))).toString('utf8'); // TODO 添加异常提示
 			}
-			let indent = this.configuration.indent;
+			let indent = this.engine.renderAny(this.configuration.indent);
 			if (indent !== 0) {
 				tpl = tpl.replace(/\t/g, new Array(indent).fill(' ').join('') );
 			}

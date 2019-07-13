@@ -39,7 +39,6 @@ export interface InputItem {
 	};
 	items: string[] | SelectItem[] | SearchHandler<any>;
 	option: {
-		title: string;
 		parentDirectoryText: string;
 		pathSeparator: string;
 		confirmText: string;
@@ -219,7 +218,6 @@ export default class Configuration {
 				suggest: i.suggest,
 				items: i.items || [],
 				option: {
-					title: option.title || this.defaultInputI18nTpl(i.name, 'title'),
 					parentDirectoryText: option.parentDirectoryText || this.defaultInputI18nTpl(i.name, 'parentDirectoryText'),
 					pathSeparator: option.pathSeparator || path.sep,
 					confirmText: option.confirmText || this.defaultInputI18nTpl(i.name, 'confirmText'),

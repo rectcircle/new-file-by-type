@@ -4,14 +4,14 @@
 
 	"inputs.action.placeHolder": "请选择您要做什么",
 	
-	"inputs.keyword.title": "搜索",
+	"inputs.keyword.prompt": "搜索",
 	"inputs.keyword.placeHolder": "请输入如关键字",
 
 	"translate": "翻译",
 	"translate.description": "使用Google翻译",
 	"inputs.twoPartyLanguage.prompt": "请输入两种语言",
 	"inputs.twoPartyLanguage.placeHolder": "请输入两种语言 (such as \"en,zh-CN\")",
-	"inputs.translation.title": "Google 翻译",
+	"inputs.translation.prompt": "Google 翻译",
 	"inputs.translation.placeHolder": "请输入关键字",
 	"copyToClipborad": "将翻译结果拷贝到剪切板",
 	"openGoogleTranslate": "在 Google 翻译中进行翻译",

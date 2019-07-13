@@ -21,23 +21,25 @@
 			"properties": {
 				"type": {
 					"enum": ["path", "text", "select", "search"],
-					"description": "input type",
+					"description": "input type（输入类型）",
 					"default": "text"
 				},
 				"name": {
 					"type": "string",
-					"description": "input name"
+					"description": "input name（变量名）"
 				},
 				"value": {
 					"type": "string",
-					"description": "if set value, will not show the input windows"
+					"description": "if set value, will not show the input windows（如果配置了该值，将不会展示输入框，该输入将作为配置项）"
 				},
 				"prompt": {
 					"type": "string",
-					"default": "{{i18n('inputs.name.prompt')}}"
+					"description": "prompt（提示）",
+					"default": "{{i18n(`inputs.${name}.prompt`)}}"
 				},
 				"placeHolder": {
 					"type": "string",
+					"description": "placeHolder（输入框内提示）",
 					"default": "{{i18n('inputs.name.placeHolder')}}"
 				},
 				"items": {
@@ -98,10 +100,6 @@
 				"option": {
 					"type": "object",
 					"properties": {
-						"title": {
-							"type": "string",
-							"default": "select view title"
-						},
 						"parentDirectoryText":{
 							"type":"string",
 							"default": "{{i18n('inputs.name.parentDirectoryText')}}"
@@ -154,10 +152,6 @@
 							"type": "boolean",
 							"default": false
 						},
-						"canSelectEmpty": {
-							"type": "boolean",
-							"default": false
-						},
 						"multiConfirmText": {
 							"type": "string",
 							"default": "Finish Multi-select"
@@ -179,21 +173,21 @@
 			"type": "object",
 			"properties": {
 				"filepath": {
-					"description": "target file path to generate",
+					"description": "target file path to generate（文件写入的目标路径）",
 					"type": "string",
 					"default": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}"
 				},
 				"tplpath": {
-					"description": "template file path",
+					"description": "template file path（模板文件的路径）",
 					"type": "string",
 					"default": "tpl"
 				},
 				"tplcontent": {
-					"description": "template content, Priority is higher than tplpath",
+					"description": "template content, Priority is higher than tplpath（模板内容，比tplpath有更高的优先级）",
 					"type": "string"
 				},
 				"saveType": {
-					"description": "tpl save type (targetType = \"file\")",
+					"description": "tpl save type (targetType = \"file\")（模板保存方式）",
 					"enum": [
 						"override",
 						"append",
@@ -222,7 +216,7 @@
 		},
 		"Comment": {
 			"type": "object",
-			"description": "comment config",
+			"description": "comment config（注释相关配置）",
 			"default": {
 				"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
 				"dateFormat": "YYYY-MM-DD",
@@ -239,34 +233,35 @@
 			},
 			"properties": {
 				"dateFormat": {
-					"description": "code comment date format",
+					"description": "code comment date format（日期格式化）",
 					"type": "string",
 					"default": "YYYY-MM-DD"
 				},
 				"copyright": {
-					"description": "copyright string",
+					"description": "copyright string（版权声明）",
 					"default": "Copyright (c) {{year}}, {{user}}. All rights reserved."
 				},
 				"startLine": {
-					"description": "comment first line string",
+					"description": "comment first line string（注释起始内容）",
 					"type": "string",
 					"default": "/**"
 				},
 				"lineHeader": {
-					"description": "expect first and last line, comment every line header string",
+					"description": "expect first and last line, comment every line header string（注释每一行起始字符串）",
 					"type": "string",
 					"default": "* "
 				},
 				"endLine": {
-					"description": "comment last line string",
+					"description": "comment last line string（注释每一行结束字符串）",
 					"type": "string",
 					"default": " */"
 				},
 				"items": {
 					"type": "array",
+					"description": "comment items （注释需要渲染的每一项）",
 					"default": [
 						"{{comment.copyright}}",
-						"\n",
+						"",
 						"@author {{user}}",
 						"@date {{date}}",
 						"@version {{version}}"
@@ -278,19 +273,19 @@
 			}
 		},
 		"Match": {
-			"description": "show when this condition is matched",
+			"description": "show when this condition is matched（根据条件选择是否显示该模板）",
 			"type": "object",
 			"properties": {
 				"workspaceFolderGlobs": {
 					"type": "array",
-					"description": "workspace folder glob match",
+					"description": "workspace folder glob match（工作空间文件glob匹配表达式）",
 					"items": {
 						"type": "string"
 					}
 				},
 				"always": {
 					"type": "boolean",
-					"description": "Whether it always matches",
+					"description": "Whether it always matches（是否总是启用该模板）",
 					"default": true
 				}
 			}
@@ -298,37 +293,50 @@
 	},
 	"properties": {
 		"name": {
-			"description": "template or type name",
+			"description": "template or type name（模板或模板目录名）",
 			"type": "string",
-			"default": "{{ i18n('name') }}"
+			"default": "{{ i18n(`${dir}.name`) }}"
 		},
 		"description": {
-			"description": "template or type name",
+			"description": "template or type description（模板或模板目录描述）",
 			"type": "string",
-			"default": "{{ i18n('description') }}"
+			"default": "{{ i18n(`${dir}.description`) }}"
 		},
 		"weight": {
-			"description": "Template sort weight",
+			"description": "Template sort weight, The value is small in front（排序权重, 小的在前面）",
 			"type": "number",
 			"default": 100
 		},
 		"version": {
-			"description": "default version will use in comment",
+			"description": "default version will use in comment（默认版本，将会渲染在模板配置中）",
 			"type": "string",
 			"default": "0.0.1"
 		},
 		"flat": {
-			"description": "subtype flat display",
-			"type": "boolean",
+			"description": "subtype flat display（是否展平）",
+			"oneOf": [{
+					"type": "boolean",
+				},
+				{
+					"type": "string"
+				}
+			],
 			"default": false
 		},
 		"renderComment": {
-			"description": "Whether to render comments",
-			"type": "boolean",
+			"description": "Whether to render comments（是否渲染注释）",
+			"oneOf": [
+				{
+					"type": "boolean",
+				},
+				{
+					"type": "string"
+				}
+			],
 			"default": true
 		},
 		"indent": {
-			"description": "file indent type: 0 - use [Tab], non-zero - use `indent` number space",
+			"description": "file indent type: 0 - use [Tab], non-zero - use `indent` number space（缩进类型0-tab, 非0-空格）",
 			"default": "{{defaultConf.indent}}",
 			"oneOf": [
 				{
@@ -341,33 +349,60 @@
 		},
 		"user": {
 			"type": "string",
-			"description": "coder name can use in tpl",
+			"description": "coder name can use in tpl （用户名，将会渲染在注释中）",
 			"default": "{{defaultConf.user}}"
 		},
+		"author": {
+			"type": "array",
+			"description": "template author（模板作者，支持多个）",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "author name（模板作者名）"
+					},
+					"email": {
+						"type": "string",
+						"description": "author email（模板作者email）"
+					},
+					"homePage": {
+						"type": "string",
+						"description": "author home page（模板作者个人主页）"
+					}
+				}
+			}
+		},
 		"suffix": {
-			"description": "file suffix",
+			"description": "file suffix（将要创建的文件后缀）",
 			"type": "string",
 			"default": ""
 		},
 		"showHidden": {
-			"description": "show hidden directory",
-			"type": "boolean",
+			"description": "show hidden directory（目录选择器是否显示隐藏文件）",
+			"oneOf": [{
+					"type": "boolean",
+				},
+				{
+					"type": "string"
+				}
+			],
 			"default": "false"
 		},
 		"targets": {
-			"description": "template file path and output path config",
+			"description": "template file path and output path config（模板输出目标）",
 			"type": "array",
 			"items": {
 				"$ref": "#/definitions/Target"
 			}
 		},
 		"placeHolder": {
-			"description": "template select view placeHolder text",
+			"description": "template select view placeHolder text（模板选择器提示文本）",
 			"type": "string",
 			"default": "{{i18n('templateSelectPlaceHolder')}}"
 		},
 		"declaration": {
-			"description": "Custom function variable declaration, filename",
+			"description": "Custom function variable declaration, filename（自定义函数变量声明文件路径，相对于当前文件所在目录）",
 			"type": "string",
 			"default": "declaration.js"
 		},

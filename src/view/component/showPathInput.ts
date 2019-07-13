@@ -380,6 +380,9 @@ class PathInput {
 
 	async multiConfirm() {
 		if (this.canSelectMany) {
+			if (!this.canSelectEmpty && this.multiResult.length === 0) {
+				vscode.window.showWarningMessage('Select at least one');
+			}
 			this.resolve(this.multiResult.map(r => this.formatResult(r)));
 			this.finished = true;
 			this.quickPick.dispose();

@@ -82,26 +82,6 @@ let helper = {
 		}
 		return result;
 	},
-	nodeImports: function (targetPath, importPaths, toString) {
-		let result = [];
-		let targetDirPath = path.dirname(targetPath);
-		for (let p of importPaths) {
-			let importFullPath = path.resolve(projectFolder, p);
-			let filename = path.basename(p);
-			let extname = path.extname(filename);
-			filename = filename.replace(extname, '');
-			let relative = path.relative(targetDirPath, importFullPath);
-			if (!relative.startsWith('.')) {
-				relative = './' + relative;
-			}
-			relative = relative.replace(extname, '');
-			result.push(toString(filename, relative, extname));
-		}
-		if (result.length === 0) {
-			return '';
-		}
-		return result.join('\n') + '\n';
-	},
 	activeDirectoryRelativeBasePath: function (basePath, pathSeparator = path.sep) {
 		if (activeDirectory === undefined || useActive === false) {
 			return undefined;

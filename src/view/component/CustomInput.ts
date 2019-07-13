@@ -127,11 +127,11 @@ export default class CustomInput extends ViewBase {
 			const result = await showSearchBox<string>({
 				placeholder: placeHolder,
 				searchDelay: this.config.searchDelay,
-				title: inputConf.option.title,
+				title: inputConf.prompt,
 				searchHandler: inputConf.items as any,
 				canSelectMany: inputConf.option.canSelectMany,
-				defaultKeyword: inputConf.suggest ? inputConf.suggest.value as string : ''
-				
+				defaultKeyword: suggest.value.length === 0 ? undefined : suggest.value[0],
+				defaultKeywordSelected: suggest.selected || true,
 			});
 			value = result;
 		}

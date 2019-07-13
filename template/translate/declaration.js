@@ -38,7 +38,7 @@ const {
 	helper,
 	i18n,
 	checkRules,
-} = require('../../template-test/context');
+} = require('../../context');
 inputs['twoPartyLanguage'] = 'en,zh-CN';
 /*<.../>*/
 

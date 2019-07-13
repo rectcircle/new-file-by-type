@@ -7,6 +7,13 @@
 	"renderComment": true,
 	"indent": "{{defaultConf.indent}}",
 	"user": "{{defaultConf.user}}",
+	"author": [
+		{
+			"name": "Rectcircle",
+			"email": "rectcircle96@gmail.com",
+			"homePage": "https://www.rectcircle.cn"
+		}
+	],
 	"placeHolder": "{{i18n('templateSelectPlaceHolder')}}",
 	"showHidden": false,
 	"targets": [{

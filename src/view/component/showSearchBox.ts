@@ -27,6 +27,7 @@ async function defaultSearchHandler(keyword: string): Promise<MyQuickPickItem<an
 
 export interface SearchBoxOption<T> {
 	defaultKeyword?: string;
+	defaultKeywordSelected?: boolean;
 	placeholder?: string;
 	canSelectMany?: boolean;
 	title?: string;
@@ -63,6 +64,9 @@ export class SearchBox<R> {
 	}
 	private get searchHandler() {
 		return this.option.searchHandler || defaultSearchHandler;
+	}
+	private get defaultKeywordSelected() {
+		return this.option.defaultKeywordSelected || true;
 	}
 
 
@@ -164,6 +168,9 @@ export class SearchBox<R> {
 			this.quickPick.show();
 			if (this.defaultKeyword !== '') {
 				this.quickPick.value = this.keyword = this.defaultKeyword;
+				if (this.defaultKeywordSelected) {
+					// vscode not support
+				}
 				await this.doSearch(this.lastSearch);
 			}
 		});
