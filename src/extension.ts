@@ -71,7 +71,13 @@ async function updateCommand(command: Command, context: vscode.ExtensionContext)
 		new PathOperation(newTree, context.globalState, context.workspaceState));
 	command.register(
 		'new-file-by-type.open-workspace',
-		async () => await openWorkspace(newTree, context.globalState)
+		async () => await openWorkspace(newTree, context.globalState));
+	command.register(
+		'new-file-by-type.reload-template',
+		async () => {
+			await updateCommand(command, context);
+			vscode.window.showInformationMessage('Reload Template Success!');
+		}
 	);
 }
 

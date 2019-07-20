@@ -88,6 +88,11 @@
 				"command": "new-file-by-type.open-workspace",
 				"title": "%new-file-by-type.open-workspace.title%",
 				"category": "New"
+			},
+			{ 
+				"command": "new-file-by-type.reload-template",
+				"title": "%new-file-by-type.reload-template.title%",
+				"category": "New"
 			}
 		],
 		"menus": {

@@ -10,6 +10,7 @@
 	"new-file-by-type.path-operation.title": "Select path...",
 	"new-file-by-type.open-workspace.title": "Open Workspace...(Use Custom path selector)",
 	"new-file-by-type.configuration.title": "New File By File or Project Type Extension",
+	"new-file-by-type.reload-template.title": "Reload Template",
 	"new-file-by-type.configuration.global.templatePath": "Custom template directory path",
 	"new-file-by-type.configuration.global.searchDelay": "Network search input delay the ms to trigger",
 	"new-file-by-type.configuration.global.showRecentUsed": "Whether to display the most recently used file template",
