@@ -15,6 +15,7 @@ import Command from './Command';
 import MakeDirectory from './view/MakeDirectory';
 import PathOperation from './view/PathOperation';
 import openWorkspace from './view/component/OpenWorkspace';
+import HelpWebview from './view/HelpWebview';
 
 const DEFAULT_TPL_PATH = path.resolve(__dirname, '../', 'template');
 
@@ -78,6 +79,11 @@ async function updateCommand(command: Command, context: vscode.ExtensionContext)
 			await updateCommand(command, context);
 			vscode.window.showInformationMessage('Reload Template Success!');
 		}
+	);
+	command.register(
+		'new-file-by-type.help',
+		new HelpWebview(rootTree, context.globalState, context.workspaceState, context),
+		false
 	);
 }
 

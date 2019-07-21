@@ -9,7 +9,6 @@ import { listWorkspaceFolderPath } from '../util/vscode';
 import DeletePath from './DeletePath';
 import MovePath from './MovePath';
 import * as os from 'os';
-import { strict } from 'assert';
 
 export default class PathOperation extends ViewBase<string, boolean> {
 

@@ -93,6 +93,11 @@
 				"command": "new-file-by-type.reload-template",
 				"title": "%new-file-by-type.reload-template.title%",
 				"category": "New"
+			},
+			{
+				"command": "new-file-by-type.help",
+				"title": "%new-file-by-type.help.title%",
+				"category": "New"
 			}
 		],
 		"menus": {

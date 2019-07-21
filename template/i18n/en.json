@@ -38,7 +38,8 @@
 	"inputs.filename.placeHolder": "Please input file name",
 	"inputs.className.prompt": "Please input class name",
 	"inputs.className.placeHolder": "Please input class name",
-	
+
+	"common": "Common",
 	"common.prompt": "Current selection: ",
 	"common.placeHolder": "Please select target directory or input target file",
 	"common.parentDirectoryText": "..(return to the upper directory)",
@@ -68,5 +69,14 @@
 	"go.description": "Go project",
 	"gitignore.description": "Add gitignore template to .gitignore file",
 	"search": "Search",
-	"search.description": "Query content from the web"
+	"search.description": "Query content from the web",
+
+	"openWikiUrl": "Open Wiki page",
+	"openGlobalConfig": "Open Global Config Help Page",
+	"openTemplateConfig": "Open Template Config Help Page",
+
+	"globalConfig": "Global Config",
+	"searchConfig": "Search Config",
+	"translateConfig": "Translate Config",
+	"templateConfig": "Template config"
 }

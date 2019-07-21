@@ -39,6 +39,7 @@
 	"inputs.className.prompt": "请输入类名",
 	"inputs.className.placeHolder": "请输入类名",
 
+	"common": "Common",
 	"common.prompt": "当前选择：",
 	"common.placeHolder": "请选择目标目录或输入目标文件",
 	"common.parentDirectoryText": "..（返回上层目录）",
@@ -68,5 +69,24 @@
 	"go.description": "Go 项目",
 	"gitignore.description": "添加 gitignore 模板到 .gitignore 文件",
 	"search": "Search",
-	"search.description": "从网络查询内容"
+	"search.description": "从网络查询内容",
+
+	"openWikiUrl": "打开 Wiki 页面",
+	"openGlobalConfig": "打开全局配置帮助页",
+	"openTemplateConfig": "打开模板配置帮助页",
+
+	"globalConfig": "全局配置",
+	"searchConfig": "搜索配置",
+	"translateConfig": "翻译配置",
+	"templateConfig": "模板配置",
+
+	"configPreview": "配置预览",
+	"configPreview.description": "以上，本扩展的所有全局配置",
+	"new-file-by-type.configuration.global.templatePath": "自定义模板目录路径",
+	"new-file-by-type.configuration.global.searchDelay": "网络搜索延迟该配置的毫秒数进行搜索",
+	"new-file-by-type.configuration.global.showRecentUsed": "是否显示最近使用的文件模板",
+	"new-file-by-type.configuration.global.showTemplateSelectorDetail": "是否展示模板选择器项目的Detail介绍",
+	"new-file-by-type.configuration.global.recentUseMaxNumber": "最近使用项目的最大数目",
+	"new-file-by-type.configuration.global.recentUseDataFrom": "最近使用数据来源",
+	"new-file-by-type.configuration.global.recentUseSortBy": "最近使用排序依据"
 }
