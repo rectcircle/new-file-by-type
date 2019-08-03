@@ -27,6 +27,7 @@ export class Node {
 	public langPack: I18n;
 	public engine: TemplateEngine;
 	public declarationSource?: string;
+
 	public constructor(nodePath: string, parent?: Node) {
 		this.path = nodePath;
 		this.parent = parent;
@@ -153,6 +154,26 @@ export class Node {
 			}
 			throw error;
 		}
+	}
+
+	get indent()  {
+		return this.configuration.indent;
+	}
+
+	get renderComment() {
+		return this.configuration.renderComment;
+	}
+
+	get version() {
+		return this.configuration.version;
+	}
+
+	get user() {
+		return this.configuration.user;
+	}
+
+	get author(): Array<{ name: string, email: string, homePage: string }> {
+		return this.engine.renderAny(this.configuration.author);
 	}
 
 	get weight(): number {

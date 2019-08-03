@@ -55,7 +55,7 @@ export default class CustomInput extends ViewBase {
 	private async input(inputConf: InputItem, node: Node, inputsLength: number): Promise<string | string[] | undefined> {
 		let value: string | string[] | undefined = inputConf.value;
 		// 用户自定义了value，直接跳过
-		if (value !== undefined) {
+		if (value) {
 			const checkResult = await this.checkRule(inputConf.checkRules as any)(value);
 			if (checkResult === undefined) {
 				if (node.inputsLength !== inputsLength + 1 ) {

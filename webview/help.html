@@ -104,7 +104,7 @@
 		<article>
 			<ol class="breadcrumb">
 				<li>扩展 new-file-by-type 帮助页</a></li>
-				<li>全局配置</li>
+				<li id="activeTitle">全局配置</li>
 			</ol>
 			<div id="content">
 				<div class="config-item">
@@ -138,13 +138,14 @@
 		</article>
 		<aside id="toc">
 			<ul>
-				<li><a href="">全局配置</a></li>
+				<li><a href="javascript:void(0)" data-namespace="$global">全局配置</a></li>
 			</ul>
 		</aside>
 	</main>
 
 <script>
 	(function(){
+		/* ===== 声明 ====== */
 		/* 获取vscode通信API */
 		if(window.acquireVsCodeApi === undefined){
 			// 调试用
@@ -156,25 +157,38 @@
 			}
 		}
 		let vscode = acquireVsCodeApi();
-
-		/* 接收扩展消息 */
-		window.addEventListener('message', event => {
-			const message = event.data;
-			switch(message.type){
-				case 'response-toc-data':
-					updateToc(message.data);
-					return;
-				case 'response-content':
-					updateContent(message.data);
-					return;
-			}
-		});
-
+		/* 获取数据 */
+		function requestActiveContent(activeNamespace) {
+			vscode.postMessage({
+				type: "request-content",
+				data: activeNamespace
+			});
+		}
 		/* 菜单 */
+		let activeNamespace = undefined;
+		let tocData = undefined;
 		function makeTocHtml(tocConfig){
 			let html = "<ul>";
 			for(let item of tocConfig){
-				html += `<li><a ${item.active?'class="active"':''} href="${item.href || "javascript:void(0);"}" ${item.href ? 'target="_blank"' : "" } data-namespace="${item.namespace}" >${item.title}</a></li>`;
+				if(activeNamespace !== undefined){
+					if (item.namespace === activeNamespace){
+						item.active = true;
+					} else {
+						item.active = false;
+					}
+				}
+				if(item.active){
+					// 步骤2. 请求内容数据
+					requestActiveContent(item.namespace);
+					// 渲染
+					document.querySelector('#activeTitle').innerHTML = item.title;
+					document.title = item.title;
+				}
+				if(item.canClick){
+					html += `<li><a ${item.active?'class="active"':''} href="${item.href || "javascript:void(0);"}" ${item.href ? 'target="_blank"' : "" } data-namespace="${item.namespace}" >${item.title}</a></li>`;
+				} else {
+					html += `<li>${item.title}</li>`;
+				}
 				if(item.children){
 					html += makeTocHtml(item.children);
 				}
@@ -183,17 +197,19 @@
 			return html;
 		}
 		const tocEle = document.querySelector('#toc');
-		tocEle.addEventListener("click", (e) => console.log(e));
+		tocEle.addEventListener("click", (e) => {
+			// 步骤3. 用户点击菜单效果
+			const namespace = e.target.dataset.namespace;
+			console.log(namespace);
+			if(namespace){
+				activeNamespace = namespace;
+				updateToc(tocData);
+				requestActiveContent(e.target.dataset.namespace)
+			}
+		});
 		function updateToc(toc){
 			tocEle.innerHTML = makeTocHtml(toc);
 		}
-		// 请求toc数据
-		(function(){
-			vscode.postMessage({
-				type: "request-toc-data"
-			});
-		})();
-
 		/* 内容渲染 */
 		const contentEle = document.querySelector('#content');
 		function updateContent(content) {
@@ -209,9 +225,27 @@
 			}
 			contentEle.innerHTML = html;
 		}
-		vscode.postMessage({
-			type: "request-content",
-			data: "$global"
+
+		/* ======= 核心初始化逻辑 ======= */
+
+		// 步骤1. 请求toc数据
+		(function(){
+			vscode.postMessage({
+				type: "request-toc-data"
+			});
+		})();
+		/* 接收扩展消息 */
+		window.addEventListener('message', event => {
+			const message = event.data;
+			switch(message.type){
+				case 'response-toc-data':
+					tocData = message.data;
+					updateToc(message.data);
+					return;
+				case 'response-content':
+					updateContent(message.data);
+					return;
+			}
 		});
 		
 		/* 监听菜单按钮事件 */

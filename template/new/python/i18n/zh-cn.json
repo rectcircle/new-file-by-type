@@ -25,6 +25,7 @@
 	"inputs.viewType.items.function-based": "基于函数",
 	"inputs.viewType.items.class-based": "基于类",
 	"inputs.viewType.items.drf-class-based": "基于 django rest framework 视图类",
+	"inputs.serializersBase.placeHolder": "请选择Django REST框架序列化器基类",
 	"inputs.moduleName.prompt": "请输入模块名",
 	"inputs.moduleName.placeHolder": "请输入模块名"
 }

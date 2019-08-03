@@ -155,6 +155,10 @@ export default class Configuration {
 		return weight;
 	}
 
+	get author(): any {
+		return this.config['author'];
+	}
+
 	get version(): string{
 		return this.config['version'];
 	}

@@ -4,6 +4,8 @@
 	"yes": "Yes",
 	"no": "No",
 	"allYes": "All is yes",
+	"description": "Description",
+	"author": "Author",
 	"coverSelectPlaceHolder": " , the file already exists. Is it overwritten?",
 	"deleteFilePlaceHolder": "Whether to permanently delete file: ",
 	"deleteDirectory": "Whether to permanently delete directory: ",
@@ -78,5 +80,23 @@
 	"globalConfig": "Global Config",
 	"searchConfig": "Search Config",
 	"translateConfig": "Translate Config",
-	"templateConfig": "Template config"
+	"templateConfig": "Template config",
+
+	"configPreview": "Configuration Preview",
+	"configPreview.description": "Above, all global configurations of this extension",
+	"new-file-by-type.configuration.global.templatePath": "Custom template directory path",
+	"new-file-by-type.configuration.global.searchDelay": "Network search input delay the ms to trigger",
+	"new-file-by-type.configuration.global.showRecentUsed": "Whether to display the most recently used file template",
+	"new-file-by-type.configuration.global.showTemplateSelectorDetail": "Whether to display the detail introduction of the template selector project",
+	"new-file-by-type.configuration.global.recentUseMaxNumber": "Maximum number of recently used projects",
+	"new-file-by-type.configuration.global.recentUseDataFrom": "Recently used data source",
+	"new-file-by-type.configuration.global.recentUseSortBy": "Recently used sort basis",
+
+	"config.indent": "Indent rule, default use `editor.insertSpaces` and `editor.tabSize`. Custom: 0 means use Tab, positive integer means use space indent",
+	"config.user": "Username that appears in the template comment",
+	"config.renderComment": "Whether to render comments",
+	"config.version": "Version field in the comment",
+	"config.showHidden": "Does the directory selector show hidden files?",
+	"config.match.always": "Whether to always display the template"
+
 }
