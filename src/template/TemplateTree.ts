@@ -4,6 +4,7 @@ import fs from "../util/fs";
 import I18n from "./I18n";
 import * as globby from "globby";
 import TemplateEngine from "./TemplateEngine";
+import { projectMatch } from "../util/vscode";
 
 const CONFIG_FILENAME = "config.jsonc";
 const I18N_PATH = "i18n";
@@ -133,7 +134,8 @@ export class Node {
 		}
 		if (matchConf.workspaceFolderGlobs) {
 			for (let projectFolder of projectFolders) {
-				if ((await globby(matchConf.workspaceFolderGlobs, { cwd: projectFolder })).length !== 0 ) {
+				// if ((await globby(matchConf.workspaceFolderGlobs, { cwd: projectFolder })).length !== 0 ) {
+				if ((await projectMatch(projectFolder, matchConf.workspaceFolderGlobs))) {
 					return true;
 				}
 			}

@@ -3,6 +3,8 @@ import UserConfiguration, { Constant } from '../UserConfiguration';
 import * as path from 'path';
 import { Node } from '../template/TemplateTree';
 import fs from './fs';
+import globby = require('globby');
+import * as multimatch from 'multimatch';
 
 export type CheckRule = (value: string) => string | undefined | Promise<string | undefined>;
 
@@ -206,4 +208,24 @@ export async function executeCommand(cmd: string) {
 		new vscode.ShellExecution(cmd)
 	);
 	await vscode.tasks.executeTask(task);
+}
+
+const workspaceOffspring: {[projectFolder: string]: string[]} = {};
+// 列出工作空间的所有文件列表（顶层目录+去除gitignore声明（包括git））
+export async function getProjectOffspring(projectFolder: string) {
+	if (!workspaceOffspring[projectFolder]) {
+		const result = await fs.readdirAsync(projectFolder);
+		result.push(...await globby(['**'], {
+			gitignore: true,
+			dot: true,
+			cwd: projectFolder,
+			ignore: ['.git/**'],
+		}));
+		workspaceOffspring[projectFolder] = result;
+	}
+	return workspaceOffspring[projectFolder];
+}
+
+export async function projectMatch(projectFolder: string, globs: string[]) {
+	return multimatch(await getProjectOffspring(projectFolder), globs).length !== 0;
 }

@@ -75,11 +75,9 @@ ext install Rectcircle.new-file-by-type
 
 本扩展使用一般分为3个步骤，分别是：激活命令、选择文件模板、输入模板定义的参数
 
-**第一步：** 使用命令面板（前缀为 `New:`，推荐方式）、快捷键或者上下文菜单激活
+**第一步：** 使用命令面板（前缀为 `New:`，推荐方式）、快捷键、上下文菜单激活
 
 ![通过命令面板或快捷键打开扩展](images/v1/step1-by-command.jpg)
-
-// TODO: 完成上下文菜单
 
 **第二步：** 选择模板文件
 
@@ -100,7 +98,7 @@ ext install Rectcircle.new-file-by-type
 * 蓝色部分称为Description
   * 如果包含时钟图标，表示该项目是最近使用过的模板，否者为模板列表
   * 文字表示当前模板或文件夹的名字空间（ `namespace` ）
-* 黄色部分称为Detail：当前选项的描述
+* 黄色部分称为Detail：当前选项的描述（如果不需要可以通过配置取消展示）
 
 **第三步：** 输入模板定义的参数
 
@@ -216,9 +214,17 @@ ext install Rectcircle.new-file-by-type
 
 ***
 
+打开命令面板，输入 `New: help` 打开帮助页面查看。
+
 ## Contribute
 
 ***
+
+欢迎贡献模板和代码，模板贡献参见：[自定义模板](https://github.com/rectcircle/new-file-by-type/wiki/CustomTemplate)
+
+### Contributor list
+
+* [Rectcircle](https://www.rectcircle.cn)
 
 ## 发行说明
 
