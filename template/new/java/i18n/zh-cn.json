@@ -13,6 +13,8 @@
 	"junit.description": "创建一个 JUnit 测试样例",
 	"properties": "Java Properties",
 	"properties.description": "创建一个 Java 属性文件",
+	"yml": "YAML 文件",
+	"yml.description": "创建一个 YAML 文件",
 	"templateSelectPlaceHolder": "请选择文件类型",
 	"projectSelectPlaceHolder": "请选择一个项目目录",
 	"inputs.srcPath.placeHolder": "请选择Java源代码根目录（输入或选择一个目录）",
@@ -32,6 +34,8 @@
 	"inputs.interfaceName.placeHolder": "请输入接口名",
 	"inputs.enumName.prompt": "请输入枚举名",
 	"inputs.enumName.placeHolder": "请输入枚举名",
+	"inputs.annotationName.prompt": "请输入注解名",
+	"inputs.annotationName.placeHolder": "请输入注解名",
 	"inputs.junitClassName.prompt": "请输入待测试类名",
 	"inputs.junitClassName.placeHolder": "请输入待测试类名",
 	"inputs.srcPath.placeHolder.properties": "请输入 Properties 文件所在目录 (输入或选择一个目录)"
