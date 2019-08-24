@@ -4,6 +4,11 @@
 	"description": "vscode extension new-file-by-type config schema",
 	"type": "object",
 	"definitions": {
+		"TplJsSyntax": {
+			"type": "string",
+			"pattern": "{{.*}}",
+			"description": "Java Script Syntax, Use {{}} package （JavaScript 语法，使用{{}}包裹）"
+		},
 		"StringOrStringArray": {
 			"anyOf": [{
 					"type": "string"
@@ -188,10 +193,17 @@
 				},
 				"saveType": {
 					"description": "tpl save type (targetType = \"file\")（模板保存方式）",
-					"enum": [
-						"override",
-						"append",
-						"insert"
+					"oneOf": [
+						{
+							"enum": [
+								"override",
+								"append",
+								"insert"
+							]
+						},
+						{
+							"$ref": "#/definitions/TplJsSyntax"
+						}
 					],
 					"default": "override"
 				},

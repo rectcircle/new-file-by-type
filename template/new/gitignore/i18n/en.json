@@ -1,5 +1,6 @@
 {
 	"inputs.gitignoreTplUrl.prompt": "Please select gitignore template",
 	"inputs.gitignoreTplUrl.placeHolder": "Please select gitignore template",
+	"inputs.saveType.placeHolder": "Please select save type",
 	"attachGitignoreNetworkError": "Attach gitignore template list error, Please check your network"
 }
