@@ -23,7 +23,7 @@
 	],
 	"preview": false,
 	"license": "SEE LICENSE IN LICENSE",
-	"icon": "images/new-file-by-type.png",
+	"icon": "new-file-by-type.png",
 	"homepage": "https://github.com/rectcircle/new-file-by-type#readme",
 	"repository": {
 		"type": "git",
