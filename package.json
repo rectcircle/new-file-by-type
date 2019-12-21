@@ -2,7 +2,7 @@
 	"name": "new-file-by-type",
 	"displayName": "New File by Type",
 	"description": "Create file by project type and generate template code (根据文件或项目类型创建文件，并自动生成模板代码)",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "Rectcircle",
 	"author": {
 		"name": "Rectcircle",
@@ -23,7 +23,7 @@
 	],
 	"preview": false,
 	"license": "SEE LICENSE IN LICENSE",
-	"icon": "images/new-file-by-type.png",
+	"icon": "new-file-by-type.png",
 	"homepage": "https://github.com/rectcircle/new-file-by-type#readme",
 	"repository": {
 		"type": "git",
