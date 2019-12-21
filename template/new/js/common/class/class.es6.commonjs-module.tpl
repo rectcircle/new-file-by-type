@@ -4,7 +4,7 @@
 }}
 
 
-class {{inputs.className}} {
+module.exports = class {{inputs.className}} {
 
 	constructor($1) {
 		$2
@@ -14,5 +14,3 @@ class {{inputs.className}} {
 		${0:{{happyCoding}}}
 	}
 }
-
-module.exports = {{inputs.className}};

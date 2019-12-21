@@ -3,7 +3,7 @@
 // Date: 2019-12-21
 // Version: 0.0.1
 
-// Package go_test description...
-package go_test
+// Package rectcircle description...
+package rectcircle
 
 // TODO: happy coding! (created by vscode extension new-file-by-type)

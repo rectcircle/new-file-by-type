@@ -12,6 +12,7 @@ export default {
 	mkdirAsync: util.promisify(fs.mkdir),
 	unlinkAsync: util.promisify(fs.unlink),
 	rmdirAsync: util.promisify(fs.rmdir),
+	renameAsync: util.promisify(fs.rename),
 	async rmdirRecursiveAsync(dirpath: string) {
 		if (await this.existsAsync(dirpath)) {
 			for (let subName of await this.readdirAsync(dirpath)) {

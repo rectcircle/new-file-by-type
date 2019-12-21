@@ -14,8 +14,9 @@
 			"name": "srcPath",
 			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
 			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
+			"value": "{{declaration['activeScalaSrcPath'](projectFolder)}}",
 			"suggest": {
-				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/scala', 'src/test/scala', 'src'])}}"
+				"value": "{{ declaration['scalaSrcSuggest'](projectFolder)}}"
 			}
 		},
 		{

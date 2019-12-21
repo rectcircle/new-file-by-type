@@ -3,12 +3,14 @@
 	"suffix": "go",
 	"targets": [
 		{
-			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}",
-			"tplpath": "tpl"
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + '_test' + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "test.tpl",
+			"isExec": "{{inputs.isCreateTestFile === 'yes'}}"
 		},
 		{
-			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + '_test' + ( suffix ?  '.' + suffix : ''))}}",
-			"tplpath": "test.tpl"
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "tpl",
+			"isExec": true
 		}
 	],
 	"inputs": [
@@ -37,6 +39,20 @@
 				"selected": true,
 				"value": "main"
 			}
+		},
+		{
+			"type": "select",
+			"name": "isCreateTestFile",
+			"items": [
+				{
+					"label": "{{i18n('yes')}}",
+					"value": "yes"
+				},
+				{
+					"label": "{{i18n('no')}}",
+					"value": "no"
+				}
+			]
 		}
 	]
 }

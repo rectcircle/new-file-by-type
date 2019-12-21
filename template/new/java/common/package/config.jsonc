@@ -14,7 +14,7 @@
 			"name": "srcPath",
 			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
 			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
-			"value": "{{declaration['activeJavaScrPath'](projectFolder)}}",
+			"value": "{{declaration['activeJavaSrcPath'](projectFolder)}}",
 			"suggest": {
 				"value": "{{ declaration['javaSrcSuggest'](projectFolder)}}"
 			}

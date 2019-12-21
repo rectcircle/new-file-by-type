@@ -7,6 +7,7 @@ import TemplateSelect from './component/TemplateSelect';
 import fs from '../util/fs';
 import { openExternal } from '../util/vscode';
 import * as clipboardy from "clipboardy";
+import { InputItem } from '../template/Configuration';
 
 export default class HelpWebview extends ViewBase<void, void> {
 	
@@ -257,6 +258,35 @@ export default class HelpWebview extends ViewBase<void, void> {
 
 	}
 
+	private makeComment = (node: Node, input: InputItem) => {
+		let comment = node.engine.renderAny(input.placeHolder);
+		let tips;
+		if (input.type === "path") {
+			if (input.option.canSelectMany) {
+				tips = node.i18n('value.type.pathArray');
+			} else {
+				tips = node.i18n('value.type.pathString');
+			}
+		} else if (input.type === "search" || input.type === "text" ) {
+			tips = node.i18n('value.type.string');
+		} else if (input.type === "select") {
+			tips = node.i18n('value.type.enum');
+			if (Array.isArray(input.items)) {
+				tips += '[' + (input.items as any[]).map(i => {
+					let result;
+					if (typeof (i) === "string") {
+						result = i;
+					} else if (typeof (i) === "object") {
+						result = i.value;
+					}
+					return `"${result}"`;
+				}).join(', ') + ']';
+			}
+		}
+		comment = comment + `(${tips})`;
+		return comment;
+	}
+
 	private makeNodeContentData = async (namespace: string): Promise<any> => {
 		const subTree = this.tree.getSubtree(namespace);
 		if (subTree) {
@@ -272,7 +302,7 @@ export default class HelpWebview extends ViewBase<void, void> {
 ${inputs.map(i =>
 `            {\n` +
 `                "name": "${i.name}",\n` + 
-`                "value": null // ${node.engine.renderAny(i.placeHolder)}\n` +
+`                "value": null // ${this.makeComment(node, i)}\n` +
 `            }`
 ).join(',\n')}
         ],

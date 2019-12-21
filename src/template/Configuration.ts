@@ -65,6 +65,7 @@ export interface Target {
 	tplpath: string;
 	tplcontent: string;
 	saveType: string;
+	isExec: string | boolean;
 }
 
 export interface Comment {

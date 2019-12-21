@@ -196,11 +196,15 @@ class PathInput {
 		let result: Array<{ name: string, fullPath: string, stat: Stats }> = [];
 		for (let name of dirItems) {
 			const fullPath = path.resolve(basePath, name);
-			result.push({
-				name: name,
-				fullPath: fullPath,
-				stat: await fs.statAsync(fullPath)
-			});
+			try {
+				result.push({
+					name: name,
+					fullPath: fullPath,
+					stat: await fs.statAsync(fullPath)
+				});
+			} catch (e) {
+				console.log(e);
+			}
 		}
 		result.sort((a, b) => {
 			if (a.stat.isDirectory() && !b.stat.isDirectory()) {

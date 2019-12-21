@@ -43,6 +43,18 @@
 * 高度可定制的配置
 * 利用自定义路径选择器，实现文件或目录的拷贝、复制和重命名等常见文件系统操作
 
+根据模板创建文件（创建Java类文件示例）
+
+![创建Java类文件](images/v1/create-java-class.gif)
+
+搜索常见内容的开发者内容
+
+![搜索Maven依赖](images/v1/search-dev-resource.gif)
+
+文件系统常见操作
+
+![常见文件系统操作](images/v1/fs-operation.png)
+
 优雅的打开工作区
 
 ![工作区添加目录](images/v1/open-workspace.gif)
@@ -50,10 +62,6 @@
 高度定制的路径选择器
 
 ![自定义路径选择器](images/v1/custom-path-selector.jpg)
-
-创建Java类文件示例
-
-![创建Snippet文件](images/v1/create-java-class.gif)
 
 ## 安装
 
@@ -140,11 +148,13 @@ ext install Rectcircle.new-file-by-type
 | 命令名                                | 标识符                          | 激活方式                             | 描述                                                       |
 | ------------------------------------- | ------------------------------- | ------------------------------------ | ---------------------------------------------------------- |
 | 拷贝当前文件                          | new-file-by-type.copy-file      | 命令面板、资源管理器菜单、上下文菜单 | 拷贝当前激活或者选中的文件或目录                           |
-| 删除当前文件                          | new-file-by-type.delete-file    | 命令面板、资源管理器菜单、上下文菜单 | 删除当前激活或者选中的文件或目录                           |
-| 移动当前文件                          | new-file-by-type.move-file      | 命令面板、资源管理器菜单、上下文菜单 | 移动当前激活或者选中的文件或目录                           |
-| 创建目录                              | new-file-by-type.make-directory | 命令面板、资源管理器菜单、上下文菜单 | 在当前激活文件或选中的文件所在目录 或 选中的目录中创建目录 |
+| 删除当前文件                          | new-file-by-type.delete-file    | 命令面板、上下文菜单 | 删除当前激活或者选中的文件或目录                           |
+| 移动当前文件                          | new-file-by-type.move-file      | 命令面板、上下文菜单 | 移动当前激活或者选中的文件或目录                           |
+| 创建目录                              | new-file-by-type.make-directory | 命令面板、上下文菜单 | 在当前激活文件或选中的文件所在目录 或 选中的目录中创建目录 |
 | 选择路径...                           | new-file-by-type.path-operation | 命令面板                             | 选择路径并选择执行上述操作                                 |
 | 打开工作空间...(使用自定义路径选择器) | new-file-by-type.open-workspace | 命令面板                             | 打开工作空间                                               |
+| 搜索常见的开发者资源 | new-file-by-type.search | 命令面板                             | 支持 baidu github npm stackoverflow google maven pip                                              |
+| 翻译 | new-file-by-type.translate | 命令面板                             |    |
 
 ## 计划支持的项目类型
 

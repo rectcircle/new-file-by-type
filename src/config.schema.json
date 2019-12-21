@@ -218,11 +218,22 @@
 							]
 						},
 						{
-							"type": "string",
-							"description": "must is {{ JavaScript-Statement }}"
+							"$ref": "#/definitions/TplJsSyntax"
 						}
 					],
 					"default": "file"
+				},
+				"isExec": {
+					"description": "Whether to execute the output in the end（最终是否执行该输出）",
+					"default": true,
+					"oneOf": [
+						{
+							"type": "boolean"
+						},
+						{
+							"$ref": "#/definitions/TplJsSyntax"
+						}
+					]
 				}
 			}
 		},

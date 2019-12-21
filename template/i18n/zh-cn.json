@@ -73,6 +73,9 @@
 	"search": "Search",
 	"search.description": "从网络查询内容",
 
+	"new": "New",
+	"new.description": "根据模板创建文件",
+
 	"openWikiUrl": "打开 Wiki 页面",
 	"openGlobalConfig": "打开全局配置帮助页",
 	"openTemplateConfig": "打开模板配置帮助页",
@@ -97,6 +100,13 @@
 	"config.renderComment": "是否渲染注释",
 	"config.version": "注释中版本字段",
 	"config.showHidden": "目录选择器是否显示隐藏文件",
-	"config.match.always": "是否总是显示该模板"
+	"config.match.always": "是否总是显示该模板",
 
+	"value.type.pathArray": "类型为：相对路径字符串数组",
+	"value.type.pathString": "类型为：相对路径字符串",
+	"value.type.string": "类型为：字符串",
+	"value.type.enum": "类型为：枚举值",
+
+	"renameOnlyOneFile": "重命名只支持选择一个文件或目录",
+	"pleaseInputNewFileName": "请输入新文件名"
 }

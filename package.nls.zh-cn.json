@@ -6,6 +6,7 @@
 	"new-file-by-type.copy-file.title": "拷贝当前文件 (cp)",
 	"new-file-by-type.delete-file.title": "删除当前文件 (rm -r)",
 	"new-file-by-type.move-file.title": "移动当前文件 (mv)",
+	"new-file-by-type.rename-file.title": "重命名当前文件 (rename)",
 	"new-file-by-type.make-directory.title": "创建目录 (mkdir)",
 	"new-file-by-type.path-operation.title": "选择路径...",
 	"new-file-by-type.open-workspace.title": "打开工作空间...(使用自定义路径选择器)",

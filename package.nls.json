@@ -6,6 +6,7 @@
 	"new-file-by-type.copy-file.title": "Create a Copy of Current File (cp)",
 	"new-file-by-type.delete-file.title": "Delete Current File (rm -r)",
 	"new-file-by-type.move-file.title": "Move Current file (mv)",
+	"new-file-by-type.rename-file.title": "Rename Current file (rename)",
 	"new-file-by-type.make-directory.title": "Make directory (mkdir)",
 	"new-file-by-type.path-operation.title": "Select path...",
 	"new-file-by-type.open-workspace.title": "Open Workspace...(Use Custom path selector)",

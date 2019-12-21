@@ -1,12 +1,10 @@
-import cn.rectcircle.test
-import cn.rectcircle.test.Point
-import cn.rectcircle.test.PointObject
-
+/**
+ * Copyright (c) 2019, Rectcircle. All rights reserved.
+ * 
+ * @author Rectcircle
+ * @date 2019-12-21
+ * @version 0.0.1
+ */
 object Main extends App {
-  println("Hello, World!")
-  println("test")
-  val a = 1
-  println(new Point(0,1))
-  println(PointObject())
-  println(test.testVal)
+  // TODO: happy coding! (created by vscode extension new-file-by-type)
 }

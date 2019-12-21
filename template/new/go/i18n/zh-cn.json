@@ -6,5 +6,8 @@
 	"commonfile.description": "创建通用 Go 源文件",
 
 	"inputs.packageName.prompt": "请输入包名",
-	"inputs.packageName.placeHolder": "请输入包名"
+	"inputs.packageName.placeHolder": "请输入包名",
+
+	"inputs.isCreateTestFile.prompt": "请选择是否创建测试文件",
+	"inputs.isCreateTestFile.placeHolder": "请选择是否创建测试文件"
 }

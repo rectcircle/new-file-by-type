@@ -16,6 +16,7 @@ import MakeDirectory from './view/MakeDirectory';
 import PathOperation from './view/PathOperation';
 import openWorkspace from './view/component/OpenWorkspace';
 import HelpWebview from './view/HelpWebview';
+import { RenameOption } from './view/RenameFile';
 
 const DEFAULT_TPL_PATH = path.resolve(__dirname, '../', 'template');
 
@@ -84,6 +85,10 @@ async function updateCommand(command: Command, context: vscode.ExtensionContext)
 		'new-file-by-type.help',
 		new HelpWebview(rootTree, context.globalState, context.workspaceState, context),
 		false
+	);
+	command.register(
+		'new-file-by-type.rename-file',
+		new RenameOption(newTree, context.globalState, context.workspaceState),
 	);
 }
 

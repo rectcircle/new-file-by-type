@@ -262,6 +262,10 @@ export class Node {
 		this.setCommentOutput(this.commentOutput);
 		const result = [] as OutputItem[];
 		for (let target of (this.engine.get('targets') as Target[])) {
+			let isExec = this.engine.renderAny(target.isExec);
+			if (isExec === false) {
+				continue;
+			}
 			let tpl: string = '';
 			if (target.tplcontent) {
 				tpl = await target.tplcontent; 

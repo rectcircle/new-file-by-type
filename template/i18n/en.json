@@ -73,6 +73,9 @@
 	"search": "Search",
 	"search.description": "Query content from the web",
 
+	"new": "New",
+	"new.description": "Create file by template",
+
 	"openWikiUrl": "Open Wiki page",
 	"openGlobalConfig": "Open Global Config Help Page",
 	"openTemplateConfig": "Open Template Config Help Page",
@@ -97,6 +100,13 @@
 	"config.renderComment": "Whether to render comments",
 	"config.version": "Version field in the comment",
 	"config.showHidden": "Does the directory selector show hidden files?",
-	"config.match.always": "Whether to always display the template"
+	"config.match.always": "Whether to always display the template",
 
+	"value.type.pathArray": "Type is: an array of relative path strings",
+	"value.type.pathString": "Type is: relative path string",
+	"value.type.string": "Type is: string",
+	"value.type.enum": "Type is: enum value",
+
+	"renameOnlyOneFile": "Rename only supports selecting a file or directory",
+	"pleaseInputNewFileName": "Please input new file name"
 }

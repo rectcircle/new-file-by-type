@@ -6,5 +6,8 @@
 	"commonfile.description": "Create common Go source file",
 
 	"inputs.packageName.prompt": "Please input package name",
-	"inputs.packageName.placeHolder": "Please input package name"
+	"inputs.packageName.placeHolder": "Please input package name",
+
+	"inputs.isCreateTestFile.prompt": "Please choose whether to create a test file",
+	"inputs.isCreateTestFile.placeHolder": "Please choose whether to create a test file"
 }

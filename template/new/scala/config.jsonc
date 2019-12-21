@@ -1,6 +1,7 @@
 {
 	"name": "Scala",
 	"flat": true,
+	"declaration": "declaration.js",
 	"match": {
 		"always": false,
 		"workspaceFolderGlobs": ["*.sbt", "**/*.scala"]
