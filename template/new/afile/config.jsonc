@@ -1,0 +1,455 @@
+{
+	"name": "A File",
+	"renderComment": false,
+	"targets": [{
+		"filepath": "{{path.resolve(projectFolder, inputs.srcPath, inputs.filename + inputs.fileType.suffix)}}",
+		"tplpath": "{{inputs.fileType.tpl}}"
+	}],
+	"inputs": [{
+			"type": "select",
+			"name": "fileType",
+			"items": [{
+					"label": "None",
+					"value": {
+						"suffix": "",
+						"tpl": "tpl",
+						"defaultName": "Untitled"
+					}
+				},
+				{
+					"label": ".asp",
+					"value": {
+						"suffix": ".asp",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".bak",
+					"value": {
+						"suffix": ".bak",
+						"tpl": "tpl",
+						"defaultName": "Untitled"
+					}
+				},
+				{
+					"label": ".bat",
+					"value": {
+						"suffix": ".bat",
+						"tpl": "tpl",
+						"defaultName": "script"
+					}
+				},
+				{
+					"label": ".c",
+					"value": {
+						"suffix": ".c",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".cpp",
+					"value": {
+						"suffix": ".cpp",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".cs",
+					"value": {
+						"suffix": ".cs",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".css",
+					"value": {
+						"suffix": ".css",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".cshtml",
+					"value": {
+						"suffix": ".cshtml",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".clj",
+					"value": {
+						"suffix": ".clj",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".coffee",
+					"value": {
+						"suffix": ".coffee",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".cnf",
+					"value": {
+						"suffix": ".cnf",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".fs",
+					"value": {
+						"suffix": ".fs",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".gitignore",
+					"value": {
+						"suffix": ".gitignore",
+						"tpl": "gitignore.tpl",
+						"defaultName": ""
+					}
+				},
+				{
+					"label": ".go",
+					"value": {
+						"suffix": ".go",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".groovy",
+					"value": {
+						"suffix": ".groovy",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".hlsl",
+					"value": {
+						"suffix": ".hlsl",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".html",
+					"value": {
+						"suffix": ".html",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".http",
+					"value": {
+						"suffix": ".http",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".ini",
+					"value": {
+						"suffix": ".ini",
+						"tpl": "tpl",
+						"defaultName": "config"
+					}
+				},
+				{
+					"label": ".jade",
+					"value": {
+						"suffix": ".jade",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".java",
+					"value": {
+						"suffix": ".java",
+						"tpl": "tpl",
+						"defaultName": "Main"
+					}
+				},
+				{
+					"label": ".js",
+					"value": {
+						"suffix": ".js",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".json",
+					"value": {
+						"suffix": ".json",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".jsonc",
+					"value": {
+						"suffix": ".jsonc",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".jsp",
+					"value": {
+						"suffix": ".jsp",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".less",
+					"value": {
+						"suffix": ".less",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".log",
+					"value": {
+						"suffix": ".log",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".lua",
+					"value": {
+						"suffix": ".lua",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".md",
+					"value": {
+						"suffix": ".md",
+						"tpl": "tpl",
+						"defaultName": "README"
+					}
+				},
+				{
+					"label": ".m",
+					"value": {
+						"suffix": ".m",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".php",
+					"value": {
+						"suffix": ".php",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".pl",
+					"value": {
+						"suffix": ".pl",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".prl",
+					"value": {
+						"suffix": ".prl",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".perl",
+					"value": {
+						"suffix": ".perl",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".ps1",
+					"value": {
+						"suffix": ".ps1",
+						"tpl": "tpl",
+						"defaultName": "script"
+					}
+				},
+				{
+					"label": ".properties",
+					"value": {
+						"suffix": ".properties",
+						"tpl": "tpl",
+						"defaultName": "config"
+					}
+				},
+				{
+					"label": ".py",
+					"value": {
+						"suffix": ".py",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".r",
+					"value": {
+						"suffix": ".r",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".rb",
+					"value": {
+						"suffix": ".rb",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".rs",
+					"value": {
+						"suffix": ".rs",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".scss",
+					"value": {
+						"suffix": ".scss",
+						"tpl": "tpl",
+						"defaultName": "index"
+					}
+				},
+				{
+					"label": ".sql",
+					"value": {
+						"suffix": ".sql",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".scala",
+					"value": {
+						"suffix": ".scala",
+						"tpl": "tpl",
+						"defaultName": "Main"
+					}
+				},
+				{
+					"label": ".sh",
+					"value": {
+						"suffix": ".sh",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".swift",
+					"value": {
+						"suffix": ".swift",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".ts",
+					"value": {
+						"suffix": ".ts",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".txt",
+					"value": {
+						"suffix": ".txt",
+						"tpl": "tpl",
+						"defaultName": "Untitled"
+					}
+				},
+				{
+					"label": ".vb",
+					"value": {
+						"suffix": ".vb",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".xml",
+					"value": {
+						"suffix": ".xml",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".xsl",
+					"value": {
+						"suffix": ".xsl",
+						"tpl": "tpl",
+						"defaultName": "main"
+					}
+				},
+				{
+					"label": ".yml",
+					"value": {
+						"suffix": ".yml",
+						"tpl": "tpl",
+						"defaultName": "config"
+					}
+				},
+			]
+		},
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'src')}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"prompt": "{{i18n('inputs.filename.prompt')}}",
+			"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
+			"value": "{{ inputs.fileType.suffix === '.gitignore' ? '' : undefined }}",
+			"suggest": {
+				"selected": true,
+				"value": "{{inputs.fileType.defaultName}}"
+			}
+		}
+	],
+	"match": {
+		"always": true
+	}
+
+}

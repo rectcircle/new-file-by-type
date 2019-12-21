@@ -1,0 +1,45 @@
+{
+	"suffix": "h",
+	"weight": 300,
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(customize['fullHeaderPath'], inputs.filename + '.h') }}",
+			"tplpath": "header.{{inputs.filetype}}.tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "headerPath",
+			"after": "{{customize['fullHeaderPath'] = path.resolve(projectFolder, projectFolder, inputs.headerPath)}}",
+			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder) }}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'include', 'includes', 'src', 'source', 'sources')}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
+			"suggest": {
+				"selected": true,
+				"value": "Main"
+			}
+		},
+		{
+			"type": "select",
+			"name": "filetype",
+			"items": [
+				{
+					"label": "C++",
+					"value": "cpp"
+				},
+				{
+					"label": "C",
+					"value": "c"
+				}
+			]
+		}
+	]
+}

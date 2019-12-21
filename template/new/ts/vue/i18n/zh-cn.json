@@ -1,0 +1,7 @@
+{
+	"templateSelectPlaceHolder": "请选择文件类型",
+	"entry": "入口",
+	"entry.description": "创建 Vue 入口文件",
+	"component": "单文件组件",
+	"component.description": "创建 Vue 单文件组件"
+}

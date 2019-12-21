@@ -1,0 +1,39 @@
+{
+	"name": "Package Object",
+	"weight": 700,
+	"suffix": "scala",
+	"snippet": true,
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(customize['fullFileDirPath'], 'package.scala') }}",
+			"tplpath": "tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
+			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
+			"value": "{{declaration['activeScalaSrcPath'](projectFolder)}}",
+			"suggest": {
+				"value": "{{ declaration['scalaSrcSuggest'](projectFolder)}}"
+			}
+		},
+		{
+			"type": "path",
+			"name": "packageName",
+			"checkRules": "{{[checkRules.packageName,  (value) => (value === undefined || value === '') ? i18n('checkRules.notRootPackage') : undefined]}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(customize['fullSrcPath'], '.') }}",
+			"after": "{{customize['fullFileDirPath'] = path.resolve(customize['fullSrcPath'],  path.join(...inputs.packageName.split('.')))}}",
+			"suggest": {
+				"selected": false,
+				"value": "{{[...helper.openedFileDirectoryPath(customize['fullSrcPath'], '.'), helper.firstHasManyChildrenDirectory(customize['fullSrcPath'], '.')].filter(v=>v) }}"
+			},
+			"option": {
+				"pathSeparator": ".",
+				"basePath": "{{customize['fullSrcPath']}}"
+			}
+		}
+	]
+}

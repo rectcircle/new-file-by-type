@@ -1,0 +1,28 @@
+{
+	"weight": 800,
+	"name": "Scala Worksheet",
+	"suffix": "sc",
+	"renderComment": true,
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder.properties')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/scala', 'src/main/resource', 'src'])}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"prompt": "{{i18n('inputs.filename.prompt')}}",
+			"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
+			"suggest": {
+				"selected": true,
+				"value": "worksheet"
+			}
+		}
+	]
+}

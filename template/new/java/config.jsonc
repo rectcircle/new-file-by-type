@@ -1,0 +1,9 @@
+{
+	"name": "Java",
+	"flat": true,
+	"declaration": "declaration.js",
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["pom.xml", "**/*.java"]
+	}
+}

@@ -1,0 +1,466 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Template Config",
+	"description": "vscode extension new-file-by-type config schema",
+	"type": "object",
+	"definitions": {
+		"TplJsSyntax": {
+			"type": "string",
+			"pattern": "{{.*}}",
+			"description": "Java Script Syntax, Use {{}} package （JavaScript 语法，使用{{}}包裹）"
+		},
+		"StringOrStringArray": {
+			"anyOf": [{
+					"type": "string"
+				},
+				{
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			]
+		},
+		"Input": {
+			"type": "object",
+			"properties": {
+				"type": {
+					"enum": ["path", "text", "select", "search"],
+					"description": "input type（输入类型）",
+					"default": "text"
+				},
+				"name": {
+					"type": "string",
+					"description": "input name（变量名）"
+				},
+				"value": {
+					"type": "string",
+					"description": "if set value, will not show the input windows（如果配置了该值，将不会展示输入框，该输入将作为配置项）"
+				},
+				"prompt": {
+					"type": "string",
+					"description": "prompt（提示）",
+					"default": "{{i18n(`inputs.${name}.prompt`)}}"
+				},
+				"placeHolder": {
+					"type": "string",
+					"description": "placeHolder（输入框内提示）",
+					"default": "{{i18n('inputs.name.placeHolder')}}"
+				},
+				"items": {
+					"description": "if type is select, it must give as options",
+					"oneOf": [
+						{
+							"type": "string",
+							"default": "{{ JavaScript-Statement }}"
+						},
+						{
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						{
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"label": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"detail": {
+										"type": "string"
+									},
+									"picked": {
+										"type": "boolean"
+									},
+									"alwaysShow": {
+										"type": "boolean"
+									},
+									"value": true
+								},
+								"required": ["label", "value"]
+							}
+						}
+					]
+				},
+				"suggest": {
+					"type": "object",
+					"properties": {
+						"selected":{
+							"type": "boolean",
+							"default": true
+						},
+						"value": {
+							"$ref": "#/definitions/StringOrStringArray"
+						}
+					}
+				},
+				"checkRules": {
+					"$ref": "#/definitions/StringOrStringArray"
+				},
+				"option": {
+					"type": "object",
+					"properties": {
+						"parentDirectoryText":{
+							"type":"string",
+							"default": "{{i18n('inputs.name.parentDirectoryText')}}"
+						},
+						"pathSeparator": {
+							"type": "string",
+							"default": "/"
+						},
+						"confirmText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.confirmText')}"
+						},
+						"suggestText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.suggestText')}}"
+						},
+						"directoryText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name..directoryText')}}"
+						},
+						"fileText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.fileText')}}"
+						},
+						"confirmDetailText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.confirmDetailText')}}"
+						},
+						"currentDirectoryText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.currentDirectoryText')}}"
+						},
+						"allowNoExist": {
+							"type": "boolean",
+							"default": true
+						},
+						"resultExistAndTypeErrorText": {
+							"type": "string",
+							"default": "{{i18n('inputs.name.resultExistAndTypeErrorText')}}"
+						},
+						"returnType": {
+							"enum": ["file" , "directory" , "all"],
+							"default": "directory"
+						},
+						"basePath": {
+							"type": "string",
+							"default": "{{projectFolder}}"
+						},
+						"canSelectMany": {
+							"type": "boolean",
+							"default": false
+						},
+						"multiConfirmText": {
+							"type": "string",
+							"default": "Finish Multi-select"
+						},
+						"multiConfirmDetailText": {
+							"type": "string",
+							"default": "(Press \"Enter\" to finish multi-select)"
+						},
+						"multiSelectCancelText": {
+							"type": "string",
+							"default": "(Press \"Enter\" to cancel selection)"
+						}
+					}
+				}
+			},
+			"required": ["type", "name"]
+		},
+		"Target": {
+			"type": "object",
+			"properties": {
+				"filepath": {
+					"description": "target file path to generate（文件写入的目标路径）",
+					"type": "string",
+					"default": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}"
+				},
+				"tplpath": {
+					"description": "template file path（模板文件的路径）",
+					"type": "string",
+					"default": "tpl"
+				},
+				"tplcontent": {
+					"description": "template content, Priority is higher than tplpath（模板内容，比tplpath有更高的优先级）",
+					"type": "string"
+				},
+				"saveType": {
+					"description": "tpl save type (targetType = \"file\")（模板保存方式）",
+					"oneOf": [
+						{
+							"enum": [
+								"override",
+								"append",
+								"insert"
+							]
+						},
+						{
+							"$ref": "#/definitions/TplJsSyntax"
+						}
+					],
+					"default": "override"
+				},
+				"targetType": {
+					"anyOf": [
+						{
+							"enum": [
+								"file",
+								"clipboard",
+								"command",
+								"browser"
+							]
+						},
+						{
+							"$ref": "#/definitions/TplJsSyntax"
+						}
+					],
+					"default": "file"
+				},
+				"isExec": {
+					"description": "Whether to execute the output in the end（最终是否执行该输出）",
+					"default": true,
+					"oneOf": [
+						{
+							"type": "boolean"
+						},
+						{
+							"$ref": "#/definitions/TplJsSyntax"
+						}
+					]
+				}
+			}
+		},
+		"Comment": {
+			"type": "object",
+			"description": "comment config（注释相关配置）",
+			"default": {
+				"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
+				"dateFormat": "YYYY-MM-DD",
+				"startLine": "/**",
+				"lineHeader": " * ",
+				"endLine": " */",
+				"items": [
+					"{{comment.copyright}}",
+					"",
+					"@author {{user}}",
+					"@date {{date}}",
+					"@version {{version}}"
+				]
+			},
+			"properties": {
+				"dateFormat": {
+					"description": "code comment date format（日期格式化）",
+					"type": "string",
+					"default": "YYYY-MM-DD"
+				},
+				"copyright": {
+					"description": "copyright string（版权声明）",
+					"default": "Copyright (c) {{year}}, {{user}}. All rights reserved."
+				},
+				"startLine": {
+					"description": "comment first line string（注释起始内容）",
+					"type": "string",
+					"default": "/**"
+				},
+				"lineHeader": {
+					"description": "expect first and last line, comment every line header string（注释每一行起始字符串）",
+					"type": "string",
+					"default": "* "
+				},
+				"endLine": {
+					"description": "comment last line string（注释每一行结束字符串）",
+					"type": "string",
+					"default": " */"
+				},
+				"items": {
+					"type": "array",
+					"description": "comment items （注释需要渲染的每一项）",
+					"default": [
+						"{{comment.copyright}}",
+						"",
+						"@author {{user}}",
+						"@date {{date}}",
+						"@version {{version}}"
+					],
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"Match": {
+			"description": "show when this condition is matched（根据条件选择是否显示该模板）",
+			"type": "object",
+			"properties": {
+				"workspaceFolderGlobs": {
+					"type": "array",
+					"description": "workspace folder glob match（工作空间文件glob匹配表达式）",
+					"items": {
+						"type": "string"
+					}
+				},
+				"always": {
+					"type": "boolean",
+					"description": "Whether it always matches（是否总是启用该模板）",
+					"default": true
+				}
+			}
+		}
+	},
+	"properties": {
+		"name": {
+			"description": "template or type name（模板或模板目录名）",
+			"type": "string",
+			"default": "{{ i18n(`${dir}.name`) }}"
+		},
+		"description": {
+			"description": "template or type description（模板或模板目录描述）",
+			"type": "string",
+			"default": "{{ i18n(`${dir}.description`) }}"
+		},
+		"weight": {
+			"description": "Template sort weight, The value is small in front（排序权重, 小的在前面）",
+			"type": "number",
+			"default": 100
+		},
+		"version": {
+			"description": "default version will use in comment（默认版本，将会渲染在模板配置中）",
+			"type": "string",
+			"default": "0.0.1"
+		},
+		"flat": {
+			"description": "subtype flat display（是否展平）",
+			"oneOf": [{
+					"type": "boolean"
+				},
+				{
+					"type": "string"
+				}
+			],
+			"default": false
+		},
+		"renderComment": {
+			"description": "Whether to render comments（是否渲染注释）",
+			"oneOf": [
+				{
+					"type": "boolean"
+				},
+				{
+					"type": "string"
+				}
+			],
+			"default": true
+		},
+		"indent": {
+			"description": "file indent type: 0 - use [Tab], non-zero - use `indent` number space（缩进类型0-tab, 非0-空格）",
+			"default": "{{defaultConf.indent}}",
+			"oneOf": [
+				{
+					"type": "number"
+				},
+				{
+					"type": "string"
+				}
+			]
+		},
+		"user": {
+			"type": "string",
+			"description": "coder name can use in tpl （用户名，将会渲染在注释中）",
+			"default": "{{defaultConf.user}}"
+		},
+		"author": {
+			"type": "array",
+			"description": "template author（模板作者，支持多个）",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "author name（模板作者名）"
+					},
+					"email": {
+						"type": "string",
+						"description": "author email（模板作者email）"
+					},
+					"homePage": {
+						"type": "string",
+						"description": "author home page（模板作者个人主页）"
+					}
+				}
+			}
+		},
+		"suffix": {
+			"description": "file suffix（将要创建的文件后缀）",
+			"type": "string",
+			"default": ""
+		},
+		"showHidden": {
+			"description": "show hidden directory（目录选择器是否显示隐藏文件）",
+			"oneOf": [{
+					"type": "boolean"
+				},
+				{
+					"type": "string"
+				}
+			],
+			"default": "false"
+		},
+		"targets": {
+			"description": "template file path and output path config（模板输出目标）",
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Target"
+			}
+		},
+		"placeHolder": {
+			"description": "template select view placeHolder text（模板选择器提示文本）",
+			"type": "string",
+			"default": "{{i18n('templateSelectPlaceHolder')}}"
+		},
+		"declaration": {
+			"description": "Custom function variable declaration, filename（自定义函数变量声明文件路径，相对于当前文件所在目录）",
+			"type": "string",
+			"default": "declaration.js"
+		},
+		"inputs": {
+			"type": "array",
+			"default": [{
+					"type": "path",
+					"name": "srcPath",
+					"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+					"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+					"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+					"suggest": {
+						"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'src')}}"
+					}
+				},
+				{
+					"type": "text",
+					"name": "filename",
+					"prompt": "{{i18n('inputs.filename.prompt')}}",
+					"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
+					"suggest": {
+						"selected": true,
+						"value": "main"
+					}
+				}
+			],
+			"items": {
+				"$ref": "#/definitions/Input"
+			}
+		},
+		"comment": {
+			"$ref": "#/definitions/Comment"
+		},
+		"match": {
+			"$ref": "#/definitions/Match"
+		}
+	}
+}

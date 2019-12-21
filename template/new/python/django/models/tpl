@@ -1,0 +1,9 @@
+# -*- coding: {{encoding}} -*-
+{{commentOutput}}
+from django.db import models
+
+
+class ${1:Model}(models.Model):
+	${2:field} = models.${3:CharField}($4)
+	$5
+	${0:# {{happyCodingString}}}

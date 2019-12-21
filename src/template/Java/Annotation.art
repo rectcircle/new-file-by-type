@@ -1,7 +1,0 @@
-{{include './PackageName.art'}}{{include './Comments.art'}}
-@Inherited
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface {{name}} {
-{{indent}}
-}

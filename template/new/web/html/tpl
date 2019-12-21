@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{{commentOutput}}
+<html lang="${5:en}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=${1:device-width}, initial-scale=${2:1.0}">
+	<meta http-equiv="X-UA-Compatible" content="${3:ie=edge}">
+	<title>${4:Document}</title>
+</head>
+<body>
+	${0:<!-- {{happyCodingString}} -->}
+</body>
+</html>

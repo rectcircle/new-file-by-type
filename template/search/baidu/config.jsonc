@@ -1,0 +1,20 @@
+/*
+https://www.baidu.com/sugrec?json=1&prod=pc&wd=中文
+*/
+{
+	"name": "Baidu",
+	"targets": [
+		{
+			"targetType": "browser",
+			"tplcontent": "https://www.baidu.com/s?wd={{inputs.keyword}}"
+		}
+	],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "search",
+			"name": "keyword",
+			"items": "{{declaration['baiduSearchHandler']}}"
+		}
+	]
+}

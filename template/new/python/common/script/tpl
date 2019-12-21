@@ -1,0 +1,5 @@
+${1:#!/usr/bin/env ${2:python}}
+# -*- coding: {{encoding}} -*-
+{{commentOutput}}
+
+${0:# {{happyCodingString}}}

@@ -1,0 +1,74 @@
+// 创建一个class，支持选择class 实现方式 和 导出方式
+{
+	"name": "Class",
+	"suffix": "js",
+	"weight": 400,
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(customize['fullSrcPath'], inputs.className + '.js' )}}",
+			"tplpath": "class.{{inputs.classImplType}}.{{inputs.moduleImpl}}.tpl"
+		}
+	],
+	"inputs": [{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
+			"suggest": {
+				"value": "src"
+			}
+		},
+		{
+			"type": "select",
+			"name": "classImplType",
+			"items": [
+				{
+					"label": "ES6",
+					"value": "es6"
+				},
+				{
+					"label": "{{i18n('classImplType.tradition')}}",
+					"value": "tradition"
+				}
+			]
+		},
+		{
+			"type": "select",
+			"name": "moduleImpl",
+			"items": [
+				{
+					"label": "{{i18n('moduleImpl.commonjs-module')}}",
+					"value": "commonjs-module"
+				},
+				{
+					"label": "{{i18n('moduleImpl.es6')}}",
+					"value": "es6-module"
+				}
+			]
+		},
+		{
+			"type": "text",
+			"name": "className",
+			"suggest": {
+				"selected": true,
+				"value": "Main"
+			}
+		},
+		{
+			"type": "path",
+			"name": "imports",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, helper.ancestor(projectFolder, customize['fullSrcPath']))}}"
+			},
+			"option": {
+				"canSelectMany": true,
+				"canSelectEmpty": true,
+				"returnType": "file",
+				"allowNoExist": false,
+				"basePath": "{{projectFolder}}"
+			}
+		}
+	]
+}

@@ -1,0 +1,4 @@
+# -*- coding: {{encoding}} -*-
+{{commentOutput}}
+
+${0:# {{happyCodingString}}}

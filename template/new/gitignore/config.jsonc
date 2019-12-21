@@ -1,0 +1,26 @@
+{
+	"name": "GitIgnore",
+	"renderComment": false,
+	"targets": [{
+		"filepath": "{{ path.resolve(projectFolder, '.gitignore')}}",
+		"tplcontent": "{{ helper.download(inputs.gitignoreTplUrl) }}",
+		"saveType": "{{ inputs.saveType }}"
+	}],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "select",
+			"name": "gitignoreTplUrl",
+			"items": "{{ declaration.loadGitIgnoreTemplateList() }}"
+		},
+		{
+			"type": "select",
+			"name": "saveType",
+			"value": "{{fs.existsSync(path.resolve(projectFolder, '.gitignore')) ? undefined : 'override' }}",
+			"items": ["append", "override"]
+		}
+	],
+	"match": {
+		"workspaceFolderGlobs": [".git"]
+	}
+}

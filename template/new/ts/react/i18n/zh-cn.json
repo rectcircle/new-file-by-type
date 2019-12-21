@@ -1,0 +1,6 @@
+{
+	"templateSelectPlaceHolder": "请选择文件类型",
+	"component.description": "创建 React 组件",
+	"inputs.className.prompt": "请输入类名（React 组件名）",
+	"inputs.className.placeHolder": "请输入类名"
+}

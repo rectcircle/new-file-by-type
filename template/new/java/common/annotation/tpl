@@ -1,0 +1,7 @@
+{{inputs.packageName ? 'package '+inputs.packageName + ';\n\n' : ''}}{{commentOutput}}
+@Inherited
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface {{inputs.annotationName}} {
+	${0:{{happyCoding}}}
+}

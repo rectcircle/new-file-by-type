@@ -1,0 +1,31 @@
+{
+	"name": "Maven",
+	"targets": [
+		{
+			"targetType": "clipboard",
+			"tplcontent": "{{inputs.content}}"
+		}
+	],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "search",
+			"name": "artifact",
+			"suggest": {
+				"selected": true,
+				"value": "junit"
+			},
+			"items": "{{declaration['mavenSearchHandler']}}"
+		},
+		{
+			"type": "select",
+			"name": "version",
+			"items": "{{declaration['mavenSelectVersion'](inputs.artifact)}}"
+		},
+		{
+			"type": "select",
+			"name": "content",
+			"items": "{{declaration['downloadDependency'](inputs.version)}}"
+		}
+	]
+}

@@ -1,0 +1,65 @@
+{
+	"name": "Views",
+	"weight": 400,
+	"suffix": "py",
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "{{inputs.viewType}}.tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'src', path.basename(projectFolder))}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"prompt": "{{i18n('inputs.filename.prompt')}}",
+			"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
+			"suggest": {
+				"selected": true,
+				"value": "views"
+			}
+		},
+		{
+			"type": "select",
+			"name": "viewType",
+			"items": [
+				{
+					"label": "{{i18n('inputs.viewType.items.function-based')}}",
+					"value": "function"
+				},
+				{
+					"label": "{{i18n('inputs.viewType.items.class-based')}}",
+					"value": "class"
+				},
+				{
+					"label": "{{i18n('inputs.viewType.items.drf-class-based')}}",
+					"value": "drf-class"
+				}
+			]
+		}
+
+	],
+	"comment": {
+		"copyright": "Copyright (c) {{year}}, {{user}}. All rights reserved.",
+		"dateFormat": "YYYY-MM-DD",
+		"startLine": "",
+		"lineHeader": "# ",
+		"endLine": "",
+		"items": [
+			"{{comment.copyright}}",
+			"@author {{user}}",
+			"@date {{date}}",
+			"@version {{version}}"
+		]
+	}
+}

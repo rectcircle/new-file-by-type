@@ -1,0 +1,10 @@
+{
+	"templateSelectPlaceHolder": "Please select a file type",
+	"none": "None",
+	"none.description": "Create a Common TypeScript file",
+	"module.description": "Create a TypeScript module",
+	"class.description": "Create a Class",
+
+	"inputs.classImplType.placeHolder": "Please select a class implementation",
+	"classImplType.tradition": "Tradition"
+}

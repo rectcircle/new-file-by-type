@@ -1,0 +1,13 @@
+{
+	"templateSelectPlaceHolder": "请选择项目或者文件类型",
+
+	"common": "Common",
+	"common.description": "通用 Go 项目",
+	"commonfile.description": "创建通用 Go 源文件",
+
+	"inputs.packageName.prompt": "请输入包名",
+	"inputs.packageName.placeHolder": "请输入包名",
+
+	"inputs.isCreateTestFile.prompt": "请选择是否创建测试文件",
+	"inputs.isCreateTestFile.placeHolder": "请选择是否创建测试文件"
+}

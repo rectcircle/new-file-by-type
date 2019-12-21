@@ -1,0 +1,58 @@
+{
+	"name": "Common",
+	"suffix": "go",
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + '_test' + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "test.tpl",
+			"isExec": "{{inputs.isCreateTestFile === 'yes'}}"
+		},
+		{
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename + ( suffix ?  '.' + suffix : ''))}}",
+			"tplpath": "tpl",
+			"isExec": true
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, `src/github.com/${user.toLowerCase()}`, 'src/github.com', 'src')}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "packageName",
+			"suggest": {
+				"selected": true,
+				"value": "{{path.basename(inputs.srcPath)}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"suggest": {
+				"selected": true,
+				"value": "main"
+			}
+		},
+		{
+			"type": "select",
+			"name": "isCreateTestFile",
+			"items": [
+				{
+					"label": "{{i18n('yes')}}",
+					"value": "yes"
+				},
+				{
+					"label": "{{i18n('no')}}",
+					"value": "no"
+				}
+			]
+		}
+	]
+}

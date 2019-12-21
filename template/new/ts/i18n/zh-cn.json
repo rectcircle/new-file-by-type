@@ -1,0 +1,25 @@
+{
+	"common": "Common",
+	"common.description": "创建通用的 TypeScript 类型",
+	"react": "React",
+	"react.description": "创建 React TypeScript 类型",
+	"vue": "Vue",
+	"vue.description": "创建 Vue TypeScript 类型",
+	"angular": "Angular",
+	"angular.description": "创建 Angular TypeScript 类型",
+	"templateSelectPlaceHolder": "请选择项目类型",
+
+	"inputs.imports.prompt": "当前选择：",
+	"inputs.imports.placeHolder": "请选择需要导入的源文件（输入或选择一个目录）",
+	"inputs.imports.parentDirectoryText": "..（返回上层目录）",
+	"inputs.imports.confirmText": "确定使用：",
+	"inputs.imports.suggestText": "建议",
+	"inputs.imports.directoryText": "目录",
+	"inputs.imports.fileText": "文件",
+	"inputs.imports.confirmDetailText": "(按 ↵ 键选择此项目)",
+	"inputs.imports.currentDirectoryText": "项目根目录",
+	"inputs.imports.multiConfirmText": "完成多选",
+	"inputs.imports.multiConfirmDetailText": "（按 ↵ 键完成多选）",
+	"inputs.imports.multiSelectCancelText": "（按 ↵ 键取消此项目选择）",
+	"inputs.imports.resultExistAndTypeErrorText": "{resultPath} 已经存在, 类型为 {nowTypeText}, 期望类型为 {expectTypeText}"
+}

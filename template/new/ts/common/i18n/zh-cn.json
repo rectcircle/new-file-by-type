@@ -1,0 +1,10 @@
+{
+	"templateSelectPlaceHolder": "请选择文件类型",
+	"none": "None",
+	"none.description": "创建通用 TypeScript 文件",
+	"module.description": "创建一个 TypeScript 模块",
+	"class.description": "创建一个类",
+
+	"inputs.classImplType.placeHolder": "请选择类实现方式",
+	"classImplType.tradition": "传统方式"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "Search",
+	"renderComment": false,
+	"match": {
+		"always": true
+	}
+}
+/*
+翻译：
+	google、百度、词典
+	https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh&dt=t&q=test
+	https://blog.csdn.net/hujingshuang/article/details/80180294
+	有道词典
+
+google搜索
+https://www.google.com/complete/search?q=test&client=psy-ab
+http://tool.chinaz.com/tools/unicode.aspx
+
+http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&site=stackoverflow&q=npmjs%20api
+*/

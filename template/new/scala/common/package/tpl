@@ -1,0 +1,9 @@
+{{commentOutput}}
+{{
+	const hasPackageDeclare = (inputs.packageName && inputs.packageName.split('.').length >= 2 )
+	customize['packageObjectName'] = inputs.packageName ? inputs.packageName.split('.').pop() : '_root_'
+	hasPackageDeclare ? 'package '+inputs.packageName.split('.').slice(0, -1).join('.') + '\n\n' : ''
+}}
+package object {{customize['packageObjectName']}} {
+	${0:{{happyCoding}}}
+}

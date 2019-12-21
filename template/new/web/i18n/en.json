@@ -1,0 +1,6 @@
+{
+	"html.description": "Create a HTML file",
+	"css.description": "Create a CSS file",
+	"less.description": "Create a Less file",
+	"sass.description": "Create a Sass file"
+}

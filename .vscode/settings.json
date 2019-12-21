@@ -1,0 +1,35 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "files.exclude": {
+        "out": false // set this to true to hide the "out" folder with the compiled JS files
+    },
+    "search.exclude": {
+        "out": true // set this to false to include "out" folder in search results
+    },
+    // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
+    "typescript.tsc.autoDetect": "off",
+    "json.schemas": [
+        {
+            "fileMatch": ["*.schema.json"],
+            "url": "http://json-schema.org/draft-07/schema#"
+        },
+        {
+            "fileMatch": ["/template/config.jsonc", "/template/**/config.jsonc"],
+            "url": "/src/config.schema.json"
+        },
+    ],
+    "cSpell.words": [
+        "Affordance",
+        "Bastea",
+        "Marcello",
+        "tosource"
+    ],
+    "cSpell.ignorePaths": [
+        "**/package-lock.json",
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/objects/**",
+        ".vscode",
+        "**tpl"
+    ]
+}

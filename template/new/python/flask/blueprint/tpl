@@ -1,0 +1,12 @@
+# -*- coding: {{encoding}} -*-
+{{commentOutput}}
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, url_for
+)
+
+bp = Blueprint('${1:{{inputs.filename}}}', __name__${2:, url_prefix='/${3:{{inputs.filename}}}'})
+
+
+@bp.route('/${4:path}', methods=(${5:'GET',$6}))
+def ${7:view}($8):
+	${0:pass # {{happyCodingString}}}

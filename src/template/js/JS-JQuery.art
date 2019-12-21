@@ -1,5 +1,0 @@
-{{include './Comments.art'}}
-
-$(function(){
-{{indent}}
-})

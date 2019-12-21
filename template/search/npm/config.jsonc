@@ -1,0 +1,80 @@
+/*
+http://registry.npmjs.com/-/v1/search?text=react
+https://github.com/npm/registry/blob/master/docs/REGISTRY-API.md#get-v1search
+https://stackoverflow.com/questions/34071621/query-npmjs-registry-via-api
+*/
+{
+	"name": "NPM",
+	"targets": [
+		{
+			"targetType": "clipboard",
+			"tplcontent": "npm i {{inputs.package.name}}"
+		},
+		{
+			"targetType": "{{inputs.action.action}}",
+			"tplcontent": "{{inputs.action.arg}}"
+		}
+	],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "search",
+			"name": "package",
+			"items": "{{declaration['npmSearchHandler']}}"
+		},
+		{
+			"type": "select",
+			"name": "action",
+			"items": [
+				{
+					"label": "{{i18n('openNpmDetail')}}",
+					"detail": "$(link) {{inputs.package.links.npm}}",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.package.links.npm}}"
+					}
+				},
+				{
+					"label": "{{i18n('openHomePage')}}",
+					"detail": "$(link) {{inputs.package.links.homepage}}",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.package.links.homepage}}"
+					}
+				},
+				{
+					"label": "{{i18n('openRepository')}}",
+					"detail": "$(link) {{inputs.package.links.repository}}",
+					"value": {
+						"action": "browser",
+						"arg":"{{inputs.package.links.repository}}"
+					}
+				},
+				{
+					"label": "{{i18n('openBugs')}}",
+					"detail": "$(link) {{inputs.package.links.bugs}}",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.package.links.bugs}}"
+					}
+				},
+				{
+					"label": "{{i18n('installPackage')}}",
+					"detail": "$(terminal) npm i {{inputs.package.name}}",
+					"value": {
+						"action": "command",
+						"arg": "npm i {{inputs.package.name}}"
+					}
+				},
+				{
+					"label": "{{i18n('installPackageDev')}}",
+					"detail": "$(terminal) npm i {{inputs.package.name}} --save-dev",
+					"value": {
+						"action": "command",
+						"arg": "npm i {{inputs.package.name}} --save-dev"
+					}
+				}
+			]
+		}
+	]
+}

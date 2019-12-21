@@ -1,5 +1,0 @@
-{{include './Comments.art'}}
-{{each importInfos}}
-import * as {{$value[0]}} from '{{$value[1]}}'{{/each}}
-
-export {}

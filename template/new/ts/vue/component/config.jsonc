@@ -1,0 +1,45 @@
+{
+	"suffix": "vue",
+	"weight": 100,
+	"renderComment": false,
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(customize['fullSrcPath'], inputs.filename + '.' + suffix )}}",
+			"tplpath": "tpl"
+		}
+	],
+	"inputs": [{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
+			"suggest": {
+				"value": "src"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"suggest": {
+				"selected": true,
+				"value": "main"
+			}
+		},
+		{
+			"type": "path",
+			"name": "imports",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, helper.ancestor(projectFolder, customize['fullSrcPath']))}}"
+			},
+			"option": {
+				"canSelectMany": true,
+				"canSelectEmpty": true,
+				"returnType": "file",
+				"allowNoExist": false,
+				"basePath": "{{projectFolder}}"
+			}
+		}
+	]
+}

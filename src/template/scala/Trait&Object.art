@@ -1,8 +1,0 @@
-{{include './PackageName.art'}}{{include './Comments.art'}}
-trait {{name}} {
-{{indent}}
-}
-
-object {{name}} {
-
-}

@@ -1,0 +1,4 @@
+{{inputs.packageName ? 'package '+inputs.packageName + ';\n\n' : ''}}{{commentOutput}}
+public interface {{inputs.interfaceName}} {
+	${0:{{happyCoding}}}
+}

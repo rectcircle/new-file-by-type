@@ -1,0 +1,46 @@
+{
+	"weight": 400,
+	"suffix": "java",
+	"targets": [
+		{
+			"filepath": "{{ customize['fullTargetPath'] }}",
+			"tplpath": "tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
+			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
+			"suggest": {
+				"value": "{{ helper.flatAndFilterSuggestPath(projectFolder, ['src/main/java', 'src/test/java', 'src'])}}"
+			}
+		},
+		{
+			"type": "path",
+			"name": "packageName",
+			"checkRules": "{{checkRules.packageName}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(customize['fullSrcPath'], '.') }}",
+			"after": "{{customize['fullFileDirPath'] = path.resolve(customize['fullSrcPath'],  path.join(...inputs.packageName.split('.')))}}",
+			"suggest": {
+				"selected": false,
+				"value": "{{[...helper.openedFileDirectoryPath(customize['fullSrcPath'], '.'), helper.firstHasManyChildrenDirectory(customize['fullSrcPath'], '.')].filter(v=>v) }}"
+			},
+			"option": {
+				"pathSeparator": ".",
+				"basePath": "{{customize['fullSrcPath']}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "annotationName",
+			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.annotationName + '.' + suffix)}}",
+			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
+			"suggest": {
+				"selected": true,
+				"value": "Main"
+			}
+		}
+	]
+}

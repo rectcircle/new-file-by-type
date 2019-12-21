@@ -1,0 +1,4 @@
+{{inputs.packageName ? 'package '+inputs.packageName + '\n\n' : ''}}{{commentOutput}}
+object {{inputs.objectName}} extends App {
+	${0:{{happyCoding}}}
+}

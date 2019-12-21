@@ -1,0 +1,20 @@
+{
+	"networkError": "Search has a network error, please check your network",
+	"enterSearch": "Press ↵ to Search",
+	
+	"inputs.action.placeHolder": "Please select your action",
+
+	"inputs.keyword.prompt": "Search",
+	"inputs.keyword.placeHolder": "Please input keyword",
+
+	"translate": "Translate",
+	"translate.description": "Translate by Google",
+	"inputs.twoPartyLanguage.prompt": "Please input two party languaget",
+	"inputs.twoPartyLanguage.placeHolder": "Please input two party languaget (such as \"en,zh-CN\")",
+	"inputs.translation.prompt": "Google Translation",
+	"inputs.translation.placeHolder": "Please input keyword",
+	"copyToClipborad": "Copy the translation result to the clipboard",
+	"openGoogleTranslate": "Translate in Google Translate",
+	"openBaiduTranslate": "Translate in Baidu Translation",
+	"openYoudaoTranslate": "Translate in Yudao dictionary"
+}

@@ -1,0 +1,8 @@
+{{inputs.packageName ? 'package '+inputs.packageName + '\n\n' : ''}}{{commentOutput}}
+class {{inputs.className}}${1:($2)} {
+	$3
+}
+
+object {{inputs.className}} {
+	${0:{{happyCoding}}}
+}

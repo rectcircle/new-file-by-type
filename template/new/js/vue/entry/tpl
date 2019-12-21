@@ -1,0 +1,9 @@
+{{commentOutput}}
+import Vue from 'vue';
+{{
+	declaration.nodeImports(targets[0].filepath, inputs.imports, (name, relative) => `import * as ${name} from '${relative}'`)
+}}
+
+const vm = new Vue({
+	$0
+});

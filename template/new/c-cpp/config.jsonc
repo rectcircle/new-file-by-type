@@ -1,0 +1,8 @@
+{
+	"name": "C/C++",
+	"flat": true,
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["Makefile", "CMakeLists.txt", "**/*.c", "**/*.h", "**/*.cpp"]
+	}
+}

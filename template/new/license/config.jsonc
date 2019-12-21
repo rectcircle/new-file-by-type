@@ -1,0 +1,55 @@
+{
+	"name": "LICENSE",
+	"suffix": "",
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(projectFolder, inputs.srcPath, inputs.filename)}}",
+			"tplpath": "{{inputs.license}}.tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "select",
+			"name": "license",
+			"items":[
+				"Apache-2.0",
+				"BSD-3-Clause",
+				"BSD-2-Clause",
+				"GPL-2.0",
+				"GPL-3.0",
+				"LGPL-2.0",
+				"LGPL-2.1",
+				"LGPL-3.0",
+				"MIT",
+				"MPL-2.0",
+				"CDDL-1.0",
+				"EPL-1.0",
+				"The Unlicense"
+			]
+		},
+		{
+			"type": "path",
+			"name": "srcPath",
+			"prompt": "{{i18n('inputs.srcPath.prompt')}}",
+			"placeHolder": "{{i18n('inputs.srcPath.placeHolder')}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+		},
+		{
+			"type": "select",
+			"name": "filename",
+			"items":[
+				"LICENSE",
+				"LICENSE.txt"
+			],
+			"prompt": "{{i18n('inputs.filename.prompt')}}",
+			"placeHolder": "{{i18n('inputs.filename.placeHolder')}}",
+			"suggest": {
+				"selected": true,
+				"value": "main"
+			}
+		}
+	],
+	"match": {
+		"always": true
+	}
+}

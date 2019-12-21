@@ -1,0 +1,4 @@
+{
+	"inputs.fileType.prompt": "请选择文件后缀",
+	"inputs.fileType.placeHolder": "请选择文件后缀"
+}

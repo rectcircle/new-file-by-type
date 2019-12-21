@@ -1,0 +1,20 @@
+/*
+http://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&site=stackoverflow&q=npmjs%20api
+*/
+{
+	"name": "stackoverflow",
+	"targets": [
+		{
+			"targetType": "browser",
+			"tplcontent": "{{inputs.keyword}}"
+		}
+	],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "search",
+			"name": "keyword",
+			"items": "{{declaration['stackoverflowSearchHandler']}}"
+		}
+	]
+}

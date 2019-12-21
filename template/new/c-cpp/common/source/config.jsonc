@@ -1,0 +1,45 @@
+{
+	"suffix": "cpp",
+	"weight": 400,
+	"targets": [
+		{
+			"filepath": "{{ path.resolve(customize['fullCppPath'], inputs.filename + '.' + inputs.filetype) }}",
+			"tplpath": "{{inputs.filetype}}.tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "cppPath",
+			"after": "{{customize['fullCppPath'] = path.resolve(projectFolder, inputs.cppPath)}}",
+			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(projectFolder)}}",
+			"suggest": {
+				"value": "{{helper.flatAndFilterSuggestPath(projectFolder, 'src', 'source', 'sources')}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "filename",
+			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
+			"suggest": {
+				"selected": true,
+				"value": "Main"
+			}
+		},
+		{
+			"type": "select",
+			"name": "filetype",
+			"items": [
+				{
+					"label": "C++",
+					"value": "cpp"
+				},
+				{
+					"label": "C",
+					"value": "c"
+				}
+			]
+		}
+	]
+}

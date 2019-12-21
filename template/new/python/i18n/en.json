@@ -1,0 +1,31 @@
+{
+	"templateSelectPlaceHolder": "Please select a project or file type",
+
+	"django": "Django",
+	"django.description": "Select Django Project",
+	"models.description": "Create a Django Model file",
+	"urls.description": "Create a Django Url file",
+	"views.description": "Create a Django View file",
+	"serializers.description": "Create a Django REST framework serializers",
+
+	"common": "Common",
+	"common.description": "Common Python project",
+	"module.description": "Create Python Module",
+	"script.description": "Create Python Script",
+	"commonfile.description": "Create Common Python File",
+	"class.description": "Create Python Class",
+
+	"flask": "Flask",
+	"flask.description": "Flask Project",
+	"entry.description": "Create Flask application Entrance",
+	"blueprint.description": "Create Flask Blueprint",
+
+	"inputs.djangoVersion.placeHolder": "Please select django version",
+	"inputs.viewType.placeHolder": "Please select Django View implementation type",
+	"inputs.viewType.items.function-based": "function-based",
+	"inputs.viewType.items.class-based": "class-based",
+	"inputs.viewType.items.drf-class-based": "base on django rest framework view class",
+	"inputs.serializersBase.placeHolder": "Please select Django REST framework serializers Base class",
+	"inputs.moduleName.prompt": "Please input module name",
+	"inputs.moduleName.placeHolder": "Please input module name"
+}

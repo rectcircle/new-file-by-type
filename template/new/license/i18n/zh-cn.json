@@ -1,0 +1,14 @@
+{
+	"inputs.srcPath.prompt": "当前选择：",
+	"inputs.srcPath.placeHolder": "请选择开源许可证所在目录（输入或选择一个目录）",
+	"inputs.srcPath.parentDirectoryText": "..（返回上层目录）",
+	"inputs.srcPath.confirmText": "确定使用：",
+	"inputs.srcPath.suggestText": "建议", 
+	"inputs.srcPath.directoryText": "目录",
+	"inputs.srcPath.fileText": "文件",
+	"inputs.srcPath.confirmDetailText": "(按 ↵ 键完成选择)",
+	"inputs.srcPath.currentDirectoryText": "项目根目录",
+	"inputs.srcPath.resultExistAndTypeErrorText": "{resultPath} 已经存在, 类型为 {nowTypeText}, 期望类型为 {expectTypeText}",
+
+	"inputs.license.placeHolder": "请选择开源许可证类型"
+}

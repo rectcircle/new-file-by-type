@@ -1,0 +1,4 @@
+{
+	"inputs.fileType.prompt": "Please select file suffix",
+	"inputs.fileType.placeHolder": "Please select file suffix"
+}

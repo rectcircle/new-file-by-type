@@ -1,0 +1,61 @@
+{
+	"name": "Trait&Object",
+	"suffix": "scala",
+	"weight": 600,
+	"targets": [
+		{
+			"filepath": "{{ customize['fullTargetPath'] }}",
+			"tplpath": "tpl"
+		}
+	],
+	"inputs": [
+		{
+			"type": "path",
+			"name": "srcPath",
+			"after": "{{customize['fullSrcPath'] = path.resolve(projectFolder, inputs.srcPath)}}",
+			"checkRules": "{{[checkRules.activeDirectoryRuleFunction(projectFolder)]}}",
+			"value": "{{declaration['activeScalaSrcPath'](projectFolder)}}",
+			"suggest": {
+				"value": "{{ declaration['scalaSrcSuggest'](projectFolder)}}"
+			}
+		},
+		{
+			"type": "path",
+			"name": "packageName",
+			"checkRules": "{{checkRules.packageName}}",
+			"value": "{{helper.activeDirectoryRelativeBasePath(customize['fullSrcPath'], '.') }}",
+			"after": "{{customize['fullFileDirPath'] = path.resolve(customize['fullSrcPath'],  path.join(...inputs.packageName.split('.')))}}",
+			"suggest": {
+				"selected": false,
+				"value": "{{[...helper.openedFileDirectoryPath(customize['fullSrcPath'], '.'), helper.firstHasManyChildrenDirectory(customize['fullSrcPath'], '.')].filter(v=>v) }}"
+			},
+			"option": {
+				"pathSeparator": ".",
+				"basePath": "{{customize['fullSrcPath']}}"
+			}
+		},
+		{
+			"type": "text",
+			"name": "traitName",
+			"after": "{{customize['fullTargetPath'] = path.resolve(customize['fullFileDirPath'], inputs.traitName + '.' + suffix)}}",
+			"checkRules": "{{[checkRules.notEmpty, checkRules.commonIdentifier, checkRules.uppercaseFirst]}}",
+			"suggest": {
+				"selected": true,
+				"value": "Main"
+			}
+		}
+	],
+	"comment": {
+		"dateFormat": "YYYY-MM-DD",
+		"startLine": "/**",
+		"lineHeader": " * ",
+		"endLine": " */",
+		"items": [
+			"{{comment.copyright}}",
+			"",
+			"@author {{user}}",
+			"@date {{date}}",
+			"@version {{version}}"
+		]
+	}
+}

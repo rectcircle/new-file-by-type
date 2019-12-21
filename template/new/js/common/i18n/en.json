@@ -1,0 +1,14 @@
+{
+	"templateSelectPlaceHolder": "Please select a file type",
+	"none": "None",
+	"none.description": "Create a Common JavaScript file",
+	"commonjs-module.description": "Create a commonJS Module",
+	"es6-module.description": "Create a ES6 Module",
+	"class.description": "Create a Class",
+
+	"inputs.classImplType.placeHolder": "Please select a class implementation",
+	"classImplType.tradition": "Tradition",
+	"inputs.moduleImpl.placeHolder": "Please select the implementation of the module",
+	"moduleImpl.commonjs-module": "commonjs Module",
+	"moduleImpl.es6": "ES6 Module"
+}

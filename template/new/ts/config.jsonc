@@ -1,0 +1,9 @@
+{
+	"name": "TypeScript",
+	"flat": false,
+	"declaration": "declaration.js",
+	"match": {
+		"always": false,
+		"workspaceFolderGlobs": ["package.json", "**/*.ts"]
+	}
+}

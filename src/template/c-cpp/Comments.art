@@ -1,3 +1,0 @@
-{{each comments.items}}{{if comments[$value]}} 
- * @{{$value}} {{comments[$value]}}{{else}}
- * @{{$value}}{{/if}}{{/each}}

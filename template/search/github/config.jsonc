@@ -1,0 +1,58 @@
+/*
+https://api.github.com/search/repositories?q=react
+*/
+{
+	"name": "Github",
+	"targets": [
+		{
+			"targetType": "{{inputs.action.action}}",
+			"tplcontent": "{{inputs.action.arg}}"
+		}
+	],
+	"declaration": "declaration.js",
+	"inputs": [
+		{
+			"type": "search",
+			"name": "repo",
+			"items": "{{declaration['githubSearchHandler']}}"
+		},
+		{
+			"type": "select",
+			"name": "action",
+			"items": [
+				{
+					"label": "{{i18n('copyCloneToClipborad')}}",
+					"detail": "$(clippy) {{inputs.repo.clone_url}}",
+					"value": {
+						"action": "clipboard",
+						"arg": "{{inputs.repo.clone_url}}"
+					}
+				},
+				{
+					"label": "{{i18n('cloneCommand')}}",
+					"detail": "$(termimal) cd $projectFolder && cd ../ && git clone {{inputs.repo.clone_url}}",
+					"value": {
+						"action": "command",
+						"arg": "cd {{projectFolder}} && cd ../ && git clone {{inputs.repo.clone_url}}"
+					}
+				},
+				{
+					"label": "{{i18n('openGitHomePage')}}",
+					"detail": "$(link) {{inputs.repo.html_url}}",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.repo.html_url}}"
+					}
+				},
+				{
+					"label": "{{i18n('openGitIssuesPage')}}",
+					"detail": "$(link) {{inputs.repo.html_url}}/issues",
+					"value": {
+						"action": "browser",
+						"arg": "{{inputs.repo.html_url}}/issues"
+					}
+				}
+			]
+		}
+	]
+}

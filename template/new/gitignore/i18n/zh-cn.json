@@ -1,0 +1,6 @@
+{
+	"inputs.gitignoreTplUrl.prompt": "请选择 gitignore 模板",
+	"inputs.gitignoreTplUrl.placeHolder": "请选择 gitignore 模板",
+	"inputs.saveType.placeHolder": "请选择保存方式",
+	"attachGitignoreNetworkError": "获取 gitignore 模板列表出错，请检查你的网络"
+}
