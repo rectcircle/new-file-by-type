@@ -4,7 +4,13 @@ All notable changes to the "new-file-by-type-v1" extension will be documented in
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [1.0.1] - 2010-12-21
+
+### Changed
+
+* Fix 缩减包大小，从扩展包中去除无用图片资源
+
+## [1.0.0] - 2019-12-21
 
 ### Add
 
@@ -17,6 +23,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   * 创建目录
   * 选择路径...
   * 打开工作空间...(使用自定义路径选择器)
+* 支持常见资源搜索
+* 支持翻译功能
 * 添加扩展版本更新弹窗
 * 模板引擎支持创建模拟调试代码
 * 支持显示最近使用的
