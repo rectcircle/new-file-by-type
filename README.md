@@ -110,7 +110,7 @@ ext install Rectcircle.new-file-by-type
 
 **第三步：** 输入模板定义的参数
 
-创建Java类为例，[其配置文件](https://github.com/rectcircle/new-file-by-type/blob/master/template/java/common/class/config.jsonc)一共定义了三个输入参数：分别是
+创建Java类为例，[其配置文件](https://github.com/rectcircle/new-file-by-type/blob/master/template/new/java/common/class/config.jsonc)一共定义了三个输入参数：分别是
 
 源代码根目录
 
