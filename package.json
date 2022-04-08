@@ -337,7 +337,7 @@
 		"iconv-lite": "^0.4.24",
 		"json5": "^2.1.0",
 		"minimatch": "^3.0.4",
-		"moment": "^2.24.0",
+		"moment": "^2.29.2",
 		"multimatch": "^4.0.0",
 		"string-format-obj": "^1.1.1"
 	}
