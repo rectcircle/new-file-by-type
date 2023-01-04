@@ -335,7 +335,7 @@
 		"drivelist": "^8.0.6",
 		"globby": "^9.2.0",
 		"iconv-lite": "^0.4.24",
-		"json5": "^2.1.0",
+		"json5": "^2.2.2",
 		"minimatch": "^3.0.4",
 		"moment": "^2.24.0",
 		"multimatch": "^4.0.0",
